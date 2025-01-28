@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,6 +18,24 @@ public class Interactable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (inRange) {
+            if (Input.GetKeyDown(interactKey)) {
+                action.Invoke();
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
+            inRange = true;
+            Debug.Log("Player is in range");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
+            inRange = false;
+            Debug.Log("Player is out of range");
+        }
     }
 }
