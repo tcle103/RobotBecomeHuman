@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,13 +29,18 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
+            var player = collision.gameObject;
+            player.GetComponent<SpriteRenderer>().color = new Color(0, 0.5f, 1);
             inRange = true;
+            Debug.Log(player.GetComponent<SpriteRenderer>().color);
             Debug.Log("Player is in range");
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
+            var player = collision.gameObject;
+            player.GetComponent<SpriteRenderer>().color = Color.blue;
             inRange = false;
             Debug.Log("Player is out of range");
         }
