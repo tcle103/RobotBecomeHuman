@@ -1,8 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,7 +29,6 @@ public class Interactable : MonoBehaviour
             var player = collision.gameObject;
             player.GetComponent<SpriteRenderer>().color = new Color(0, 0.5f, 1);
             inRange = true;
-            Debug.Log(player.GetComponent<SpriteRenderer>().color);
             Debug.Log("Player is in range");
         }
     }
