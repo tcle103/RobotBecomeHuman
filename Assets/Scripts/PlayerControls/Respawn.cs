@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Respawn : MonoBehaviour
 {
     public Transform spawnPoint;
-
     InputAction respawnAction;
     // Start is called before the first frame update
     void Start()
