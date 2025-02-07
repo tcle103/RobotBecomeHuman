@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4895081436902133241}
   - component: {fileID: 3553656194673722305}
-  - component: {fileID: 1453086628197558063}
   - component: {fileID: 6090721715463859387}
+  - component: {fileID: 3002445565806364109}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -87,19 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1453086628197558063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5898066639082915695}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2e4a40d591e9414bb6656ca119ef8a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isOn: 0
 --- !u!61 &6090721715463859387
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,6 +132,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3002445565806364109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898066639082915695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b02eb2f1bdb7840a9592b702ba47d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOn: 0
 --- !u!1001 &667635527590876931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,10 +214,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2115785248820166717, guid: b3d7384d37992254eb7b7f13dc01dd66, type: 3}
-      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1453086628197558063}
-    - target: {fileID: 2115785248820166717, guid: b3d7384d37992254eb7b7f13dc01dd66, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -240,10 +236,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2380904978346370394, guid: b3d7384d37992254eb7b7f13dc01dd66, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1490910433447404432}
   m_SourcePrefab: {fileID: 100100000, guid: b3d7384d37992254eb7b7f13dc01dd66, type: 3}
 --- !u!4 &1552202035283994664 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2074309497383403307, guid: b3d7384d37992254eb7b7f13dc01dd66, type: 3}
   m_PrefabInstance: {fileID: 667635527590876931}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2902929014999446105 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2380904978346370394, guid: b3d7384d37992254eb7b7f13dc01dd66, type: 3}
+  m_PrefabInstance: {fileID: 667635527590876931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1490910433447404432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2902929014999446105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fecfa2972ab4614d8e6bdc26de66c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inRange: 0
+  interactKey: 101
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3002445565806364109}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

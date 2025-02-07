@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenericController : MonoBehaviour
+public class ButtonController : MonoBehaviour, IGenericController
 {
     public bool isOn;
     public void Activate() {
@@ -14,5 +14,9 @@ public class GenericController : MonoBehaviour
             isOn = false;
         }
         Debug.Log("Activated");
+    }
+
+    public void Reset() {
+
     }
 }
