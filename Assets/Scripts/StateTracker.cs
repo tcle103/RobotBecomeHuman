@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class StateTracker : MonoBehaviour
 {
     public GameObject prefab;
-    bool resetLive;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,22 +17,9 @@ public class StateTracker : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
-            resetLive = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
-            ResetState();
-            resetLive = false;
-        }
-    }
-
-    void ResetState() {
+    public void ResetState() {
         foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) {
-            if (child != this.transform) {
+            if (child != this.transform && !child.gameObject.CompareTag("Respawn")) {
                 Destroy(child.gameObject);
             }
         }

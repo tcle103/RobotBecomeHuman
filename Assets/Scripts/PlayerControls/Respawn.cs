@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Respawn : MonoBehaviour
 {
     public Transform spawnPoint;
+    public Transform spawnZone;
     InputAction respawnAction;
     // Start is called before the first frame update
     void Start()
@@ -17,21 +18,26 @@ public class Respawn : MonoBehaviour
     void Update()
     {
         if (spawnPoint && respawnAction.triggered) {
+            spawnZone.GetComponent<StateTracker>().ResetState();
             this.transform.position = spawnPoint.position;
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.transform.CompareTag("Death")) {
+            if (spawnZone)
+                spawnZone.GetComponent<StateTracker>().ResetState();
             this.transform.position = spawnPoint.position;
         }
         if (collision.transform.CompareTag("Zone")) {
+            spawnZone = collision.transform;
             spawnPoint = GetChildWithTag(collision.gameObject, "Respawn");
         }
     }
 
     void OnTriggerExit2D(Collider2D collision) {
         if (collision.transform.CompareTag("Zone")) {
+            spawnZone.GetComponent<StateTracker>().ResetState();
             spawnPoint = null;
         }
     }
