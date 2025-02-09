@@ -25,7 +25,9 @@ public class Respawn : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.transform.CompareTag("Death")) {
             this.transform.position = spawnPoint.position;
-            if (spawnZone) {}
+            if (spawnZone) {
+                spawnZone.GetComponent<ZoneController>().Reset();
+            }
         }
         if (collision.transform.CompareTag("Zone")) {
             spawnZone = collision.transform;
