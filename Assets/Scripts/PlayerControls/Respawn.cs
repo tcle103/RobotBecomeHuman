@@ -18,15 +18,13 @@ public class Respawn : MonoBehaviour
     void Update()
     {
         if (spawnPoint && respawnAction.triggered) {
-            spawnZone.GetComponent<StateTracker>().ResetState();
             this.transform.position = spawnPoint.position;
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.transform.CompareTag("Death")) {
-            if (spawnZone)
-                spawnZone.GetComponent<StateTracker>().ResetState();
+            
             this.transform.position = spawnPoint.position;
         }
         if (collision.transform.CompareTag("Zone")) {
@@ -37,7 +35,6 @@ public class Respawn : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision) {
         if (collision.transform.CompareTag("Zone")) {
-            spawnZone.GetComponent<StateTracker>().ResetState();
             spawnPoint = null;
         }
     }

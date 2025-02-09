@@ -10,13 +10,13 @@ public class ButtonController : MonoBehaviour, IGenericController
             gameObject.GetComponent<SpriteRenderer>().color = Color.green;
             isOn = true;
         } else {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-            isOn = false;
+            Reset();
         }
         Debug.Log("Activated");
     }
 
     public void Reset() {
-
+        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        isOn = false;
     }
 }
