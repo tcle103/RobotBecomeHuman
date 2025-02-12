@@ -19,4 +19,8 @@ public class ButtonController : MonoBehaviour, IGenericController
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         isOn = false;
     }
+
+    public void Deactivate() {
+        
+    }
 }

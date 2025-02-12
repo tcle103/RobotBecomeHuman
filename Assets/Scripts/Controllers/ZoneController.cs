@@ -25,6 +25,8 @@ public class ZoneController : MonoBehaviour
             if (child.gameObject.CompareTag("Gate")) {
                 Destroy(child.gameObject);
             }
+            var controller = child.GetComponent<IGenericController>();
+            controller?.Activate();
         }
     }
 
