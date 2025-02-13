@@ -9,18 +9,23 @@ public class PlayerMovement : MonoBehaviour
 
     InputAction moveAction;
     Rigidbody2D rb;
+    DialogueBox canvas;
 
     // Start is called before the first frame update
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody2D>();
+        canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = moveAction.ReadValue<Vector2>();
-        rb.velocity = movement * speed;
+        if (!canvas.textLoaded)
+        {
+            Vector2 movement = moveAction.ReadValue<Vector2>();
+            rb.velocity = movement * speed;
+        }
     }
 }
