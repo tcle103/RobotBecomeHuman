@@ -19,6 +19,9 @@ public class Respawn : MonoBehaviour
     {
         if (spawnPoint && respawnAction.triggered) {
             this.transform.position = spawnPoint.position;
+            if (spawnZone) {
+                spawnZone.GetComponent<ZoneController>().Reset();
+            }
         }
     }
 

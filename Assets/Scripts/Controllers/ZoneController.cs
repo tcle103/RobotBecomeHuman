@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ZoneController : MonoBehaviour
 {
+    bool isActive;
     bool isComplete;
     // Start is called before the first frame update
     void Start()
@@ -17,9 +18,20 @@ public class ZoneController : MonoBehaviour
         
     }
 
+    public void Open() {
+        isActive = true;
+        foreach (Transform child in GetComponentsInChildren<Transform>()) {
+            if (child.gameObject.CompareTag("Gate")) {
+                Destroy(child.gameObject);
+            }
+            var controller = child.GetComponent<IGenericController>();
+            controller?.Activate();
+        }
+    }
+
     public void Reset() {
-        if (!isComplete) {
-            foreach (Transform child in gameObject.GetComponentsInChildren<Transform>()) {
+        if (isActive) {
+            foreach (Transform child in GetComponentsInChildren<Transform>()) {
                 var controller = child.GetComponent<IGenericController>();
                 controller?.Reset();
             }
@@ -27,6 +39,7 @@ public class ZoneController : MonoBehaviour
     }
 
     public void Validate() {
+        isActive = false;
         isComplete = true;
     }
 }

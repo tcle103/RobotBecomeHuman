@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour, IGenericController
+public class ButtonController : MonoBehaviour
 {
     public bool isOn;
     public void Activate() {
@@ -18,5 +18,9 @@ public class ButtonController : MonoBehaviour, IGenericController
     public void Reset() {
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         isOn = false;
+    }
+
+    public void Deactivate() {
+
     }
 }
