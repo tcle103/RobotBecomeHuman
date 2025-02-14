@@ -2376,8 +2376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe5e946aa930d5543b5f1d784f244e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _width: 3
-  _height: 3
+  _width: 2
+  _height: 2
   _tilePrefab: {fileID: 4509589516602487473, guid: c7397c54784f72d468308a2caee5421a, type: 3}
   action:
     m_PersistentCalls:

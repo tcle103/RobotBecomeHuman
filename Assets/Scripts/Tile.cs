@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Tile : MonoBehaviour
 {
@@ -9,14 +8,17 @@ public class Tile : MonoBehaviour
     [SerializeField] private SpriteRenderer _tileRenderer;
     Collider2D _collider;
     List<Collider2D> _collisions;
+    [SerializeField] List<GameObject> _neighbors;
     public bool isActivated;
+    public bool isRoot;
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         _tileRenderer.color = _offColor;
         _collider = GetComponent<Collider2D>();
         _collisions = new();
+        FindNeighbors();
     }
 
     // Update is called once per frame
@@ -26,14 +28,26 @@ public class Tile : MonoBehaviour
         {
             if (_collider.bounds.Contains(collision.bounds.center))
             {
+                isRoot = true;
                 if (!isActivated)
-                {
                     Activate();
-                    FindNeighbors();
-                }
+                return;
+            }
+            else isRoot = false;
+        }
+
+        foreach (var neighbor in _neighbors)
+        {
+            Tile tile = neighbor.GetComponent<Tile>();
+            if (tile.isRoot)
+            {
+                if (!isActivated)
+                    Activate();
                 return;
             }
         }
+
+        Deactivate();
     }
 
     public void Activate()
@@ -58,7 +72,10 @@ public class Tile : MonoBehaviour
         _collisions.Remove(other);
     }
 
-    private void FindNeighbors() {
+    private void FindNeighbors()
+    {
+        _neighbors = new();
+
         Vector2[] directions = {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
         foreach (Vector2 dir in directions)
         {
@@ -66,7 +83,7 @@ public class Tile : MonoBehaviour
             if (hit && hit.collider.gameObject.GetComponent<Tile>())
             {
                 Debug.Log("Hit " + hit.collider.gameObject);
-                hit.collider.gameObject.GetComponent<Tile>().Activate();
+                _neighbors.Add(hit.collider.gameObject);
             }
         }
     }
