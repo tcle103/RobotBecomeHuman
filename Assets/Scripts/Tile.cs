@@ -60,6 +60,7 @@ public class Tile : MonoBehaviour
     {
         _tileRenderer.color = _offColor;
         isActivated = false;
+        isRoot = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

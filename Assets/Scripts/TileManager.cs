@@ -53,6 +53,11 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    public void Reset() {
+        foreach (var tile in _tiles)
+            tile.Deactivate();
+    }
+
     Tile GetTileAtPos(Vector3 pos)
     {
         return null;

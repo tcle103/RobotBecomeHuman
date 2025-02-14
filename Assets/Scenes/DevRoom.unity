@@ -1242,8 +1242,8 @@ Transform:
   m_GameObject: {fileID: 506115400}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.9285164, y: -0.4848299, z: 0.0793195}
-  m_LocalScale: {x: 1.8221, y: 18.618954, z: 1}
+  m_LocalPosition: {x: 7.9285164, y: -0.5027, z: 0.0793195}
+  m_LocalScale: {x: 1.8221, y: 18.583578, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1931541933}
@@ -2640,10 +2640,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
@@ -2651,7 +2655,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 191485315}
     - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1296834268}
+    - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
@@ -2659,11 +2671,23 @@ PrefabInstance:
       value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Reset
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: ZoneController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: TileManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806837982781408006, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
+      propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6405363051587572237, guid: 80256f919a2ca08488976a3b088fc9e6, type: 3}
@@ -3292,7 +3316,7 @@ Transform:
   m_GameObject: {fileID: 1137625416}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.004983902, y: 8.24, z: 0.0793195}
+  m_LocalPosition: {x: -0.004983902, y: 8.2, z: 0.0793195}
   m_LocalScale: {x: 14.227569, y: 1.1926724, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
