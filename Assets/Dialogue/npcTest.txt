@@ -1,4 +1,9 @@
-NPCName
-Dialogue One!$$In order to go to the next screen of dialogue, type two dollar signs!
-Dialogue Two!$$This is the second dialogue box!$$This is for when you interact with an NPC for the second time!
-Dialogue Three!$$This is the third dialogue box!$$Too lazy to figure it out now, but you can probably set up specific symbols for if they did a specific interaction or not!
+"Choose one"
+    - "A" -> a
+    - "B" -> b
+
+a:
+"This is A!"
+
+b:
+"This is B!"
