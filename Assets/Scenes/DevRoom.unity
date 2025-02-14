@@ -497,7 +497,7 @@ PrefabInstance:
       objectReference: {fileID: 1302274872}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Activate
+      value: Press
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1163,7 +1163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 527639108}
   m_Layer: 0
-  m_Name: Walls
+  m_Name: ZoneWalls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2219,7 +2219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Activate
+      value: Press
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -2347,6 +2347,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crumbleTime: 50
   crumbleRate: 0.01
+--- !u!1 &1296834267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296834269}
+  - component: {fileID: 1296834268}
+  m_Layer: 0
+  m_Name: TileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1296834268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296834267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe5e946aa930d5543b5f1d784f244e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _width: 4
+  _height: 4
+  _tilePrefab: {fileID: 4509589516602487473, guid: c7397c54784f72d468308a2caee5421a, type: 3}
+--- !u!4 &1296834269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296834267}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15, y: -5, z: 0.060482603}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1302274870
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,7 +2576,7 @@ PrefabInstance:
       objectReference: {fileID: 340510338}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Activate
+      value: Press
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -3035,7 +3082,7 @@ PrefabInstance:
       objectReference: {fileID: 1684839144}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Activate
+      value: Press
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -3956,7 +4003,7 @@ PrefabInstance:
       objectReference: {fileID: 720445334}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Activate
+      value: Press
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -4816,7 +4863,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7008981908947705732}
         m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
-        m_MethodName: Activate
+        m_MethodName: Press
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5298,7 +5345,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7667090814384850330}
         m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
-        m_MethodName: Activate
+        m_MethodName: Press
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5663,3 +5710,4 @@ SceneRoots:
   - {fileID: 812477149}
   - {fileID: 2039294153}
   - {fileID: 527639108}
+  - {fileID: 1296834269}
