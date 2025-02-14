@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6159794492406076673}
   m_Layer: 0
   m_Name: Tile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   _offColor: {r: 1, g: 0, b: 0, a: 1}
   _onColor: {r: 0, g: 1, b: 0, a: 1}
   _tileRenderer: {fileID: 5113011694013563626}
+  isActivated: 0
 --- !u!61 &-6159794492406076673
 BoxCollider2D:
   m_ObjectHideFlags: 0

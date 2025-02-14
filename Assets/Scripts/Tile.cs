@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Tile : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Tile : MonoBehaviour
     public bool isActivated;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         _tileRenderer.color = _offColor;
         _collider = GetComponent<Collider2D>();
@@ -25,11 +26,14 @@ public class Tile : MonoBehaviour
         {
             if (_collider.bounds.Contains(collision.bounds.center))
             {
-                Activate();
+                if (!isActivated)
+                {
+                    Activate();
+                    FindNeighbors();
+                }
                 return;
             }
         }
-        Deactivate();
     }
 
     public void Activate()
@@ -49,7 +53,21 @@ public class Tile : MonoBehaviour
         _collisions.Add(other);
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other)
+    {
         _collisions.Remove(other);
+    }
+
+    private void FindNeighbors() {
+        Vector2[] directions = {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
+        foreach (Vector2 dir in directions)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(_collider.bounds.center, dir);
+            if (hit && hit.collider.gameObject.GetComponent<Tile>())
+            {
+                Debug.Log("Hit " + hit.collider.gameObject);
+                hit.collider.gameObject.GetComponent<Tile>().Activate();
+            }
+        }
     }
 }
