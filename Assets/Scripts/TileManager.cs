@@ -31,6 +31,7 @@ public class TileManager : MonoBehaviour
             }
             action.Invoke();
             isComplete = true;
+            Debug.Log("Complete");
         }
     }
 

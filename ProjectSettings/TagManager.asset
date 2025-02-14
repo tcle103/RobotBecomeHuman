@@ -7,7 +7,6 @@ TagManager:
   - Death
   - Zone
   - Gate
-  - Tile
   layers:
   - Default
   - TransparentFX

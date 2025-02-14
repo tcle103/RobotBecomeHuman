@@ -11,7 +11,7 @@ public class BoxController : MonoBehaviour, IGenericController
     {
         _originalPos = this.transform.position;
         _rb = GetComponent<Rigidbody2D>();
-        _rb.isKinematic = true;
+        _rb.isKinematic = false;
     }
 
     public void Activate() {
