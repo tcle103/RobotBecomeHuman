@@ -11,7 +11,6 @@ public class DialogScanner
     public int line { get; private set; }
 
     private bool lineHasCode = false;
-    private bool lineHasComment = false;
 
     public DialogScanner(string input)
     {
@@ -41,8 +40,31 @@ public class DialogScanner
     {
         char ch = NextCh();
         index++;
-        if (ch == '\n') line++;
+        if (ch == '\n')
+        {
+            line++;
+            lineHasCode = false;
+        }
         return ch;
+    }
+
+    private void SkipNewLine()
+    {
+        if (NextCh() == '\n' || NextCh() == '\r')
+        {
+            char ch = SkipCh();
+            if (ch == '\n')
+            {
+                if (NextCh() == '\r')
+                {
+                    SkipCh();
+                }
+            }
+            else if (ch == '\n')
+            {
+                SkipCh();
+            }
+        }
     }
 
     private void SkipWhiteSpace()
@@ -59,10 +81,13 @@ public class DialogScanner
             }
             else if(NextCh() == '#')
             {
-                lineHasComment = true;
                 while (!EndOfFile() && NextCh() != '\n')
                 {
                     SkipCh();
+                }
+                if(!EndOfFile() && !lineHasCode)
+                {
+                    SkipNewLine();
                 }
             } else
             {
@@ -107,17 +132,10 @@ public class DialogScanner
             return new DialogToken(line, DialogTokenType.EOF, "EOF");
         }
 
-        if(NextCh() == '\n')
+        if(NextCh() == '\n' || NextCh() == '\r')
         {
-            bool emitNewLine = lineHasCode || !lineHasComment;
-            line++;
-            SkipCh();
-            lineHasCode = false;
-            lineHasComment = false;
-            if (emitNewLine)
-            {
-                return new DialogToken(line - 1, DialogTokenType.NewLine, "");
-            }
+            SkipNewLine();
+            return new DialogToken(line - 1, DialogTokenType.NewLine, "");
         }
 
         lineHasCode = true;
@@ -146,21 +164,14 @@ public class DialogScanner
                 SkipCh();
                 return new DialogToken(line, DialogTokenType.Goto, "->");
             }
+            else if(IsNext('-'))
+            {
+                SkipCh();
+                return new DialogToken(line, DialogTokenType.Exit, "--");
+            }
             else
             {
                 return new DialogToken(line, DialogTokenType.Option, "-");
-            }
-        }
-        else if(IsNext('<'))
-        {
-            SkipCh();
-            if (IsNext('-'))
-            {
-                SkipCh();
-                return new DialogToken(line, DialogTokenType.Exit, "<-");
-            } else
-            {
-                throw new Exception("Expected character '-'");
             }
         }
         else if (ch == '@')
@@ -178,7 +189,7 @@ public class DialogScanner
         }
         else
         {
-            throw new Exception("Unexpected character '" + ch + "'");
+            throw new Exception("Unexpected character '" + ch + "' (" + (int)ch + ") on line " + line);
         }
     }
 }

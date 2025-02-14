@@ -1,9 +1,14 @@
+# This is a comment!
+
+# Any dialogue text can be followed by one or more options
 "Choose one"
-    - "A" -> a
-    - "B" -> b
+    - "Option A" -> A               # This option links to the A label
+    - "Option B" "This is B!" --    # This options puts it's code in-line
+    - "Default Option"              # Options fall through by default
 
-a:
+"This is the default!"  # Dialogue can have no options
+--                      # This ends the dialogue
+
+A:                      # This is the A label
 "This is A!"
-
-b:
-"This is B!"
+--

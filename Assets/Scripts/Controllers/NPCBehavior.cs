@@ -34,6 +34,7 @@ public class NPCBehavior : MonoBehaviour
         else
         {
             entryPoint = DialogParser.Parse(dialogueFile.text);
+            currentNode = entryPoint;
         }
     }
 
@@ -44,40 +45,88 @@ public class NPCBehavior : MonoBehaviour
         { 
             InteractNPC();
         }
+        if(nameBox.IsActive())
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                SkipDialog();
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                ChooseOption(0);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                ChooseOption(1);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                ChooseOption(2);
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                ChooseOption(3);
+            }
+        }
+    }
+
+    void SkipDialog()
+    {
+        if (currentNode is DialogChoiceNode choice && choice.options.Count == 0)
+        {
+            currentNode = currentNode.next;
+            UpdateDialog();
+        }
+    }
+
+    void ChooseOption(int index)
+    {
+        if (currentNode is DialogChoiceNode choice)
+        {
+            if (index >= 0 && index < choice.options.Count)
+            {
+                currentNode = choice.options[index];
+                UpdateDialog();
+            }
+        }
+    }
+
+    void UpdateDialog()
+    {
+        while (true)
+        {
+            if (currentNode == null)
+            {
+                // TODO: Make it so the interaction automatically ends if the dialogue ends so they don't have to press E
+                break;
+            }
+            else if (currentNode is DialogChoiceNode choice)
+            {
+                //Set boxes to text
+                dialogueBox.text = choice.text;
+                for (int i = 0; i < choice.options.Count; i++)
+                {
+                    dialogueBox.text += "\n    [" + (i + 1) + "] " + choice.options[i].text;
+                }
+                break;
+            }
+            else
+            {
+                currentNode = currentNode.next;
+            }
+        }
     }
 
     public void InteractNPC()
     {
         if (!nameBox.IsActive()) //prevents interaction if dialogue is already active
         {
-            Debug.Log("Run");
             //make boxes visible
             nameBox.gameObject.SetActive(true);
             dialogueBox.gameObject.SetActive(true);
 
-            if (currentNode == null)
-            {
-                currentNode = entryPoint;
-            }
-
-            while (true)
-            {
-                if(currentNode == null)
-                {
-                    break;
-                }
-                else if (currentNode is DialogChoiceNode choice)
-                {
-                    //Set boxes to text
-                    //nameBox.text = npcName;
-                    dialogueBox.text = choice.text;
-                    break;
-                }
-                else
-                {
-                    currentNode = currentNode.next;
-                }
-            }
+            currentNode = entryPoint;
+            UpdateDialog();
         }
     }
     

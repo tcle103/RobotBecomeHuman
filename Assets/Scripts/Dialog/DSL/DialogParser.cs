@@ -2,27 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 
 #nullable enable
 
 public class DialogParser
 {
-    private DialogScanner scanner;
+    class Context
+    {
+        public DialogNode? firstNode;
+        public List<DialogNode> endNodes;
+        public List<string> labelNames;
 
+        public Context()
+        {
+            endNodes = new List<DialogNode>();
+            labelNames = new List<string>();
+        }
+    }
+
+    private DialogScanner scanner;
     private bool readNext;
     private DialogToken _currentToken = null!;
 
-    private Dictionary<string, DialogNode> labels;
+    private Dictionary<string, DialogNode?> labels;
     private Dictionary<DialogNode, string> gotos;
+
+    private Stack<Context> contexts;
+    private Context? context;
 
     private DialogParser(string input)
     {
         readNext = true;
         scanner = new DialogScanner(input);
-        labels = new Dictionary<string, DialogNode>();
+        labels = new Dictionary<string, DialogNode?>();
         gotos = new Dictionary<DialogNode, string>();
+        contexts = new Stack<Context>();
     }
 
     private DialogNode Unexpected(DialogTokenType? expected = null)
@@ -78,19 +97,23 @@ public class DialogParser
     {
         Expect(DialogTokenType.Option);
         DialogOptionNode node = new DialogOptionNode(Expect(DialogTokenType.String).value);
-        ParseSequence(node, true);
+        BeginContext();
+        EmitNode(node);
+        ParseSequence(true);
+        EndContext();
         return node;
     }
 
-    private DialogChoiceNode ParseChoice(bool inOption)
+    private void ParseChoice(bool inOption)
     {
         DialogChoiceNode node = new DialogChoiceNode(null);
+        EmitNode(node);
         if(IsNext(DialogTokenType.String))
         {
             node.text = SkipToken().value;
             if (inOption)
             {
-                return node;
+                return;
             }
         }
         if(IsNext(DialogTokenType.NewLine))
@@ -105,12 +128,78 @@ public class DialogParser
                 SkipToken();
             }
         }
-        return node;
     }
 
-    private DialogNode ParseSequence(DialogNode lastNode, bool inline)
+    private void EmitNode(DialogNode node)
     {
-        string? labelName = null;
+        foreach (DialogNode endNode in context!.endNodes)
+        {
+            endNode.next = node;
+        }
+        context.endNodes.Clear();
+        context.endNodes.Add(node);
+        if (context.firstNode == null)
+        {
+            context.firstNode = node;
+        }
+        foreach (string labelName in context.labelNames)
+        {
+            labels.Add(labelName, node);
+        }
+        context.labelNames.Clear();
+    }
+
+    private void BeginContext()
+    {
+        if (context != null)
+        {
+            contexts.Push(context);
+        }
+        context = new Context();
+    }
+
+    private DialogNode? EndContext()
+    {
+        DialogNode? result = context!.firstNode;
+        if (contexts.Count > 0)
+        {
+            Context nextContext = contexts.Pop();
+            nextContext.endNodes.AddRange(context.endNodes);
+            nextContext.labelNames.AddRange(context.labelNames);
+            context = nextContext;
+        } else
+        {
+            context = null;
+        }
+        return result;
+    }
+
+    private void EmitExit()
+    {
+        foreach (string labelName in context!.labelNames)
+        {
+            labels.Add(labelName, null);
+        }
+        context.labelNames.Clear();
+        context.endNodes.Clear();
+    }
+
+    private void EmitLabel(string labelName)
+    {
+        context!.labelNames.Add(labelName);
+    }
+
+    private void EmitGoto(string labelName)
+    {
+        foreach (DialogNode endNode in context!.endNodes)
+        {
+            gotos.Add(endNode, labelName);
+        }
+    }
+
+    private void ParseSequence(bool inline)
+    {
+        List<string> labelNames = new List<string>();
         while (true)
         {
             if (IsNext(DialogTokenType.EOF))
@@ -125,74 +214,57 @@ public class DialogParser
             {
                 break;
             }
-            else if(IsNext(DialogTokenType.Id))
-            {
-                if (IsNext(DialogTokenType.Id))
-                {
-                    labelName = SkipToken().value;
-                    Expect(DialogTokenType.Label);
-                    while (IsNext(DialogTokenType.NewLine))
-                    {
-                        SkipToken();
-                    }
-                }
-            }
             else
             {
-                DialogNode nextNode = ParseNode(lastNode, false);
-                lastNode.next = nextNode;
-                lastNode = nextNode;
-                if (labelName != null)
-                {
-                    labels.Add(labelName, nextNode);
-                    labelName = null;
-                }
+                ParseNode(false);
             }
         }
-        return lastNode;
     }
 
-    private DialogNode ParseNode(DialogNode lastNode, bool inOption)
+    private void ParseNode(bool inOption)
     {
         if(IsNext(DialogTokenType.NewLine))
         {
             SkipToken();
-            return lastNode;
         }
         else if (IsNext(DialogTokenType.String) || IsNext(DialogTokenType.Option))
         {
-            return ParseChoice(inOption);
+            ParseChoice(inOption);
         }
         else if (IsNext(DialogTokenType.Goto))
         {
             SkipToken();
-            string name = Expect(DialogTokenType.Id).value;
-            gotos.Add(lastNode, name);
-            return new DialogGoToNode(name);
+            EmitGoto(Expect(DialogTokenType.Id).value);
         }
-        else if (IsNext(DialogTokenType.Container))
+        else if (IsNext(DialogTokenType.Id))
         {
-            SkipToken();
-            DialogEntryNode entryPoint = new DialogEntryNode();
-            ParseSequence(entryPoint, true);
-            return new DialogContainerNode(entryPoint);
+            EmitLabel(SkipToken().value);
+            Expect(DialogTokenType.Label);
+            while (IsNext(DialogTokenType.NewLine))
+            {
+                SkipToken();
+            }
         }
         else if (IsNext(DialogTokenType.BeginGroup))
         {
             SkipToken();
-            DialogNode node = ParseSequence(lastNode, false);
+            ParseSequence(false);
             SkipToken();
-            return node;
+        }
+        else if(IsNext(DialogTokenType.Exit))
+        {
+            SkipToken();
+            EmitExit();
         }
         else
         {
-            return Unexpected();
+            Unexpected();
         }
     }
 
     private void LinkGotos()
     {
-        foreach (KeyValuePair<string, DialogNode> label in labels)
+        foreach (KeyValuePair<string, DialogNode?> label in labels)
         {
             foreach (KeyValuePair<DialogNode, string> gt in gotos)
             {
@@ -204,12 +276,13 @@ public class DialogParser
         }
     }
 
-    public static DialogNode Parse(string input)
+    public static DialogNode? Parse(string input)
     {
         DialogParser parser = new DialogParser(input);
-        DialogNode entryPoint = new DialogEntryNode();
-        parser.ParseSequence(entryPoint, false);
+        parser.BeginContext();
+        parser.ParseSequence(false);
+        DialogNode? result = parser.EndContext();
         parser.LinkGotos();
-        return entryPoint;
+        return result;
     }
 }
