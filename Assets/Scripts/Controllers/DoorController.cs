@@ -13,6 +13,7 @@ public class DoorController : MonoBehaviour
     {
         _doorCollider = GetComponent<Collider2D>();
         _doorRenderer = GetComponent<SpriteRenderer>();
+        _doorRenderer.color = _closedColor;
     }
 
     // Update is called once per frame
