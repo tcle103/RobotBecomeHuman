@@ -123,6 +123,18 @@ public class DialogScanner
         return new DialogToken(line, DialogTokenType.Id, value);
     }
 
+    private DialogToken ScanName()
+    {
+        SkipCh();
+        string name = "";
+        while (!IsNext(']'))
+        {
+            name += SkipCh();
+        }
+        SkipCh();
+        return new DialogToken(line, DialogTokenType.Name, name);
+    }
+
     public DialogToken NextToken()
     {
         SkipWhiteSpace();
@@ -174,11 +186,6 @@ public class DialogScanner
                 return new DialogToken(line, DialogTokenType.Option, "-");
             }
         }
-        else if (ch == '@')
-        {
-            SkipCh();
-            return new DialogToken(line, DialogTokenType.Container, "@");
-        }
         else if (ch == '"')
         {
             return ScanString();
@@ -186,6 +193,10 @@ public class DialogScanner
         else if (char.IsLetterOrDigit(ch) || ch == '_')
         {
             return ScanId();
+        }
+        else if(ch == '[')
+        {
+            return ScanName();
         }
         else
         {

@@ -106,8 +106,12 @@ public class DialogParser
 
     private void ParseChoice(bool inOption)
     {
-        DialogChoiceNode node = new DialogChoiceNode(null);
+        DialogChoiceNode node = new DialogChoiceNode();
         EmitNode(node);
+        if (IsNext(DialogTokenType.Name))
+        {
+            node.name = SkipToken().value;
+        }
         if(IsNext(DialogTokenType.String))
         {
             node.text = SkipToken().value;
@@ -227,7 +231,8 @@ public class DialogParser
         {
             SkipToken();
         }
-        else if (IsNext(DialogTokenType.String) || IsNext(DialogTokenType.Option))
+        else if (IsNext(DialogTokenType.Name) || IsNext(DialogTokenType.String)
+            || IsNext(DialogTokenType.Option))
         {
             ParseChoice(inOption);
         }

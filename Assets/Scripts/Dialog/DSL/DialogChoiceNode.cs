@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 public class DialogChoiceNode : DialogNode
 {
+    public string? name;
     public string? text;
     public List<DialogOptionNode> options;
 
-    public DialogChoiceNode(string? text)
+    public DialogChoiceNode()
     {
-        this.text = text;
         options = new List<DialogOptionNode>();
     }
 }

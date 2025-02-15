@@ -103,7 +103,18 @@ public class NPCBehavior : MonoBehaviour
             else if (currentNode is DialogChoiceNode choice)
             {
                 //Set boxes to text
-                dialogueBox.text = choice.text;
+                dialogueBox.text = "";
+                if (choice.text != null)
+                {
+                    dialogueBox.text = choice.text;
+                }
+
+                nameBox.text = "";
+                if (choice.name != null)
+                {
+                    nameBox.text = choice.name;
+                }
+
                 for (int i = 0; i < choice.options.Count; i++)
                 {
                     dialogueBox.text += "\n    [" + (i + 1) + "] " + choice.options[i].text;

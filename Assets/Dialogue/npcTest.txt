@@ -10,5 +10,5 @@
 --                      # This ends the dialogue
 
 A:                      # This is the A label
-"This is A!"
+[NPC A] "This is A!"    # Square brackets can be used before text to specifiy an NPC name
 --

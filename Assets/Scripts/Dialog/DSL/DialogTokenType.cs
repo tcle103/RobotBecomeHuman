@@ -8,12 +8,12 @@ public enum DialogTokenType
 {
     Id,
     String,
+    Name,
     BeginGroup,
     EndGroup,
     Label,
     Option,
     Goto,
-    Container,
     Exit,
     NewLine,
     EOF
