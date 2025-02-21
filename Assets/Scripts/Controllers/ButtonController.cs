@@ -4,29 +4,39 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour, IGenericController
 {
+    [SerializeField] private Color _onColor, _offColor;
+    SpriteRenderer _buttonRenderer;
     public bool isOn;
-    bool isActive;
+    // bool isActive;
 
-    public void Press() {
-        if (isActive) {
-            if (!isOn) {
-                gameObject.GetComponent<SpriteRenderer>().color = Color.green;
-                isOn = true;
-            } else {
-                Reset();
-            }
-            Debug.Log("Activated");
+    // public void Press() {
+    //     if (isActive) {
+    //         if (!isOn) {
+    //             gameObject.GetComponent<SpriteRenderer>().color = Color.green;
+    //             isOn = true;
+    //         } else {
+    //             Reset();
+    //         }
+    //         Debug.Log("Activated");
+    //     }
+    // }
+
+    void Awake() {
+        _buttonRenderer = GetComponent<SpriteRenderer>();
+        _buttonRenderer.color = _offColor;
+    }
+    public void Activate() {
+        if (!isOn) {
+            _buttonRenderer.color = _onColor;
+            isOn = true;
         }
     }
-
-    public void Activate() {
-        isActive = true;
-    }
     public void Reset() {
-        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+        _buttonRenderer.color = _offColor;
         isOn = false;
     }
     public void Deactivate() {
-        isActive = false;
+        if (isOn)
+            Reset();
     }
 }
