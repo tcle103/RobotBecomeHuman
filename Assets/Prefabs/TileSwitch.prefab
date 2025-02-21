@@ -171,7 +171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Activate
+      value: Toggle
       objectReference: {fileID: 0}
     - target: {fileID: 6614503255736572561, guid: cf3c5eb617b25dc439a27f33b547d5b2, type: 3}
       propertyPath: action.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName

@@ -24,13 +24,21 @@ public class DoorController : MonoBehaviour
 
     public void Operate() {
         if (!isOpen) {
-            _doorCollider.isTrigger = true;
-            _doorRenderer.color = _openColor;
-            isOpen = true;
+            Open();
         } else {
-            _doorCollider.isTrigger = false;
-            _doorRenderer.color = _closedColor;
-            isOpen = false;
+            Close();
         }
+    }
+
+    public void Open() {
+        _doorCollider.isTrigger = true;
+        _doorRenderer.color = _openColor;
+        isOpen = true;
+    }
+
+    public void Close() {
+        _doorCollider.isTrigger = false;
+        _doorRenderer.color = _closedColor;
+        isOpen = false;
     }
 }
