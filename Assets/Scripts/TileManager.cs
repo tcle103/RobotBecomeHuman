@@ -8,7 +8,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private int _width, _height;
     [SerializeField] private Tile _tilePrefab;
     List<Tile> _tiles;
-    readonly float tileMargin = 2.25f;
+    readonly float tileMargin = 2.1f;
     bool isComplete;
     public UnityEvent action;
 
