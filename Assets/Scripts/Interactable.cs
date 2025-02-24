@@ -5,13 +5,15 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    public bool inRange;
+    [HideInInspector] public bool inRange;
     public KeyCode interactKey;
     public UnityEvent action;
+    private DialogueBox dialogueBox;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
     }
 
     // Update is called once per frame
@@ -19,7 +21,13 @@ public class Interactable : MonoBehaviour
     {
         if (inRange) {
             if (Input.GetKeyDown(interactKey)) {
-                action.Invoke();
+                if(dialogueBox.IsActive())
+                {
+                    dialogueBox.Hide();
+                } else
+                {
+                    action.Invoke();
+                }
             }
         }
     }

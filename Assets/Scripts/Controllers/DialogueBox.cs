@@ -3,30 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#nullable enable
+
 public class DialogueBox : MonoBehaviour
 {
     
     [SerializeField] Text nameBox;
     [SerializeField] Text dialogueBox;
-    public bool textLoaded;
-    public KeyCode interactKey;
     
     // Start is called before the first frame update
     void Start()
     {
-        textLoaded = false;
         nameBox.gameObject.SetActive(false);
         dialogueBox.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetText(string? npcName, string? text)
     {
-        if (Input.GetKeyDown(interactKey))
-        {
-            textLoaded = !textLoaded;
-            nameBox.gameObject.SetActive(textLoaded);
-            dialogueBox.gameObject.SetActive(textLoaded);
-        }
+        nameBox.gameObject.SetActive(true);
+        dialogueBox.gameObject.SetActive(true);
+        nameBox.text = npcName;
+        dialogueBox.text = text;
+    }
+
+    public void Hide()
+    {
+        nameBox.gameObject.SetActive(false);
+        dialogueBox.gameObject.SetActive(false);
+    }
+
+    public bool IsActive()
+    {
+        return nameBox.gameObject.activeSelf || dialogueBox.gameObject.activeSelf;
     }
 }

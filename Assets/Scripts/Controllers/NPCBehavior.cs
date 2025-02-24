@@ -8,28 +8,24 @@ using UnityEngine.UI;
 public class NPCBehavior : MonoBehaviour
 {
     [SerializeField] TextAsset dialogueFile;
-    [SerializeField] Text nameBox;
-    [SerializeField] Text dialogueBox;
     private int interactionCounter;
-    public KeyCode interactKey;
-    private bool inRange;
 
     private DialogNode entryPoint;
     private DialogNode currentNode;
+    private DialogueBox dialogueBox;
+
+    private bool isActive = false;
     
     // Start is called before the first frame update
     void Start()
     {
         //Set up variables
+        dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
         interactionCounter = 0;
 
         if (dialogueFile == null)
         {
             Debug.LogError("Dialogue file not assigned!");
-        }
-        else if (dialogueBox == null || nameBox == null)
-        {
-            Debug.LogError("Dialogue box or name box not assigned!");
         }
         else
         {
@@ -41,32 +37,35 @@ public class NPCBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(interactKey) && inRange)
-        { 
-            InteractNPC();
-        }
-        if(nameBox.IsActive())
+        if(!dialogueBox.IsActive())
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                SkipDialog();
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                ChooseOption(0);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                ChooseOption(1);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                ChooseOption(2);
-            }
-            else if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                ChooseOption(3);
-            }
+            isActive = false;
+        }
+
+        if(!isActive)
+        {
+            return;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            SkipDialog();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ChooseOption(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChooseOption(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ChooseOption(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ChooseOption(3);
         }
     }
 
@@ -97,28 +96,18 @@ public class NPCBehavior : MonoBehaviour
         {
             if (currentNode == null)
             {
-                // TODO: Make it so the interaction automatically ends if the dialogue ends so they don't have to press E
+                dialogueBox.Hide();
                 break;
             }
             else if (currentNode is DialogChoiceNode choice)
             {
                 //Set boxes to text
-                dialogueBox.text = "";
-                if (choice.text != null)
-                {
-                    dialogueBox.text = choice.text;
-                }
-
-                nameBox.text = "";
-                if (choice.name != null)
-                {
-                    nameBox.text = choice.name;
-                }
-
+                string text = choice.text ?? "";
                 for (int i = 0; i < choice.options.Count; i++)
                 {
-                    dialogueBox.text += "\n    [" + (i + 1) + "] " + choice.options[i].text;
+                    text += "\n    [" + (i + 1) + "] " + choice.options[i].text;
                 }
+                dialogueBox.SetText(choice.name, text);
                 break;
             }
             else
@@ -130,28 +119,8 @@ public class NPCBehavior : MonoBehaviour
 
     public void InteractNPC()
     {
-        if (!nameBox.IsActive()) //prevents interaction if dialogue is already active
-        {
-            //make boxes visible
-            nameBox.gameObject.SetActive(true);
-            dialogueBox.gameObject.SetActive(true);
-
-            currentNode = entryPoint;
-            UpdateDialog();
-        }
-    }
-    
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
-            var player = collision.gameObject;
-            inRange = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
-            var player = collision.gameObject;
-            inRange = false;
-        }
+        isActive = true;
+        currentNode = entryPoint;
+        UpdateDialog();
     }
 }
