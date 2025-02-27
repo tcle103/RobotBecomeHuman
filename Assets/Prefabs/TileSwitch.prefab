@@ -75,8 +75,8 @@ SpriteRenderer:
   m_SortingLayerID: -1683402689
   m_SortingLayer: -1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 773567823, guid: f1b333d67a8885c408e16641f08b5ff2, type: 3}
+  m_Color: {r: 0.3886792, g: 0.3886792, b: 0.3886792, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b02eb2f1bdb7840a9592b702ba47d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onColor: {r: 0, g: 1, b: 0, a: 1}
-  _offColor: {r: 1, g: 0, b: 0, a: 1}
+  _onColor: {r: 1, g: 1, b: 1, a: 1}
+  _offColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   isOn: 0
 --- !u!1001 &414035328926905428
 PrefabInstance:
