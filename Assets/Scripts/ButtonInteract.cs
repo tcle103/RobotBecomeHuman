@@ -21,4 +21,10 @@ public class ButtonInteract: MonoBehaviour, IInteractable
     {
         action.Invoke();
     }
+
+    public void Highlight()
+    {}
+
+    public void Unhighlight()
+    {}
 }
