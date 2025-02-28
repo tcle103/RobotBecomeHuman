@@ -209,11 +209,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5527383745098970489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fecfa2972ab4614d8e6bdc26de66c48, type: 3}
+  m_Script: {fileID: 11500000, guid: e4aaa058c0b69ab4e9302e11e93fd838, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inRange: 0
-  interactKey: 0
   action:
     m_PersistentCalls:
       m_Calls: []
