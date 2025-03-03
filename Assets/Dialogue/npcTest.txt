@@ -3,10 +3,11 @@
 # Any dialogue text can be followed by one or more options
 "Choose one"
     - "Option A" -> A               # This option links to the A label
-    - "Option B" "This is B!" --    # This options puts it's code in-line
+    - "Option B" "This is B!" --    # This option puts it's code in-line
     - "Default Option"              # Options fall through by default
 
 "This is the default!"  # Dialogue can have no options
+-> say_hello
 --                      # This ends the dialogue
 
 A:                      # This is the A label

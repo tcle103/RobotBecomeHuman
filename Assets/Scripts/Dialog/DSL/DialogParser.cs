@@ -199,6 +199,7 @@ public class DialogParser
         {
             gotos.Add(endNode, labelName);
         }
+        EmitNode(new DialogGoToNode(labelName));
     }
 
     private void ParseSequence(bool inline)

@@ -3,11 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class NPCBehavior : MonoBehaviour
 {
+    [Serializable]
+    public class ExternalAction
+    {
+        public string name;
+        public UnityEvent action;
+    }
+
+
     [SerializeField] TextAsset dialogueFile;
+    [SerializeField] List<ExternalAction> externalActions;
     private int interactionCounter;
 
     private DialogNode entryPoint;
@@ -97,6 +107,7 @@ public class NPCBehavior : MonoBehaviour
             if (currentNode == null)
             {
                 dialogueBox.Hide();
+                isActive = false;
                 break;
             }
             else if (currentNode is DialogChoiceNode choice)
@@ -108,6 +119,19 @@ public class NPCBehavior : MonoBehaviour
                     text += "\n    [" + (i + 1) + "] " + choice.options[i].text;
                 }
                 dialogueBox.SetText(choice.name, text);
+                break;
+            }
+            else if (currentNode is DialogGoToNode goToNode)
+            {
+                dialogueBox.Hide();
+                isActive = false;
+                foreach (ExternalAction action in externalActions)
+                {
+                    if (action.name == goToNode.name)
+                    {
+                        action.action.Invoke();
+                    }
+                }
                 break;
             }
             else
