@@ -9,18 +9,29 @@ public class PlayerMovement : MonoBehaviour
 
     InputAction moveAction;
     Rigidbody2D rb;
+    DialogueBox dialogueBox;
+    GameObject inventoryBox;
 
     // Start is called before the first frame update
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody2D>();
+        dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
+        inventoryBox = GameObject.FindGameObjectWithTag("Inventory");
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 movement = moveAction.ReadValue<Vector2>();
-        rb.velocity = movement * speed;
+        if (inventoryBox == null)
+        {
+            inventoryBox = GameObject.FindGameObjectWithTag("Inventory");
+        }
+        if ((!dialogueBox.IsActive()) && (inventoryBox == null || !inventoryBox.activeSelf))
+        {
+            Vector2 movement = moveAction.ReadValue<Vector2>();
+            rb.velocity = movement * speed;
+        }
     }
 }

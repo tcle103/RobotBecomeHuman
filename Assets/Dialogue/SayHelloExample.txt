@@ -1,0 +1,3 @@
+[NPC] "Hello!"
+    - "Say hello in the console" -> say_hello
+    - "Don't say hello"
