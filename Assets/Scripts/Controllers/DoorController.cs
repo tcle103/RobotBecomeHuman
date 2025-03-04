@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    Collider2D doorCollider;
+    [SerializeField] private Color _openColor, _closedColor;
+    SpriteRenderer _doorRenderer;
+    Collider2D _doorCollider;
     bool isOpen;
     // Start is called before the first frame update
     void Awake()
     {
-        doorCollider = GetComponent<Collider2D>();
+        _doorCollider = GetComponent<Collider2D>();
+        _doorRenderer = GetComponent<SpriteRenderer>();
+        _doorRenderer.color = _closedColor;
     }
 
     // Update is called once per frame
@@ -19,17 +23,22 @@ public class DoorController : MonoBehaviour
     }
 
     public void Operate() {
-        var mat = GetComponent<Renderer>().material;
-        Color newColor;
         if (!isOpen) {
-            doorCollider.isTrigger = true;
-            newColor = new(mat.color.r, mat.color.g, mat.color.b, 0);
-            isOpen = true;
+            Open();
         } else {
-            doorCollider.isTrigger = false;
-            newColor = new(mat.color.r, mat.color.g, mat.color.b, 1);
-            isOpen = false;
+            Close();
         }
-        mat.SetColor("_Color", newColor);
+    }
+
+    public void Open() {
+        _doorCollider.isTrigger = true;
+        _doorRenderer.color = _openColor;
+        isOpen = true;
+    }
+
+    public void Close() {
+        _doorCollider.isTrigger = false;
+        _doorRenderer.color = _closedColor;
+        isOpen = false;
     }
 }

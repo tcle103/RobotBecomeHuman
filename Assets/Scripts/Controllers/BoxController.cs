@@ -4,25 +4,25 @@ using UnityEngine;
 
 public class BoxController : MonoBehaviour, IGenericController
 {
-    Vector3 originalPos;
-    Rigidbody2D rb;
+    Vector3 _originalPos;
+    Rigidbody2D _rb;
     // Start is called before the first frame update
     void Awake()
     {
-        originalPos = this.transform.position;
-        rb = GetComponent<Rigidbody2D>();
-        rb.isKinematic = true;
+        _originalPos = this.transform.position;
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.isKinematic = false;
     }
 
     public void Activate() {
-        rb.isKinematic = false;
+        _rb.isKinematic = false;
     }
 
     public void Reset() {
-        this.transform.position = originalPos;
+        this.transform.position = _originalPos;
     }
 
     public void Deactivate() {
-        rb.isKinematic = true;
+        _rb.isKinematic = true;
     }
 }
