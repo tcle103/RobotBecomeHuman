@@ -6,12 +6,12 @@ using UnityEngine.Events;
 public class Triggerable : MonoBehaviour
 {
     public UnityEvent action;
-    bool isTriggered;
+    AudioSource _audioSource;
     List<Collider2D> collisions = new();
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,6 +23,7 @@ public class Triggerable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collisions.Count == 0) {
             action.Invoke();
+            _audioSource.Play();
             Debug.Log("Player is in range");
         }
         collisions.Add(collision);
