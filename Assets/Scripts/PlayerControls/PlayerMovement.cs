@@ -11,12 +11,15 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     DialogueBox dialogueBox;
     GameObject inventoryBox;
+    public AudioClip step;
+    AudioSource _audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
         dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
         inventoryBox = GameObject.FindGameObjectWithTag("Inventory");
     }
@@ -31,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
         if ((!dialogueBox.IsActive()) && (inventoryBox == null || !inventoryBox.activeSelf))
         {
             Vector2 movement = moveAction.ReadValue<Vector2>();
+            if (movement != Vector2.zero && !_audioSource.loop) 
+            {
+                if (!_audioSource.isPlaying) _audioSource.PlayOneShot(step, 0.1f);
+            }
             rb.velocity = movement * speed;
         }
     }
