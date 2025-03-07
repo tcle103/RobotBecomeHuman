@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Interact : MonoBehaviour
 {
+    [SerializeField] private Color _highlightOn, _highlightOff;
     IInteractable objInteract;
     InputAction interactAction;
     // Start is called before the first frame update
@@ -27,7 +28,7 @@ public class Interact : MonoBehaviour
         objInteract = collision.transform.GetComponent<IInteractable>();
         if (objInteract != null)
         {
-            GetComponent<SpriteRenderer>().color = new Color(0, 0.5f, 1);
+            GetComponent<SpriteRenderer>().color = _highlightOn;
             Debug.Log("Player is in range");
         }
     }
@@ -37,7 +38,7 @@ public class Interact : MonoBehaviour
         if (collision.transform.GetComponent<IInteractable>() != null)
         {
             objInteract = null;
-            GetComponent<SpriteRenderer>().color = Color.blue;
+            GetComponent<SpriteRenderer>().color = _highlightOff;
             Debug.Log("Player is out of range");
         }
     }
