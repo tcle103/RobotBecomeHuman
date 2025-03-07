@@ -6,13 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 1;
-
     InputAction moveAction;
     Rigidbody2D rb;
     DialogueBox dialogueBox;
     GameObject inventoryBox;
     public AudioClip step;
     AudioSource _audioSource;
+    Animator _playerAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody2D>();
         _audioSource = GetComponent<AudioSource>();
+        _playerAnimator = GetComponent<Animator>();
         dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
         inventoryBox = GameObject.FindGameObjectWithTag("Inventory");
     }
@@ -39,6 +40,11 @@ public class PlayerMovement : MonoBehaviour
                 if (!_audioSource.isPlaying) _audioSource.PlayOneShot(step, 0.1f);
             }
             rb.velocity = movement * speed;
+            if (movement == Vector2.up) _playerAnimator.SetTrigger("Up");
+            if (movement == Vector2.down) _playerAnimator.SetTrigger("Down");
+            if (movement == Vector2.left) _playerAnimator.SetTrigger("Left");
+            if (movement == Vector2.right) _playerAnimator.SetTrigger("Right");
         }
+
     }
 }
