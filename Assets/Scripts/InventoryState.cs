@@ -48,6 +48,12 @@ public class InventoryState : MonoBehaviour
             inventoryOpen = !inventoryOpen;
             inventoryUI.SetActive(inventoryOpen);
         }
+        
+        //on esc key press, open main menu
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.LoadLevel("StartMenu");
+        }
 
         if (inventoryOpen)
         {
