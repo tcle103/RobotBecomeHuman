@@ -26,10 +26,10 @@ public class InventoryState : MonoBehaviour
             Debug.Log("Sprite added: " + sprite.name);
         }
         inventory.Add("inventoryTest1");
-        inventory.Add("inventoryTest2");
-        inventory.Add("inventoryTest3");
-        inventory.Add("inventoryTest4");
-        inventory.Add("inventoryTest5");
+        // inventory.Add("inventoryTest2");
+        // inventory.Add("inventoryTest3");
+        // inventory.Add("inventoryTest4");
+        // inventory.Add("inventoryTest5");
         
         //get a list of all children(ui images) of inventory ui, these are the placeholder spots for items
         itemSlots = new List<GameObject>();

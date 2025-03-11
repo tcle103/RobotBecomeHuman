@@ -7,11 +7,14 @@ public class Respawn : MonoBehaviour
 {
     public Transform spawnPoint;
     public Transform spawnZone;
+    public AudioClip grunt;
+    AudioSource _audioSource;
     InputAction respawnAction;
     // Start is called before the first frame update
     void Start()
     {
         respawnAction = InputSystem.actions.FindAction("Respawn");
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +32,7 @@ public class Respawn : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision) {
         if (collision.transform.CompareTag("Death")) {
             this.transform.position = new (spawnPoint.position.x, spawnPoint.position.y);
+            _audioSource.PlayOneShot(grunt, 0.7f);
             if (spawnZone) {
                 spawnZone.GetComponent<ZoneController>().Reset();
             }

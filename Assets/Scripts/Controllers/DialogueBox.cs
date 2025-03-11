@@ -10,16 +10,17 @@ public class DialogueBox : MonoBehaviour
     
     [SerializeField] Text nameBox;
     [SerializeField] Text dialogueBox;
+    [SerializeField] GameObject dialoguePanel;
     
     // Start is called before the first frame update
     void Start()
     {
-        nameBox.gameObject.SetActive(false);
-        dialogueBox.gameObject.SetActive(false);
+        Hide();
     }
 
     public void SetText(string? npcName, string? text)
     {
+        dialoguePanel.SetActive(true);
         nameBox.gameObject.SetActive(true);
         dialogueBox.gameObject.SetActive(true);
         nameBox.text = npcName;
@@ -28,6 +29,7 @@ public class DialogueBox : MonoBehaviour
 
     public void Hide()
     {
+        dialoguePanel.SetActive(false);
         nameBox.gameObject.SetActive(false);
         dialogueBox.gameObject.SetActive(false);
     }

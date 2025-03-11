@@ -14,15 +14,24 @@ public class BoxController : MonoBehaviour, IGenericController
         _rb.isKinematic = false;
     }
 
-    public void Activate() {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Zone"))
+            Reset();
+    }
+
+    public void Activate()
+    {
         _rb.isKinematic = false;
     }
 
-    public void Reset() {
+    public void Reset()
+    {
         this.transform.position = _originalPos;
     }
 
-    public void Deactivate() {
+    public void Deactivate()
+    {
         _rb.isKinematic = true;
     }
 }

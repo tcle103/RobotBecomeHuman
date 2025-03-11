@@ -6,9 +6,10 @@ using UnityEngine.Events;
 public class ButtonInteract: MonoBehaviour, IInteractable
 {
     public UnityEvent action;
-    void Start()
+    AudioSource _audioSource;
+    void Awake()
     {
-        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -20,6 +21,7 @@ public class ButtonInteract: MonoBehaviour, IInteractable
     public void Interact()
     {
         action.Invoke();
+        _audioSource.Play();
     }
 
     public void Highlight()

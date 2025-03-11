@@ -6,43 +6,46 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private Color _offColor, _onColor;
     [SerializeField] private SpriteRenderer _tileRenderer;
-    Collider2D _collider;
-    List<Collider2D> _collisions;
+    AudioSource _audioSource;
+    Collider2D _colliderSelf;
+    Collider2D _colliderOther;
     [SerializeField] List<GameObject> _neighbors;
     public bool isActivated;
-    public bool isRoot;
+    public bool isRootTile;
 
     // Start is called before the first frame update
     void Start()
     {
         _tileRenderer.color = _offColor;
-        _collider = GetComponent<Collider2D>();
-        _collisions = new();
+        _audioSource = GetComponent<AudioSource>();
+        _colliderSelf = GetComponent<Collider2D>();
         FindNeighbors();
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (var collision in _collisions)
+        if (_colliderOther)
         {
-            if (_collider.bounds.Contains(collision.bounds.center))
+            if (_colliderSelf.bounds.Contains(_colliderOther.bounds.center))
             {
-                isRoot = true;
-                if (!isActivated)
-                    Activate();
+                if (!isRootTile)
+                {
+                    _audioSource.Play();
+                    isRootTile = true;
+                }
+                if (!isActivated) Activate();
                 return;
             }
-            else isRoot = false;
+            isRootTile = false;
         }
 
         foreach (var neighbor in _neighbors)
         {
             Tile tile = neighbor.GetComponent<Tile>();
-            if (tile.isRoot)
+            if (tile.isRootTile)
             {
-                if (!isActivated)
-                    Activate();
+                if (!isActivated) Activate();
                 return;
             }
         }
@@ -60,17 +63,17 @@ public class Tile : MonoBehaviour
     {
         _tileRenderer.color = _offColor;
         isActivated = false;
-        isRoot = false;
+        isRootTile = false;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        _collisions.Add(other);
+        if (!_colliderOther) _colliderOther = other;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        _collisions.Remove(other);
+        if (_colliderOther == other) _colliderOther = null;
     }
 
     private void FindNeighbors()
@@ -80,7 +83,7 @@ public class Tile : MonoBehaviour
         Vector2[] directions = {Vector2.up, Vector2.down, Vector2.left, Vector2.right};
         foreach (Vector2 dir in directions)
         {
-            RaycastHit2D hit = Physics2D.Raycast(_collider.bounds.center, dir);
+            RaycastHit2D hit = Physics2D.Raycast(_colliderSelf.bounds.center, dir);
             if (hit && hit.collider.gameObject.GetComponent<Tile>())
             {
                 Debug.Log("Hit " + hit.collider.gameObject);
