@@ -16,7 +16,7 @@ public class NPCBehavior : MonoBehaviour
     }
 
 
-    [SerializeField] TextAsset dialogueFile;
+    [SerializeField] public TextAsset dialogueFile;
     [SerializeField] List<ExternalAction> externalActions;
     private int interactionCounter;
 
@@ -27,7 +27,7 @@ public class NPCBehavior : MonoBehaviour
     private bool isActive = false;
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         //Set up variables
         dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();

@@ -1,2 +1,0 @@
-[0-376] "Blah Blah Blah"
-    - "Give me the item" -> add_item
