@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 
 public class InventoryState : MonoBehaviour
@@ -52,7 +53,7 @@ public class InventoryState : MonoBehaviour
         //on esc key press, open main menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.LoadLevel("StartMenu");
+            SceneManager.LoadScene("StartMenu");
         }
 
         if (inventoryOpen)
