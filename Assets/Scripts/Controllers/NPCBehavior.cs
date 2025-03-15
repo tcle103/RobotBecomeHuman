@@ -143,8 +143,11 @@ public class NPCBehavior : MonoBehaviour
 
     public void InteractNPC()
     {
-        isActive = true;
-        currentNode = entryPoint;
-        UpdateDialog();
+        if (!isActive)
+        {
+            isActive = true;
+            currentNode = entryPoint;
+            UpdateDialog();
+        }
     }
 }
