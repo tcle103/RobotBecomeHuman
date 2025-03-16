@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5714340921311228456}
-  - component: {fileID: 803069934391316316}
   - component: {fileID: -2184782973927966613}
   - component: {fileID: -7517695770070270707}
   - component: {fileID: 6851473453315485868}
@@ -36,35 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &803069934391316316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7301551588305766044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fecfa2972ab4614d8e6bdc26de66c48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inRange: 0
-  interactKey: 101
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: -2184782973927966613}
-        m_TargetAssemblyTypeName: NPCBehavior, Assembly-CSharp
-        m_MethodName: InteractNPC
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &-2184782973927966613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueFile: {fileID: 4900000, guid: 95c3982ce67329440a96c98040fdd5c5, type: 3}
+  externalActions: []
 --- !u!212 &-7517695770070270707
 SpriteRenderer:
   m_ObjectHideFlags: 0

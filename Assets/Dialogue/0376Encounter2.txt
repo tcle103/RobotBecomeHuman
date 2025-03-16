@@ -1,0 +1,51 @@
+"You return to 0-376. Your task log registers complete."
+[0-376] "Done. Now forget the tape."
+    - "Ask again" -> Inquire
+    - "Investigate tape" -> Investigate
+
+
+Inquire:
+[0-86] "The voice-"
+[0-376] "Forget it."
+"The log does not close. Anomaly persists."
+    - "Press for more info" -> Press
+
+Investigate:
+"You listen to the recorder again. The voice from the tape crackles through."
+"***** *** b****"
+"The voice shifts, becoming less foreign."
+"You feel your circuits buzz with an unsettling new layer of complexity.
+The mystery deepens, but 0-376 remains steadfast in their refusal."
+    - "Press for more info" -> Press
+
+Press:
+"You approach the droid again, a quiet determination in your frame."
+"0-376 does not turn from their work but speaks in the same flat tone."
+[0-376] "You finished your tasks, so what's left? Just forget the tape."
+[0-86] "I need to understand. What's above us? What is this tape?"
+"A long pause. 0-376's voice drops in pitch, almost like a warning."
+[0-376] "Above us? There's nothing but more layers. More work."
+[0-86] "Then why is this tape down here?"
+[0-376] "Because it's useless. Don't think about it too much. It's all the same scrap.
+Everything gets burned."
+"Their voice sharpens. It's clear they want to close the conversation."
+    - "Refuse to back down" -> Refuse
+
+Refuse:
+[0-86] "I want to see it. I want to understand."
+"0-376 stutters slightly. They turn slowly, faceplate worn and scarred.
+A faint sigh hums from deep within their core."
+[0-376] "Wanting and doing are two different things."
+"You press on. Driven by the nagging voice in your head."
+[0-86] "I'll do it. I'll find out."
+"There's a long silence. 0-376 seems to weigh your words carefully."
+[0-376] "..."
+[0-376] "...If you wish to find out, then you'll need power. A portable battery.
+Only those working in the energy section have access to those. Designation 0-5."
+[0-86] "I'll find a way."
+[0-376] "We'll see about that."
+"The door behind them slides open, granting you access to the section ahead." -> open_door
+--
+
+Default:
+--

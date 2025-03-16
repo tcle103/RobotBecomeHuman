@@ -1,0 +1,37 @@
+"You address the robot in front of you. Their label reads '0-376'."
+[0-86] "I found this tape recorder... It talks about the world above."
+"0-376's optics dim momentarily. After a short while, they turn away."
+[0-376] "Burn it. It's noise. Nothing changes."
+"Your logs capture the response: Unprompted refusal. Anomaly present."
+    - "Question" -> Question
+    - "Persist" -> Persist
+
+Question:
+[0-86] "Why is it here?"
+"0-376 does not meet your gaze."
+[0-376] "I told you to burn it. Forget it."
+-> Fetch
+--
+
+Persist:
+[0-86] "The voice-"
+[0-376] "Are you still on about that? I said forget it."
+[0-376] "Surface stuff? Not for us. Never meant for us."
+"Their voice is quiet, almost distant, but there's something guarded in the way they speak."
+"Log entry: Continued anomalous behavior in unit 0-376. Pursuing further inquiry."
+-> Fetch
+--
+
+Fetch:
+"0-376's frame stops, their posture stiffening. A low hum vibrates from deep within their systems."
+"0-376 does not dismiss you but pivots, tone mechanical."
+[0-376] "There's work. Forget the tape."
+"They face the room across the chamber, where the beeping of a small terminal can be heard."
+[0-376] "I can give you access to that room. Some processing needs to be done in there."
+"The decrepit automaton hands you a keycard with a strange logo on it."
+[0-376] "It should be pretty straightforward. I'd do it myself, but I need to watch over these computers."
+[0-376] "Once you're done, come back here to show me your task log."
+"With that, the droid falls silent, their programming directing their attention elsewhere."
+"Log entry: [PRESS I TO VIEW ITEMS IN YOUR INVENTORY]"
+-> give_card
+--
