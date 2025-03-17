@@ -9,6 +9,8 @@ TagManager:
   - Gate
   - Canvas
   - Inventory
+  - Tile
+  - Settings
   layers:
   - Default
   - TransparentFX
