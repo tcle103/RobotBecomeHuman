@@ -13,10 +13,14 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip step;
     AudioSource _audioSource;
     Animator _playerAnimator;
+    SettingsSave settingsSave;
 
     // Start is called before the first frame update
     void Start()
     {
+        settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave.player = transform;
+        settingsSave.gameLoad();
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody2D>();
         _audioSource = GetComponent<AudioSource>();
