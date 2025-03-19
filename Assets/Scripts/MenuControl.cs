@@ -1,97 +1,145 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 //using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuControl : MonoBehaviour
 {
-
-    private string[] scenes;
-    private double[] cursorXPos;
-    private int cursorPos;
-    private RectTransform rt;
+    
+    public static SettingsSave settingsSave;
+    
+    private String[] languages = {"English", "Japanese", "Chinese"};
+    [SerializeField] private GameObject logo;
+    [SerializeField] private GameObject controls;
+    [SerializeField] private GameObject startButton;
+    [SerializeField] private GameObject optionsButton;
+    [SerializeField] private GameObject quitButton;
+    [SerializeField] private GameObject backButton;
+    [SerializeField] private GameObject languageButton;
+    [SerializeField] private GameObject contrastButton;
+    private Dictionary<String, Sprite> menuSprites;
     
     // Start is called before the first frame update
     void Start()
     {
-        cursorPos = 0;
-        if(SceneManager.GetActiveScene().name == "StartMenu")
+        settingsSave = FindObjectOfType<SettingsSave>();
+        menuSprites = new Dictionary<String, Sprite>();
+        Sprite[] sprites = Resources.LoadAll<Sprite>("Menus");
+        foreach (Sprite sprite in sprites)
         {
-            scenes = new string[] { "DevRoom", "OptionMenu", "StartMenu" };
+            menuSprites.Add(sprite.name, sprite);
         }
-        else if (SceneManager.GetActiveScene().name == "OptionMenu")
-        {
-            scenes = new string[] { "StartMenu", "StartMenu", "StartMenu" };
-        }
-        else
-        {
-            scenes = new string[] { "StartMenu", "StartMenu", "StartMenu" };
-        }
-        cursorXPos = new double[] { -580.7, -574.8, -568.4 };
-        //cursorXPos = new double[] { -3, 3.4, 9.9 };
-        //change position with rect transform
-        rt = GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2((float)cursorXPos[cursorPos], rt.anchoredPosition.y);
-        
-        //transform.position = new Vector3((float)cursorXPos[cursorPos], transform.position.y, transform.position.z);
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //
+        //load language and contrast from Menu options file
+        string language = settingsSave.language;
+        string contrast = settingsSave.contrast;
+        
+        
+        //if scene is menu - this code is ugly in a rush
+        if (SceneManager.GetActiveScene().name == "StartMenu")
+        {
+            if (language == "English")
+            {
+                logo.GetComponent<Image>().sprite = menuSprites["ENGlogo"];
+                controls.GetComponent<Image>().sprite = menuSprites["ENGcontrols"];
+                startButton.GetComponent<Image>().sprite = menuSprites["ENGstart"];
+                optionsButton.GetComponent<Image>().sprite = menuSprites["ENGsettings"];
+                quitButton.GetComponent<Image>().sprite = menuSprites["ENGquit"];
+            }
+            else if (language == "Japanese")
+            {
+                logo.GetComponent<Image>().sprite = menuSprites["JPNlogo"];
+                controls.GetComponent<Image>().sprite = menuSprites["JPNcontrols"];
+                startButton.GetComponent<Image>().sprite = menuSprites["JPNstart"];
+                optionsButton.GetComponent<Image>().sprite = menuSprites["JPNsettings"];
+                quitButton.GetComponent<Image>().sprite = menuSprites["JPNquit"];
+            }
+            else if (language == "Chinese")
+            {
+                logo.GetComponent<Image>().sprite = menuSprites["CHNlogo"];
+                controls.GetComponent<Image>().sprite = menuSprites["CHNcontrols"];
+                startButton.GetComponent<Image>().sprite = menuSprites["CHNstart"];
+                optionsButton.GetComponent<Image>().sprite = menuSprites["CHNsettings"];
+                quitButton.GetComponent<Image>().sprite = menuSprites["CHNquit"];
+            }
+        }else if (SceneManager.GetActiveScene().name == "OptionMenu")
+        {
+            if (language == "English")
+            {
+                backButton.GetComponent<Image>().sprite = menuSprites["ENGback"];
+                languageButton.GetComponent<Image>().sprite = menuSprites["ENGlang"];
+                contrastButton.GetComponent<Image>().sprite = menuSprites["ENGcontrast"];
+            }
+            else if (language == "Japanese")
+            {
+                backButton.GetComponent<Image>().sprite = menuSprites["JPNback"];
+                languageButton.GetComponent<Image>().sprite = menuSprites["JPNlang"];
+                contrastButton.GetComponent<Image>().sprite = menuSprites["JPNcontrast"];
+            }
+            else if (language == "Chinese")
+            {
+                backButton.GetComponent<Image>().sprite = menuSprites["CHNback"];
+                languageButton.GetComponent<Image>().sprite = menuSprites["CHNlang"];
+                contrastButton.GetComponent<Image>().sprite = menuSprites["CHNcontrast"];
+            }
+        }
+    }
+
+    public void StartButton()
+    {
+        Debug.Log("Start button pressed");
+        SceneManager.LoadScene("DevRoom");
     }
     
-    //press space to go to next scene
-    void OnGUI()
+    public void OptionsButton()
     {
-        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Space)
-        {
-            if (cursorPos == 2 && SceneManager.GetActiveScene().name == "StartMenu")
-            {
-                /*if (Application.isEditor)
-                {
-                    EditorApplication.isPlaying = false;
-                }
-                else
-                {*/
-                    Application.Quit();
-                //}
-            }
-            else
-            {
-                Application.LoadLevel(scenes[cursorPos]);
-            }
-        }
+        Debug.Log("Options button pressed");
+        SceneManager.LoadScene("OptionMenu");
+    }
+    
+    public void QuitButton()
+    {
+        Debug.Log("Quit button pressed");
+        Application.Quit();
+    }
+    
+    public void BackButton()
+    {
+        Debug.Log("Back button pressed");
+        SceneManager.LoadScene("StartMenu");
+    }
+    
+    public void LanguageButton()
+    {
+        Debug.Log("Language button pressed");
+        //move to the next language option in the languages array and change playerpref (loop through)
         
-        //press right or left arrow to move cursor - only work on key press not hold
-        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.D && Input.GetButtonDown("Horizontal"))
+        int currentLanguageIndex = Array.IndexOf(languages, PlayerPrefs.GetString("Language"));
+        currentLanguageIndex++;
+        currentLanguageIndex %= languages.Length;
+        
+        settingsSave.language = languages[currentLanguageIndex];
+    }
+
+    public void ContrastButton()
+    {
+        Debug.Log("Contrast button pressed");
+        //switch contrast
+        if(PlayerPrefs.GetString("Contrast") == "Normal")
         {
-            if (cursorPos < 2)
-            {
-                cursorPos++;
-            }
-            else
-            {
-                cursorPos = 0;
-            }
-            //transform.position = new Vector3((float)cursorXPos[cursorPos], transform.position.y, transform.position.z);
-            rt.anchoredPosition = new Vector2((float)cursorXPos[cursorPos], rt.anchoredPosition.y);
+            settingsSave.contrast = "High";
         }
-        if (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.A && Input.GetButtonDown("Horizontal"))
+        else
         {
-            if (cursorPos > 0)
-            {
-                cursorPos--;
-            }
-            else
-            {
-                cursorPos = 2;
-            }
-            //transform.position = new Vector3((float)cursorXPos[cursorPos], transform.position.y, transform.position.z);
-            rt.anchoredPosition = new Vector2((float)cursorXPos[cursorPos], rt.anchoredPosition.y);
+            settingsSave.contrast = "Normal";
         }
     }
 }

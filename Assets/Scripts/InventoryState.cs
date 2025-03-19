@@ -7,16 +7,17 @@ using UnityEngine.TextCore.Text;
 
 public class InventoryState : MonoBehaviour
 {
-    private List<String> inventory;
+    private List<String> inventory = new List<String>();
     public bool inventoryOpen = false;
     [SerializeField] private GameObject inventoryUI;
     private Dictionary<String, Sprite> itemSprites;
     private List<GameObject> itemSlots;
+    public static SettingsSave settingsSave;
     
     // Start is called before the first frame update
     void Start()
     {
-        inventory = new List<String>();
+        settingsSave = FindObjectOfType<SettingsSave>();
         itemSprites = new Dictionary<String, Sprite>();
         
         //load item sprites
@@ -53,6 +54,10 @@ public class InventoryState : MonoBehaviour
         //on esc key press, open main menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            //public game load function in settings save
+            settingsSave.gameLoad();
+            
+            
             SceneManager.LoadScene("StartMenu");
         }
 
