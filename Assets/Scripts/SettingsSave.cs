@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SettingsSave : MonoBehaviour
 {
@@ -30,8 +31,11 @@ public class SettingsSave : MonoBehaviour
         contrast = "Normal";
         PlayerPrefs.SetString("Language", language);
         PlayerPrefs.SetString("Contrast", contrast);
+    }
 
-        if(player != null)
+    public void gameLoad()
+    {
+        if (player != null)
         {
             float x = PlayerPrefs.GetFloat("PlayerX", player.transform.position.x);
             float y = PlayerPrefs.GetFloat("PlayerY", player.transform.position.y);
@@ -39,7 +43,7 @@ public class SettingsSave : MonoBehaviour
 
             inventoryState = player.GetComponent<InventoryState>();
             string inventoryStr = PlayerPrefs.GetString("Inventory", "");
-            if(inventoryStr != "")
+            if (inventoryStr != "")
             {
                 inventoryState.LoadInventory(inventoryStr);
             }
@@ -48,7 +52,7 @@ public class SettingsSave : MonoBehaviour
 
             Debug.Assert(doors != null);
             string doorsStr = PlayerPrefs.GetString("Doors", "");
-            if(doorsStr != "")
+            if (doorsStr != "")
             {
                 string[] doorStrs = doorsStr.Split(",");
                 int[] doorIds = new int[doorStrs.Length];
@@ -59,7 +63,7 @@ public class SettingsSave : MonoBehaviour
 
                 foreach (DoorController door in doors)
                 {
-                    if(doorIds.Contains(door.id))
+                    if (doorIds.Contains(door.id))
                     {
                         door.OpenQuiet();
                     }
