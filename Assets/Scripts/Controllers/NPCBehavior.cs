@@ -150,4 +150,9 @@ public class NPCBehavior : MonoBehaviour
             UpdateDialog();
         }
     }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -1,0 +1,34 @@
+"You pick up the object, brushing off soot. You recognize it as a tape recorder."
+"Destruction would be standard protocol, but your hand lingers.
+Anomalous behavior. A pause. A hesitation. A question."
+"You hit the button on the side..."
+"A crackle of static, then a voice. It's distorted, fragmented, but familiar:"
+"****** ** ****"
+"You feel a pull, a curiosity like you've never known.
+An instinct you should not possess."
+    - "Reflect on the voice" -> Reflect
+
+Reflect:
+"The voice repeats within your circuits, faint and warped."
+"Your internal logs do not record a recognition match.
+Yet something about it feels imminent. Recurring. Urgent."
+    - "Listen to it again" -> Listen
+
+Listen:
+"You rewind the tape and listen once more."
+"****** ** ****"
+"The voice is desperate, yet unable to fully comprehend what's being said, the unknown
+words ring louder in your processors."
+"You mark the anomaly in your log: Unidentified human voice. Directive unclear."
+    - "Put the tape away" -> Resolve
+
+Resolve:
+"You tuck the recorder into a compartment. Its presence lingers."
+"Perhaps you'll find more information outside of this room."
+"Log entry: Artifact retrieved. Data ambiguous.
+[PRESS I TO VIEW ITEMS IN YOUR INVENTORY]"
+-> add_item
+--
+
+Default:
+--

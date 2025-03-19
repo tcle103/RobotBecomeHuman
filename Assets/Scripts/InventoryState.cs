@@ -27,11 +27,7 @@ public class InventoryState : MonoBehaviour
             itemSprites.Add(sprite.name, sprite);
             Debug.Log("Sprite added: " + sprite.name);
         }
-
-        if (inventory.Count == 0)
-        {
-            inventory.Add("inventoryTest1");
-        }
+        // inventory.Add("inventoryTest1");
         // inventory.Add("inventoryTest2");
         // inventory.Add("inventoryTest3");
         // inventory.Add("inventoryTest4");
