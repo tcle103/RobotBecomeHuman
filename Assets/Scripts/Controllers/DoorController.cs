@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
+    public int id;
+
     [SerializeField] private Color _openColor, _closedColor;
     SpriteRenderer _doorRenderer;
     Collider2D _doorCollider;
     AudioSource _audioSource;
-    bool isOpen;
+    bool _isOpen;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,24 +28,34 @@ public class DoorController : MonoBehaviour
     }
 
     public void Operate() {
-        if (!isOpen) {
+        if (!_isOpen) {
             Open();
         } else {
             Close();
         }
     }
 
-    public void Open() {
+    public void OpenQuiet()
+    {
         _doorCollider.isTrigger = true;
         _doorRenderer.color = _openColor;
-        if (!isOpen) _audioSource.Play();
-        isOpen = true;
+        _isOpen = true;
+    }
+
+    public void Open() {
+        if (!_isOpen) _audioSource.Play();
+        OpenQuiet();
+    }
+
+    public bool isOpen()
+    {
+        return _isOpen;
     }
 
     public void Close() {
         _doorCollider.isTrigger = false;
         _doorRenderer.color = _closedColor;
-        if (isOpen) _audioSource.Play();
-        isOpen = false;
+        if (_isOpen) _audioSource.Play();
+        _isOpen = false;
     }
 }

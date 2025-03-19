@@ -7,7 +7,7 @@ using UnityEngine.TextCore.Text;
 
 public class InventoryState : MonoBehaviour
 {
-    private List<String> inventory;
+    private List<String> inventory = new List<String>();
     public bool inventoryOpen = false;
     [SerializeField] private GameObject inventoryUI;
     private Dictionary<String, Sprite> itemSprites;
@@ -16,7 +16,6 @@ public class InventoryState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventory = new List<String>();
         itemSprites = new Dictionary<String, Sprite>();
         
         //load item sprites
@@ -26,7 +25,11 @@ public class InventoryState : MonoBehaviour
             itemSprites.Add(sprite.name, sprite);
             Debug.Log("Sprite added: " + sprite.name);
         }
-        inventory.Add("inventoryTest1");
+
+        if (inventory.Count == 0)
+        {
+            inventory.Add("inventoryTest1");
+        }
         // inventory.Add("inventoryTest2");
         // inventory.Add("inventoryTest3");
         // inventory.Add("inventoryTest4");
