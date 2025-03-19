@@ -91,6 +91,12 @@ public class MenuControl : MonoBehaviour
                 contrastButton.GetComponent<Image>().sprite = menuSprites["CHNcontrast"];
             }
         }
+        
+        //on 9 key press, settings save delete all data - dev key
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            settingsSave.DeleteData();
+        }
     }
 
     public void StartButton()

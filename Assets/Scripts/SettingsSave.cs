@@ -26,11 +26,25 @@ public class SettingsSave : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        language = "English";
-        contrast = "Normal";
-        PlayerPrefs.SetString("Language", language);
-        PlayerPrefs.SetString("Contrast", contrast);
+        
+        if(PlayerPrefs.HasKey("Language"))
+        {
+            language = PlayerPrefs.GetString("Language");
+        }
+        else
+        {
+            language = "English";
+            PlayerPrefs.SetString("Language", language);
+        }
+        if(PlayerPrefs.HasKey("Contrast"))
+        {
+            contrast = PlayerPrefs.GetString("Contrast");
+        }
+        else
+        {
+            contrast = "Normal";
+            PlayerPrefs.SetString("Contrast", contrast);
+        }
     }
 
     public void gameLoad()
@@ -111,4 +125,31 @@ public class SettingsSave : MonoBehaviour
     
     public string language { get; set; } = "English";
     public string contrast { get; set; } = "Normal";
+    
+    //delete all save data but not the settings
+    public void DeleteSaveData()
+    {
+        PlayerPrefs.DeleteKey("PlayerX");
+        PlayerPrefs.DeleteKey("PlayerY");
+        PlayerPrefs.DeleteKey("Inventory");
+        PlayerPrefs.DeleteKey("Doors");
+    }
+    
+    //delete all accessibility data
+    public void DeleteAccessibilityData()
+    {
+        PlayerPrefs.DeleteKey("Contrast");
+        PlayerPrefs.DeleteKey("Language");
+    }
+    
+    //delete all data
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteAll();
+        
+        PlayerPrefs.SetString("Language", "English");
+        language = PlayerPrefs.GetString("Language");
+        PlayerPrefs.SetString("Contrast", "Normal");
+        contrast = PlayerPrefs.GetString("Contrast");
+    }
 }

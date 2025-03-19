@@ -2026,7 +2026,19 @@ PrefabInstance:
     - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
       propertyPath: dialogueFile
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: chnDialogueFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 04279c2a944a2c647a28c5a2a43854cd, type: 3}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: engDialogueFile
+      value: 
       objectReference: {fileID: 4900000, guid: 9a82c7fb080c8594786f67d372aa586a, type: 3}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: jpnDialogueFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 04279c2a944a2c647a28c5a2a43854cd, type: 3}
     - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
       propertyPath: externalActions.Array.size
       value: 2
@@ -3110,7 +3122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e162776524468f4887fdf073d1e77d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueFile: {fileID: 4900000, guid: 820cfef5f1e93814f94d4ea69f9f1846, type: 3}
+  engDialogueFile: {fileID: 4900000, guid: 820cfef5f1e93814f94d4ea69f9f1846, type: 3}
+  jpnDialogueFile: {fileID: 4900000, guid: ea62059d9e0b63b49a7244c16acc4ec6, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: ea62059d9e0b63b49a7244c16acc4ec6, type: 3}
+  dialogueFile: {fileID: 0}
   externalActions:
   - name: add_item
     action:
@@ -32517,7 +32532,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e1f5e668069a24885e7c7625c07c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueFile: {fileID: 4900000, guid: f77cecfd25caecc4d9f54952fd9228e1, type: 3}
+  engDialogueFile: {fileID: 4900000, guid: f77cecfd25caecc4d9f54952fd9228e1, type: 3}
+  jpnDialogueFile: {fileID: 4900000, guid: 9e97bbc8c6e5d77469e7d4e1fa96ae8c, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: 9e97bbc8c6e5d77469e7d4e1fa96ae8c, type: 3}
+  dialogueFile: {fileID: 0}
 --- !u!4 &1538129127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5714340921311228456, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
@@ -32535,7 +32553,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e1f5e668069a24885e7c7625c07c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueFile: {fileID: 4900000, guid: 2a0336a1c3cd7d646905d36ec2265409, type: 3}
+  engDialogueFile: {fileID: 4900000, guid: 2a0336a1c3cd7d646905d36ec2265409, type: 3}
+  jpnDialogueFile: {fileID: 4900000, guid: a67d3b57a0bbca849a34754647bbe1b2, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: a67d3b57a0bbca849a34754647bbe1b2, type: 3}
+  dialogueFile: {fileID: 0}
 --- !u!114 &1538129131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32548,7 +32569,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e1f5e668069a24885e7c7625c07c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueFile: {fileID: 4900000, guid: e6b5498ecc385ae4aaecc572e2446cbb, type: 3}
+  engDialogueFile: {fileID: 4900000, guid: e6b5498ecc385ae4aaecc572e2446cbb, type: 3}
+  jpnDialogueFile: {fileID: 4900000, guid: 61a9479f072b96947bbc482209a88a0b, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: 61a9479f072b96947bbc482209a88a0b, type: 3}
+  dialogueFile: {fileID: 0}
 --- !u!1 &1543504792
 GameObject:
   m_ObjectHideFlags: 0

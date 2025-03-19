@@ -16,7 +16,10 @@ public class NPCBehavior : MonoBehaviour
     }
 
 
-    [SerializeField] public TextAsset dialogueFile;
+    [SerializeField] public TextAsset engDialogueFile;
+    [SerializeField] public TextAsset jpnDialogueFile;
+    [SerializeField] public TextAsset chnDialogueFile;
+    public TextAsset dialogueFile;
     [SerializeField] List<ExternalAction> externalActions;
     private int interactionCounter;
 
@@ -29,6 +32,26 @@ public class NPCBehavior : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        //use prefs to determine which dialogue file to use
+        string language = PlayerPrefs.GetString("Language");
+        Debug.Log("Language: " + language);
+        if (language == "English")
+        {
+            dialogueFile = engDialogueFile;
+        }
+        else if (language == "Japanese")
+        {
+            dialogueFile = jpnDialogueFile;
+        }
+        else if (language == "Chinese")
+        {
+            dialogueFile = chnDialogueFile;
+        }
+        else
+        {
+            dialogueFile = engDialogueFile;
+        }
+        
         //Set up variables
         dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
         interactionCounter = 0;
@@ -36,6 +59,10 @@ public class NPCBehavior : MonoBehaviour
         if (dialogueFile == null)
         {
             Debug.LogError("Dialogue file not assigned!");
+            if (engDialogueFile == null)
+            {
+                Debug.LogError("Bruh");
+            }
         }
         else
         {
