@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     AudioSource _audioSource;
     Animator _playerAnimator;
     SettingsSave settingsSave;
+    [SerializeField] private GameObject UIcanvas;
+    [SerializeField] private GameObject Optionscanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
         {
             inventoryBox = GameObject.FindGameObjectWithTag("Inventory");
         }
-        if ((!dialogueBox.IsActive()) && (inventoryBox == null || !inventoryBox.activeSelf))
+        if ((!dialogueBox.IsActive()) && (inventoryBox == null || !inventoryBox.activeSelf) && !(UIcanvas.GetComponent<CanvasGroup>().interactable) && !(Optionscanvas.GetComponent<CanvasGroup>().interactable))
         {
             Vector2 movement = moveAction.ReadValue<Vector2>();
             if (movement != Vector2.zero && !_audioSource.loop) 
