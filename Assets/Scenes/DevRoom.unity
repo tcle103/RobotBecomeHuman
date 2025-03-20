@@ -4118,8 +4118,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engDialogueFile: {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
-  jpnDialogueFile: {fileID: 0}
-  chnDialogueFile: {fileID: 0}
+  jpnDialogueFile: {fileID: 4900000, guid: cdc5004359bb2404da1b31cfa9ff9672, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: 79243eb11ce094f45ab278de5f8228b2, type: 3}
   dialogueFile: {fileID: 0}
   dialogs:
   - {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
@@ -25072,8 +25072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engDialogueFile: {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
-  jpnDialogueFile: {fileID: 0}
-  chnDialogueFile: {fileID: 0}
+  jpnDialogueFile: {fileID: 4900000, guid: cdc5004359bb2404da1b31cfa9ff9672, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: 79243eb11ce094f45ab278de5f8228b2, type: 3}
   dialogueFile: {fileID: 0}
   dialogs:
   - {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
@@ -43785,8 +43785,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engDialogueFile: {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
-  jpnDialogueFile: {fileID: 0}
-  chnDialogueFile: {fileID: 0}
+  jpnDialogueFile: {fileID: 4900000, guid: cdc5004359bb2404da1b31cfa9ff9672, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: 79243eb11ce094f45ab278de5f8228b2, type: 3}
   dialogueFile: {fileID: 0}
   dialogs:
   - {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
@@ -44038,8 +44038,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engDialogueFile: {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
-  jpnDialogueFile: {fileID: 0}
-  chnDialogueFile: {fileID: 0}
+  jpnDialogueFile: {fileID: 4900000, guid: cdc5004359bb2404da1b31cfa9ff9672, type: 3}
+  chnDialogueFile: {fileID: 4900000, guid: 79243eb11ce094f45ab278de5f8228b2, type: 3}
   dialogueFile: {fileID: 0}
   dialogs:
   - {fileID: 4900000, guid: d60857a4a7a3f3a45bc9771229d44c3f, type: 3}
