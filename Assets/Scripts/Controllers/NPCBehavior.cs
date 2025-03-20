@@ -52,23 +52,7 @@ public class NPCBehavior : MonoBehaviour
             dialogueFile = engDialogueFile;
         }
         
-        //Set up variables
-        dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
-        interactionCounter = 0;
-
-        if (dialogueFile == null)
-        {
-            Debug.LogError("Dialogue file not assigned!");
-            if (engDialogueFile == null)
-            {
-                Debug.LogError("Bruh");
-            }
-        }
-        else
-        {
-            entryPoint = DialogParser.Parse(dialogueFile.text);
-            currentNode = entryPoint;
-        }
+        InitDialogue();
     }
 
     // Update is called once per frame
@@ -175,6 +159,26 @@ public class NPCBehavior : MonoBehaviour
             isActive = true;
             currentNode = entryPoint;
             UpdateDialog();
+        }
+    }
+
+    public void InitDialogue() {
+        //Set up variables
+        dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
+        interactionCounter = 0;
+
+        if (dialogueFile == null)
+        {
+            Debug.LogError("Dialogue file not assigned!");
+            if (engDialogueFile == null)
+            {
+                Debug.LogError("Bruh");
+            }
+        }
+        else
+        {
+            entryPoint = DialogParser.Parse(dialogueFile.text);
+            currentNode = entryPoint;
         }
     }
 

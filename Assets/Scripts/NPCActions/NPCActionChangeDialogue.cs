@@ -32,10 +32,11 @@ public class NPCActionChangeScript : MonoBehaviour
             dialogueFile = engDialogueFile;
         }
     }
+    
     public void ChangeDialogue()
     {
         npcb.dialogueFile = this.dialogueFile;
-        npcb.Start();
+        npcb.InitDialogue();
         Debug.Log("BEEP");
     }
 }
