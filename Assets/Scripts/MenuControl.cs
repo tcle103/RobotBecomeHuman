@@ -27,6 +27,7 @@ public class MenuControl : MonoBehaviour
     void Start()
     {
         settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave.npcs.Clear();
         menuSprites = new Dictionary<String, Sprite>();
         Sprite[] sprites = Resources.LoadAll<Sprite>("Menus");
         foreach (Sprite sprite in sprites)

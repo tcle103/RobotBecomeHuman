@@ -2020,6 +2020,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: npcID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: NPC_ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -2039,6 +2047,26 @@ PrefabInstance:
       propertyPath: jpnDialogueFile
       value: 
       objectReference: {fileID: 4900000, guid: 04279c2a944a2c647a28c5a2a43854cd, type: 3}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: dialogs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: dialogs.Array.data[0]
+      value: 
+      objectReference: {fileID: 4900000, guid: 9a82c7fb080c8594786f67d372aa586a, type: 3}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: dialogs.Array.data[1]
+      value: 
+      objectReference: {fileID: 4900000, guid: 2a0336a1c3cd7d646905d36ec2265409, type: 3}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: dialogs.Array.data[2]
+      value: 
+      objectReference: {fileID: 4900000, guid: f77cecfd25caecc4d9f54952fd9228e1, type: 3}
+    - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      propertyPath: dialogs.Array.data[3]
+      value: 
+      objectReference: {fileID: 4900000, guid: e6b5498ecc385ae4aaecc572e2446cbb, type: 3}
     - target: {fileID: -2184782973927966613, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
       propertyPath: externalActions.Array.size
       value: 2
@@ -2260,6 +2288,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7301551588305766044, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
       insertIndex: 5
       addedObject: {fileID: 1538129130}
+    - targetCorrespondingSourceObject: {fileID: 7301551588305766044, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 1538129134}
     - targetCorrespondingSourceObject: {fileID: 7301551588305766044, guid: 0dcfb42a9456b9e4b823a970e09e1aa7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1538129122}
@@ -3126,6 +3157,8 @@ MonoBehaviour:
   jpnDialogueFile: {fileID: 4900000, guid: ea62059d9e0b63b49a7244c16acc4ec6, type: 3}
   chnDialogueFile: {fileID: 4900000, guid: ea62059d9e0b63b49a7244c16acc4ec6, type: 3}
   dialogueFile: {fileID: 0}
+  dialogs:
+  - {fileID: 4900000, guid: 820cfef5f1e93814f94d4ea69f9f1846, type: 3}
   externalActions:
   - name: add_item
     action:
@@ -32573,6 +32606,23 @@ MonoBehaviour:
   jpnDialogueFile: {fileID: 4900000, guid: 61a9479f072b96947bbc482209a88a0b, type: 3}
   chnDialogueFile: {fileID: 4900000, guid: 61a9479f072b96947bbc482209a88a0b, type: 3}
   dialogueFile: {fileID: 0}
+--- !u!114 &1538129134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538129103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a806f47800a074aa7ca05c8ac652c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - {fileID: 4900000, guid: 9a82c7fb080c8594786f67d372aa586a, type: 3}
+  - {fileID: 4900000, guid: 2a0336a1c3cd7d646905d36ec2265409, type: 3}
+  - {fileID: 4900000, guid: f77cecfd25caecc4d9f54952fd9228e1, type: 3}
+  - {fileID: 4900000, guid: e6b5498ecc385ae4aaecc572e2446cbb, type: 3}
 --- !u!1 &1543504792
 GameObject:
   m_ObjectHideFlags: 0

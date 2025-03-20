@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class NPCBehavior : MonoBehaviour
@@ -15,23 +16,33 @@ public class NPCBehavior : MonoBehaviour
         public UnityEvent action;
     }
 
-
     [SerializeField] public TextAsset engDialogueFile;
     [SerializeField] public TextAsset jpnDialogueFile;
     [SerializeField] public TextAsset chnDialogueFile;
     public TextAsset dialogueFile;
+    public List<TextAsset> dialogs;
+    Dictionary<int, TextAsset> hashes = new();
     [SerializeField] List<ExternalAction> externalActions;
     private int interactionCounter;
 
     private DialogNode entryPoint;
     private DialogNode currentNode;
     private DialogueBox dialogueBox;
+    private SettingsSave settingsSave;
 
     private bool isActive = false;
     
     // Start is called before the first frame update
     public void Start()
     {
+        settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave.npcs.Add(this);
+        settingsSave.gameLoad();
+
+        // Fill dictionary with fileID, file pairs
+        FillDictionary();
+        Debug.Log("Start");
+        
         //use prefs to determine which dialogue file to use
         string language = PlayerPrefs.GetString("Language");
         Debug.Log("Language: " + language);
@@ -58,7 +69,7 @@ public class NPCBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!dialogueBox.IsActive())
+        if (!dialogueBox.IsActive())
         {
             isActive = false;
         }
@@ -179,6 +190,23 @@ public class NPCBehavior : MonoBehaviour
         {
             entryPoint = DialogParser.Parse(dialogueFile.text);
             currentNode = entryPoint;
+        }
+    }
+
+    public TextAsset NPCFileLookup(int fileId)
+    {
+        if (hashes[fileId])
+            return hashes[fileId];
+        return null;
+    }
+
+    public void FillDictionary()
+    {
+        for (int i = 0; i < dialogs.Count; i++)
+        {
+            Debug.Log(dialogs[i].GetInstanceID());
+            int fileId = dialogs[i].GetInstanceID();
+            hashes[fileId] = dialogs[i];
         }
     }
 
