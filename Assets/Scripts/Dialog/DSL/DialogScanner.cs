@@ -30,7 +30,7 @@ public class DialogScanner
         if (EndOfFile()) throw new Exception("Unexpected end of file");
         
         //debug log
-        Debug.Log("File Name: "+ input);
+        //Debug.Log("File Name: "+ input);
         
         return input[index];
     }
