@@ -104,6 +104,41 @@ public class SettingsSave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //PlayerPrefs.SetString("Language", language);
+        //PlayerPrefs.SetString("Contrast", contrast);
+
+        //if (player != null)
+        //{
+        //    PlayerPrefs.SetFloat("PlayerX", player.position.x);
+        //    PlayerPrefs.SetFloat("PlayerY", player.position.y);
+        //    PlayerPrefs.SetString("Inventory", inventoryState.SaveInventory());
+        //    // Store instance ID for dialog file in PlayerPrefs
+        //    for (int i = 0; i < npcCount; i++)
+        //    {
+        //        PlayerPrefs.SetInt("Npc" + i, npcs[i].dialogueFile.GetInstanceID());
+        //    }
+
+        //    string doorsStr = "";
+        //    for (int i = 0; i < doors.Length; i++)
+        //    {
+        //        if (doors[i].isOpen())
+        //        {
+        //            if (doorsStr.Length > 0)
+        //            {
+        //                doorsStr += ",";
+        //            }
+        //            doorsStr += doors[i].id.ToString();
+        //        }
+        //    }
+        //    if(doorsStr != "")
+        //    {
+        //        PlayerPrefs.SetString("Doors", doorsStr);
+        //    }
+        //}
+    }
+
+    public void Save()
+    {
         PlayerPrefs.SetString("Language", language);
         PlayerPrefs.SetString("Contrast", contrast);
 
@@ -130,7 +165,7 @@ public class SettingsSave : MonoBehaviour
                     doorsStr += doors[i].id.ToString();
                 }
             }
-            if(doorsStr != "")
+            if (doorsStr != "")
             {
                 PlayerPrefs.SetString("Doors", doorsStr);
             }

@@ -20,6 +20,6 @@ public class NPCSave : MonoBehaviour
 
     public void save_point()
     {
-        settingsSave.gameLoad();
+        settingsSave.Save();
     }
 }
