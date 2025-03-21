@@ -1,15 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using UnityEditor;
+using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SettingsSave : MonoBehaviour
 {
     private static GameObject instance;
 
     public Transform player;
+
+    public List<NPCBehavior> npcs = new();
+    private int npcCount;
 
     private InventoryState inventoryState;
 
@@ -26,11 +31,25 @@ public class SettingsSave : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        language = "English";
-        contrast = "Normal";
-        PlayerPrefs.SetString("Language", language);
-        PlayerPrefs.SetString("Contrast", contrast);
+        
+        if(PlayerPrefs.HasKey("Language"))
+        {
+            language = PlayerPrefs.GetString("Language");
+        }
+        else
+        {
+            language = "English";
+            PlayerPrefs.SetString("Language", language);
+        }
+        if(PlayerPrefs.HasKey("Contrast"))
+        {
+            contrast = PlayerPrefs.GetString("Contrast");
+        }
+        else
+        {
+            contrast = "Normal";
+            PlayerPrefs.SetString("Contrast", contrast);
+        }
     }
 
     public void gameLoad()
@@ -70,10 +89,55 @@ public class SettingsSave : MonoBehaviour
                 }
             }
         }
+
+        // Try to retrieve last saved file from dictionary for each NPC
+        npcCount = npcs.Count;
+        Debug.Log("NpcCount: " + npcCount);
+        for (int i = 0; i < npcCount; i++)
+        {
+            int fileId = PlayerPrefs.GetInt("Npc" + i);
+            Debug.Log(fileId);
+            //if (fileId != 0) npcs[i].dialogueFile = npcs[i].NPCFileLookup(fileId);
+        }
     }
 
     // Update is called once per frame
     void Update()
+    {
+        //PlayerPrefs.SetString("Language", language);
+        //PlayerPrefs.SetString("Contrast", contrast);
+
+        //if (player != null)
+        //{
+        //    PlayerPrefs.SetFloat("PlayerX", player.position.x);
+        //    PlayerPrefs.SetFloat("PlayerY", player.position.y);
+        //    PlayerPrefs.SetString("Inventory", inventoryState.SaveInventory());
+        //    // Store instance ID for dialog file in PlayerPrefs
+        //    for (int i = 0; i < npcCount; i++)
+        //    {
+        //        PlayerPrefs.SetInt("Npc" + i, npcs[i].dialogueFile.GetInstanceID());
+        //    }
+
+        //    string doorsStr = "";
+        //    for (int i = 0; i < doors.Length; i++)
+        //    {
+        //        if (doors[i].isOpen())
+        //        {
+        //            if (doorsStr.Length > 0)
+        //            {
+        //                doorsStr += ",";
+        //            }
+        //            doorsStr += doors[i].id.ToString();
+        //        }
+        //    }
+        //    if(doorsStr != "")
+        //    {
+        //        PlayerPrefs.SetString("Doors", doorsStr);
+        //    }
+        //}
+    }
+
+    public void Save()
     {
         PlayerPrefs.SetString("Language", language);
         PlayerPrefs.SetString("Contrast", contrast);
@@ -83,6 +147,11 @@ public class SettingsSave : MonoBehaviour
             PlayerPrefs.SetFloat("PlayerX", player.position.x);
             PlayerPrefs.SetFloat("PlayerY", player.position.y);
             PlayerPrefs.SetString("Inventory", inventoryState.SaveInventory());
+            // Store instance ID for dialog file in PlayerPrefs
+            for (int i = 0; i < npcCount; i++)
+            {
+                PlayerPrefs.SetInt("Npc" + i, npcs[i].dialogueFile.GetInstanceID());
+            }
 
             string doorsStr = "";
             for (int i = 0; i < doors.Length; i++)
@@ -96,7 +165,7 @@ public class SettingsSave : MonoBehaviour
                     doorsStr += doors[i].id.ToString();
                 }
             }
-            if(doorsStr != "")
+            if (doorsStr != "")
             {
                 PlayerPrefs.SetString("Doors", doorsStr);
             }
@@ -111,4 +180,36 @@ public class SettingsSave : MonoBehaviour
     
     public string language { get; set; } = "English";
     public string contrast { get; set; } = "Normal";
+    
+    //delete all save data but not the settings
+    public void DeleteSaveData()
+    {
+        PlayerPrefs.DeleteKey("PlayerX");
+        PlayerPrefs.DeleteKey("PlayerY");
+        PlayerPrefs.DeleteKey("Inventory");
+        PlayerPrefs.DeleteKey("Doors");
+        // Delete key from PlayerPrefs
+        for (int i = 0; i < npcCount; i++)
+        {
+            PlayerPrefs.DeleteKey("Npc" + i);
+        }
+    }
+    
+    //delete all accessibility data
+    public void DeleteAccessibilityData()
+    {
+        PlayerPrefs.DeleteKey("Contrast");
+        PlayerPrefs.DeleteKey("Language");
+    }
+    
+    //delete all data
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteAll();
+        
+        PlayerPrefs.SetString("Language", "English");
+        language = PlayerPrefs.GetString("Language");
+        PlayerPrefs.SetString("Contrast", "Normal");
+        contrast = PlayerPrefs.GetString("Contrast");
+    }
 }

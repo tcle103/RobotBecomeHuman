@@ -86,7 +86,7 @@ public class Tile : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(_colliderSelf.bounds.center, dir);
             if (hit && hit.collider.gameObject.GetComponent<Tile>())
             {
-                Debug.Log("Hit " + hit.collider.gameObject);
+                //Debug.Log("Hit " + hit.collider.gameObject);
                 _neighbors.Add(hit.collider.gameObject);
             }
         }

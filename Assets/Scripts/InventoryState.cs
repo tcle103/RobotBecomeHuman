@@ -13,13 +13,20 @@ public class InventoryState : MonoBehaviour
     private Dictionary<String, Sprite> itemSprites;
     private List<GameObject> itemSlots;
     public static SettingsSave settingsSave;
+    // tien things
+    private CanvasGroup canvasgroup;
+    public bool menuOpen = false;
+    DialogueBox dialoguebox;
     
     // Start is called before the first frame update
     void Start()
     {
         settingsSave = FindObjectOfType<SettingsSave>();
         itemSprites = new Dictionary<String, Sprite>();
-        
+
+        canvasgroup = GameObject.Find("UICanvas").GetComponent<CanvasGroup>();
+        dialoguebox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
+
         //load item sprites
         Sprite[] sprites = Resources.LoadAll<Sprite>("Inventory/Icons");
         foreach (Sprite sprite in sprites)
@@ -52,13 +59,16 @@ public class InventoryState : MonoBehaviour
         }
         
         //on esc key press, open main menu
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !menuOpen && !dialoguebox.IsActive() && !inventoryOpen)
         {
             //public game load function in settings save
-            settingsSave.gameLoad();
-            
-            
-            SceneManager.LoadScene("StartMenu");
+            //settingsSave.gameLoad();
+            menuOpen = true;
+
+            //SceneManager.LoadScene("StartMenu");
+            canvasgroup.alpha = 1;
+            canvasgroup.interactable = true;
+            canvasgroup.blocksRaycasts = true;
         }
 
         if (inventoryOpen)

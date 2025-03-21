@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class DialogScanner
 {
@@ -27,6 +28,10 @@ public class DialogScanner
     private char NextCh()
     {
         if (EndOfFile()) throw new Exception("Unexpected end of file");
+        
+        //debug log
+        //Debug.Log("File Name: "+ input);
+        
         return input[index];
     }
 
