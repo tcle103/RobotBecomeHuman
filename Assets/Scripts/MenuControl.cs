@@ -188,6 +188,7 @@ public class MenuControl : MonoBehaviour
         currentLanguageIndex %= languages.Length;
         
         settingsSave.language = languages[currentLanguageIndex];
+        PlayerPrefs.SetString("Language", settingsSave.language);
         Debug.Log(settingsSave.language);
     }
 
