@@ -24,7 +24,7 @@ public class FadeIn : MonoBehaviour
 
     IEnumerator TransitionFade(float end, float duration)
     {
-        var sceneTo = SceneManager.LoadSceneAsync("OptionMenu");
+        var sceneTo = SceneManager.LoadSceneAsync("StartMenu");
         sceneTo.allowSceneActivation = false;
 
         float elapsed = 0;
