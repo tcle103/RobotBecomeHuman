@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject UIcanvas;
     [SerializeField] private GameObject Optionscanvas;
     [SerializeField] private GameObject overlay;
+    [SerializeField] private GameObject credits;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Transition!");
             overlay.GetComponent<FadeIn>().Activate();
+            credits.GetComponent<FadeIn>().Activate();
         }
     }
 }

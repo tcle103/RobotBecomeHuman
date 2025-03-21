@@ -28,17 +28,19 @@ public class FadeIn : MonoBehaviour
         sceneTo.allowSceneActivation = false;
 
         float elapsed = 0;
-        SpriteRenderer overlayRenderer = gameObject.GetComponent<SpriteRenderer>();
+        SpriteRenderer overlayRenderer = this.GetComponent<SpriteRenderer>();
         Color baseColor = overlayRenderer.color;
         float start = baseColor.a;
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float newAlpha = Mathf.Lerp(start, end, elapsed / duration);
+            Debug.Log(newAlpha);
             overlayRenderer.color = new Color(baseColor.r, baseColor.g, baseColor.b, newAlpha);
             yield return null;
         }
-
+        Debug.Log("fade done" + overlayRenderer.color.a);
+        yield return new WaitForSeconds(5);
         sceneTo.allowSceneActivation = true;
     }
 }
