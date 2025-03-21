@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     SettingsSave settingsSave;
     [SerializeField] private GameObject UIcanvas;
     [SerializeField] private GameObject Optionscanvas;
+    [SerializeField] private GameObject overlay;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,14 @@ public class PlayerMovement : MonoBehaviour
             if (movement == Vector2.left) _playerAnimator.SetTrigger("Left");
             if (movement == Vector2.right) _playerAnimator.SetTrigger("Right");
         }
+    }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Finish"))
+        {
+            Debug.Log("Transition!");
+            overlay.GetComponent<FadeIn>().Activate();
+        }
     }
 }
