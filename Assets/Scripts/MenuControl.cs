@@ -94,7 +94,15 @@ public class MenuControl : MonoBehaviour
         string contrast = settingsSave.contrast;
 
         Vector2 movement = moveAction.ReadValue<Vector2>();
-        Vector2 controllerMovement = Gamepad.current.leftStick.ReadValue();
+        Vector2 controllerMovement;
+        if (Gamepad.current == null)
+        {
+            controllerMovement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        }
+        else
+        {
+            controllerMovement = Gamepad.current.leftStick.ReadValue();
+        }
 
 
         //if scene is menu - this code is ugly in a rush
