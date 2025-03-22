@@ -51,15 +51,15 @@ public class InventoryState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //on i key press, open or close inventory
-        if (Input.GetKeyDown(KeyCode.I))
+        //on i key press or select press controller, open or close inventory
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.JoystickButton6))
         {
             inventoryOpen = !inventoryOpen;
             inventoryUI.SetActive(inventoryOpen);
         }
         
-        //on esc key press, open main menu
-        if (Input.GetKeyDown(KeyCode.Escape) && !menuOpen && !dialoguebox.IsActive() && !inventoryOpen)
+        //on esc key press or start press controller, open main menu
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)) && !menuOpen && !dialoguebox.IsActive() && !inventoryOpen)
         {
             //public game load function in settings save
             //settingsSave.gameLoad();
