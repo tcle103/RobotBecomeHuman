@@ -194,7 +194,7 @@ public class MenuControl : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && canvasgroup.interactable)
         {
             Debug.Log(keypressed);
             if (keypressed)
@@ -206,7 +206,7 @@ public class MenuControl : MonoBehaviour
             highlights[(selected + 1) % buttons.Count].color = new Color(highlights[(selected + 1) % buttons.Count].color.r, highlights[(selected + 1) % buttons.Count].color.g, highlights[(selected + 1) % buttons.Count].color.b, 0);
             highlights[selected].color = new Color(highlights[selected].color.r, highlights[selected].color.g, highlights[selected].color.b, 1);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D) && canvasgroup.interactable)
         {
             Debug.Log(keypressed);
             if (keypressed)
@@ -220,9 +220,9 @@ public class MenuControl : MonoBehaviour
             highlights[(selected + buttons.Count-1) % buttons.Count].color = new Color(highlights[(selected + buttons.Count - 1) % buttons.Count].color.r, highlights[(selected + buttons.Count - 1) % buttons.Count].color.g, highlights[(selected + buttons.Count - 1) % buttons.Count].color.b, 0);
             highlights[selected].color = new Color(highlights[selected].color.r, highlights[selected].color.g, highlights[selected].color.b, 1);
         }
-        if (Input.GetKeyDown(KeyCode.Space) && keypressed)
+        if (Input.GetKeyDown(KeyCode.Space) && keypressed && canvasgroup.interactable)
         {
-
+            Debug.Log("ui keyboard button pressed");
             buttons[selected].GetComponent<Button>().onClick.Invoke();
         }
         
