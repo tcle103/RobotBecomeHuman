@@ -61,9 +61,9 @@ public class PlayerMovement : MonoBehaviour
             }
             rb.velocity = movement * speed;
             if (movement == Vector2.up || (controllerMovement.y > 0.2) && Mathf.Abs(controllerMovement.y) > Mathf.Abs(controllerMovement.x)) _playerAnimator.SetTrigger("Up");
-            if (movement == Vector2.down ||  (controllerMovement.y < -0.2) && Mathf.Abs(controllerMovement.y) > Mathf.Abs(controllerMovement.x)) _playerAnimator.SetTrigger("Down");
-            if (movement == Vector2.left ||  (controllerMovement.x > 0.2) && Mathf.Abs(controllerMovement.x) > Mathf.Abs(controllerMovement.y)) _playerAnimator.SetTrigger("Left");
-            if (movement == Vector2.right || (controllerMovement.x < -0.2) && Mathf.Abs(controllerMovement.x) > Mathf.Abs(controllerMovement.y)) _playerAnimator.SetTrigger("Right");
+            if (movement == Vector2.down || (controllerMovement.y < -0.2) && Mathf.Abs(controllerMovement.y) > Mathf.Abs(controllerMovement.x)) _playerAnimator.SetTrigger("Down");
+            if (movement == Vector2.left || (controllerMovement.x < 0.2) && Mathf.Abs(controllerMovement.x) > Mathf.Abs(controllerMovement.y)) _playerAnimator.SetTrigger("Left");
+            if (movement == Vector2.right || (controllerMovement.x > -0.2) && Mathf.Abs(controllerMovement.x) > Mathf.Abs(controllerMovement.y)) _playerAnimator.SetTrigger("Right");
         }
     }
 

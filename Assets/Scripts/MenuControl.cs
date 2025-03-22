@@ -6,6 +6,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class MenuControl : MonoBehaviour
 {
@@ -24,6 +26,11 @@ public class MenuControl : MonoBehaviour
     private Dictionary<String, Sprite> menuSprites;
     // tien things
     private CanvasGroup canvasgroup;
+    private List<GameObject> buttons = new List<GameObject>();
+    private List<Image> highlights = new List<Image>();
+    private int selected = 0;
+    private bool keypressed = false;
+    InputAction moveAction;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +46,44 @@ public class MenuControl : MonoBehaviour
 
         // tien thing again
         canvasgroup = this.GetComponent<CanvasGroup>();
+
+        if (SceneManager.GetActiveScene().name == "StartMenu")
+        {
+            buttons.Add(startButton);
+            buttons.Add(optionsButton);
+            buttons.Add(quitButton);
+            
+
+            highlights.Add(GameObject.Find("startbuttonhighlight").GetComponent<Image>());
+            highlights.Add(GameObject.Find("optionsbuttonhighlight").GetComponent<Image>());
+            highlights.Add(GameObject.Find("quitbuttonhighlight").GetComponent<Image>());
+
+        }
+        else if (SceneManager.GetActiveScene().name == "OptionMenu")
+        {
+            buttons.Add(backButton);
+            buttons.Add(languageButton);
+
+
+            highlights.Add(GameObject.Find("backbuttonhighlight").GetComponent<Image>());
+            highlights.Add(GameObject.Find("langbuttonhighlight").GetComponent<Image>());
+            //Debug.Log(highlights[2]);
+
+        }
+        if (this.name == "UICanvas")
+        {
+            buttons.Add(startButton);
+            //buttons.Add(optionsButton);
+            buttons.Add(quitButton);
+
+
+            highlights.Add(GameObject.Find("startbuttonhighlight").GetComponent<Image>());
+            //highlights.Add(GameObject.Find("optionsbuttonhighlight").GetComponent<Image>());
+            highlights.Add(GameObject.Find("quitbuttonhighlight").GetComponent<Image>());
+
+        }
+
+        moveAction = InputSystem.actions.FindAction("Move");
     }
 
     // Update is called once per frame
@@ -47,8 +92,11 @@ public class MenuControl : MonoBehaviour
         //load language and contrast from Menu options file
         string language = settingsSave.language;
         string contrast = settingsSave.contrast;
-        
-        
+
+        Vector2 movement = moveAction.ReadValue<Vector2>();
+        Vector2 controllerMovement = Gamepad.current.leftStick.ReadValue();
+
+
         //if scene is menu - this code is ugly in a rush
         if (SceneManager.GetActiveScene().name == "StartMenu")
         {
@@ -145,6 +193,39 @@ public class MenuControl : MonoBehaviour
                 quitButton.GetComponent<Image>().sprite = menuSprites["CHNquit"];
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log(keypressed);
+            if (keypressed)
+            {
+                selected -= 1;
+                if (selected < 0) { selected = highlights.Count-1; }
+            }
+            keypressed = true;
+            highlights[(selected + 1) % buttons.Count].color = new Color(highlights[(selected + 1) % buttons.Count].color.r, highlights[(selected + 1) % buttons.Count].color.g, highlights[(selected + 1) % buttons.Count].color.b, 0);
+            highlights[selected].color = new Color(highlights[selected].color.r, highlights[selected].color.g, highlights[selected].color.b, 1);
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Debug.Log(keypressed);
+            if (keypressed)
+            {
+                selected += 1;
+                if (selected > buttons.Count-1) { selected = 0; }
+            }
+            //Debug.Log(selected);
+            keypressed = true;
+            //Debug.Log((selected + 3) % buttons.Count);
+            highlights[(selected + buttons.Count-1) % buttons.Count].color = new Color(highlights[(selected + buttons.Count - 1) % buttons.Count].color.r, highlights[(selected + buttons.Count - 1) % buttons.Count].color.g, highlights[(selected + buttons.Count - 1) % buttons.Count].color.b, 0);
+            highlights[selected].color = new Color(highlights[selected].color.r, highlights[selected].color.g, highlights[selected].color.b, 1);
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && keypressed)
+        {
+
+            buttons[selected].GetComponent<Button>().onClick.Invoke();
+        }
+        
 
 
         //on 9 key press, settings save delete all data - dev key

@@ -11,6 +11,7 @@ TagManager:
   - Inventory
   - Tile
   - Settings
+  - highlight
   layers:
   - Default
   - TransparentFX
