@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -52,15 +54,16 @@ public class PlayerMovement : MonoBehaviour
         if ((!dialogueBox.IsActive()) && (inventoryBox == null || !inventoryBox.activeSelf) && !(UIcanvas.GetComponent<CanvasGroup>().interactable) && !(Optionscanvas.GetComponent<CanvasGroup>().interactable))
         {
             Vector2 movement = moveAction.ReadValue<Vector2>();
+            Vector2 controllerMovement = Gamepad.current.leftStick.ReadValue();
             if (movement != Vector2.zero && !_audioSource.loop) 
             {
                 if (!_audioSource.isPlaying) _audioSource.PlayOneShot(step, 0.1f);
             }
             rb.velocity = movement * speed;
-            if (movement == Vector2.up) _playerAnimator.SetTrigger("Up");
-            if (movement == Vector2.down) _playerAnimator.SetTrigger("Down");
-            if (movement == Vector2.left) _playerAnimator.SetTrigger("Left");
-            if (movement == Vector2.right) _playerAnimator.SetTrigger("Right");
+            if (movement == Vector2.up || (controllerMovement.y > 0.2) && Mathf.Abs(controllerMovement.y) > Mathf.Abs(controllerMovement.x)) _playerAnimator.SetTrigger("Up");
+            if (movement == Vector2.down ||  (controllerMovement.y < -0.2) && Mathf.Abs(controllerMovement.y) > Mathf.Abs(controllerMovement.x)) _playerAnimator.SetTrigger("Down");
+            if (movement == Vector2.left ||  (controllerMovement.x > 0.2) && Mathf.Abs(controllerMovement.x) > Mathf.Abs(controllerMovement.y)) _playerAnimator.SetTrigger("Left");
+            if (movement == Vector2.right || (controllerMovement.x < -0.2) && Mathf.Abs(controllerMovement.x) > Mathf.Abs(controllerMovement.y)) _playerAnimator.SetTrigger("Right");
         }
     }
 

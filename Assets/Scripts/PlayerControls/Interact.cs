@@ -8,6 +8,7 @@ public class Interact : MonoBehaviour
     [SerializeField] private Color _highlightOn, _highlightOff;
     IInteractable objInteract;
     InputAction interactAction;
+    
     // Start is called before the first frame update
     void Start()
     {

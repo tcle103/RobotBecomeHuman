@@ -7,12 +7,14 @@ public class Interactable : MonoBehaviour
 {
     [HideInInspector] public bool inRange;
     public KeyCode interactKey;
+    public KeyCode controllerInteractKey;
     public UnityEvent action;
     private DialogueBox dialogueBox;
 
     // Start is called before the first frame update
     void Start()
     {
+        controllerInteractKey = KeyCode.JoystickButton5;
         dialogueBox = GameObject.FindGameObjectWithTag("Canvas").GetComponent<DialogueBox>();
     }
 
@@ -20,7 +22,7 @@ public class Interactable : MonoBehaviour
     void Update()
     {
         if (inRange) {
-            if (Input.GetKeyDown(interactKey)) {
+            if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(controllerInteractKey)) {
                 if(dialogueBox.IsActive())
                 {
                     dialogueBox.Hide();
