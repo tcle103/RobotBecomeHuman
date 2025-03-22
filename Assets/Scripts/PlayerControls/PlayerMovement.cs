@@ -54,7 +54,15 @@ public class PlayerMovement : MonoBehaviour
         if ((!dialogueBox.IsActive()) && (inventoryBox == null || !inventoryBox.activeSelf) && !(UIcanvas.GetComponent<CanvasGroup>().interactable) && !(Optionscanvas.GetComponent<CanvasGroup>().interactable))
         {
             Vector2 movement = moveAction.ReadValue<Vector2>();
-            Vector2 controllerMovement = Gamepad.current.leftStick.ReadValue();
+            Vector2 controllerMovement;
+            if (Gamepad.current == null)
+            {
+                controllerMovement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            }
+            else
+            {
+                controllerMovement = Gamepad.current.leftStick.ReadValue();
+            }
             if (movement != Vector2.zero && !_audioSource.loop) 
             {
                 if (!_audioSource.isPlaying) _audioSource.PlayOneShot(step, 0.1f);
