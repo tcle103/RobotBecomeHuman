@@ -7,7 +7,7 @@ using UnityEngine.TextCore.Text;
 
 public class InventoryState : MonoBehaviour
 {
-    private List<String> inventory = new List<String>();
+    public List<String> inventory = new List<String>();
     public bool inventoryOpen = false;
     [SerializeField] private GameObject inventoryUI;
     private Dictionary<String, Sprite> itemSprites;
