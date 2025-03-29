@@ -41,13 +41,13 @@ public class NPCInteract : MonoBehaviour
 
     public void onInteract()
     {
-        scriptSelect();
+        Debug.Log(dialogueScripts[scriptSelect()].text);
     }
 
     private int scriptSelect()
     {
         Dictionary<string, int> choices = NPCConfigParse();
-        return 0;
+        return choices["default"];
     }
 
     private Dictionary<string, int> NPCConfigParse()
@@ -74,7 +74,7 @@ public class NPCInteract : MonoBehaviour
             // which is equivalent to an index in dialogueScripts
             if (configLines[i][0] == '{')
             {
-                string key = configLines[i].Substring(2, configLines[i].Length - 4);
+                string key = configLines[i].Substring(2, configLines[i].Length - 5);
                 int value = -1;
 
                 // [3/28/25 Tien] isolate dialogueScripts index contained in
@@ -99,6 +99,7 @@ public class NPCInteract : MonoBehaviour
                     }
                     // [3/28/25 Tien] if all is well, make an entry in configScriptDict
                     configScriptDict.Add(key, value);
+                    Debug.Log('"'+key+'"');
                 }
                 else
                 {
