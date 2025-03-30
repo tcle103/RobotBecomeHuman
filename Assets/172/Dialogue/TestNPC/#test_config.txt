@@ -1,2 +1,4 @@
+{ has,testItem,1 }
+	1
 { default }
 	0

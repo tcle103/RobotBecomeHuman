@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 462427068}
   - component: {fileID: 462427067}
   - component: {fileID: 462427066}
-  - component: {fileID: 462427065}
+  - component: {fileID: 462427072}
   - component: {fileID: 462427064}
   - component: {fileID: 462427063}
   m_Layer: 0
@@ -886,22 +886,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &462427065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462427061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81e50751f7dcd8b4699597ba57bb2ad7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inventory: []
-  inventoryOpen: 0
-  inventoryUI: {fileID: 175927687}
-  menuOpen: 0
 --- !u!114 &462427066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,6 +1053,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &462427072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462427061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145d8600720b19949944e55bf7699781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemMasterList: {fileID: 11400000, guid: d882d25202d58c0478aff049c445362c, type: 2}
 --- !u!1 &889819009
 GameObject:
   m_ObjectHideFlags: 0
