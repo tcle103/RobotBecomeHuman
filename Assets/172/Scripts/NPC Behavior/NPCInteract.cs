@@ -121,13 +121,15 @@ public class NPCInteract : MonoBehaviour
                         break;
                     }
                 }
-                // [3/29/25 Tien] "has" keyword - check if player has a certain amount
-                // of an item in their inventory
-                //
-                // inside the config file, it should look like
-                // "has,itemLabel,amount"
-                // so in the parameters list, parameters[1] will be the item label
-                // and parameters[2] will be the amount
+                /*
+                 *  [3/29/25 Tien] "has" keyword - check if player has a certain amount
+                 *  of an item in their inventory
+                 *  
+                 *  inside the config file, it should look like
+                 *  "has,itemLabel,amount"
+                 *  so in the parameters list, parameters[1] will be the item label
+                 *  and parameters[2] will be the amount
+                 */
                 if (condition.Contains("has"))
                 {
                     List<string> parameters = new List<string>(condition.Split(','));
@@ -146,16 +148,18 @@ public class NPCInteract : MonoBehaviour
                     }
 
                 }
-                // [4/5/25 Tien] "get" keyword - fetch property of a specified component
-                // from the list of tracked GameObjects
-                // 
-                // inside the config file, it should look like
-                // "get,indexNum,component,property,value"
-                // it's up to the config file writer to know what that should be
-                // does not check if the string of value you write will match the
-                // ToString()equivalent of the fetched property value
-                // 
-                // uses reflection; might be slow but i can't think of another way to do
+                /* 
+                 * [4/5/25 Tien] "get" keyword - fetch property of a specified component
+                 * from the list of tracked GameObjects
+                 *
+                 * inside the config file, it should look like
+                 * "get,indexNum,component,property,value"
+                 * it's up to the config file writer to know what that should be
+                 * does not check if the string of value you write will match the
+                 * ToString()equivalent of the fetched property value
+
+                 * uses reflection; might be slow but i can't think of another way to do
+                 */
                 if (condition.Contains("get"))
                 {
                     List<string> parameters = new List<string>(condition.Split(','));
