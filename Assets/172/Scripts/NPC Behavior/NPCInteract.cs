@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 3/29/25
+ * Last modified on: 4/5/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -14,6 +14,7 @@
 
 
 using System;
+using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,6 +40,11 @@ public class NPCInteract : MonoBehaviour
     // [3/29/25 Tien]
     // player
     private PlayerData playerData;
+    // [4/5/25 Tien]
+    // trackedObjects stores a list of GameObjects with properties that
+    // the NPC needs to track
+    // used in: dialogue switching
+    [SerializeField] private List<GameObject> trackedObjects;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +66,7 @@ public class NPCInteract : MonoBehaviour
     public void onInteract()
     {
         Debug.Log(dialogueScripts[scriptSelect()].text);
+        firstTime = false;
     }
 
 
@@ -85,6 +92,16 @@ public class NPCInteract : MonoBehaviour
             List<string> conditions = new List<string>(key.Split(';'));
             foreach (string condition in conditions)
             {
+                // [4/4/25 Tien] "firstTime" keyword - check if this is first time
+                // player has interacted with
+                if (condition.Contains("firstTime"))
+                {
+                    if (!firstTime)
+                    {
+                        chosen = false;
+                        break;
+                    }
+                }
                 // [3/29/25 Tien] "has" keyword - check if player has a certain amount
                 // of an item in their inventory
                 //
@@ -95,7 +112,57 @@ public class NPCInteract : MonoBehaviour
                 if (condition.Contains("has"))
                 {
                     List<string> parameters = new List<string>(condition.Split(','));
-                    if (currentInventory[parameters[1]] != int.Parse(parameters[2])) {
+                    if (currentInventory.ContainsKey(parameters[1]))
+                    {
+                        if (currentInventory[parameters[1]] != int.Parse(parameters[2]))
+                        {
+                            chosen = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        chosen = false;
+                        break;
+                    }
+                    
+                }
+                // [4/5/25 Tien] "get" keyword - fetch property of a specified component
+                // from the list of tracked GameObjects
+                // 
+                // inside the config file, it should look like
+                // "get,indexNum,component,property,value"
+                // it's up to the config file writer to know what that should be
+                // does not check if the string of value you write will match the
+                // ToString()equivalent of the fetched property value
+                // 
+                // uses reflection; might be slow but i can't think of another way to do
+                if (condition.Contains("get"))
+                {
+                    List<string> parameters = new List<string>(condition.Split(','));
+                    Component component = trackedObjects[int.Parse(parameters[1])].GetComponent(parameters[2]);
+                    if (component != null) 
+                    {
+                        PropertyInfo fetchedProperty = component.GetType().GetProperty(parameters[3]);
+                        if (fetchedProperty != null)
+                        {
+                            string value = fetchedProperty.GetValue(component, null).ToString();
+                            if (value != parameters[4])
+                            {
+                                chosen = false;
+                                break;
+                            } 
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"ERROR: {component} doesn't contain variable {parameters[3]}", this);
+                            chosen = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"ERROR: component {parameters[2]} not found", this);
                         chosen = false;
                         break;
                     }

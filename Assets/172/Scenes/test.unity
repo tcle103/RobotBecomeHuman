@@ -2200,6 +2200,9 @@ MonoBehaviour:
   NPCConfig: {fileID: 4900000, guid: 68a9fa597ba08994a80801bfb6a19b80, type: 3}
   dialogueScripts:
   - {fileID: 4900000, guid: e9085012449cb63459797cc1a299a922, type: 3}
+  - {fileID: 4900000, guid: ffd26b877d6fb6242a8be25d840d1459, type: 3}
+  trackedObjects:
+  - {fileID: 462427061}
 --- !u!114 &1883398615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2224,6 +2227,7 @@ MonoBehaviour:
         m_TrackedProperties:
           items:
           - rid: 6313057770578116654
+          - rid: 6313057801058910210
         m_UpdateType: 1
         m_Changed:
           m_PersistentCalls:
@@ -2241,6 +2245,19 @@ MonoBehaviour:
         - localeIdentifier:
             m_Code: ja
           value: {fileID: 4900000, guid: cd2beb6725042654e94221d4ff098afb, type: 3}
+    - rid: 6313057801058910210
+      type: {class: UnityObjectProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_PropertyPath: dialogueScripts.Array.data[1]
+        m_TypeString: UnityEngine.TextAsset, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        m_VariantData:
+        - localeIdentifier:
+            m_Code: en
+          value: {fileID: 4900000, guid: ffd26b877d6fb6242a8be25d840d1459, type: 3}
+        - localeIdentifier:
+            m_Code: ja
+          value: {fileID: 4900000, guid: 214ce6ed31132e04ab02df3b65e78bb1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

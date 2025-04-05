@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 3/29/25
+ * Last modified on: 4/5/25
  * 
  * PlayerData.cs contains all player-specific data
  * that needs to be maintained in a continuous session as well as
@@ -29,6 +29,8 @@ public class PlayerData : MonoBehaviour
     // [3/29/25 Tien] reference to the master list of 
     // item labels to item data
     [SerializeField] private ItemDict itemMasterList;
+    // [4/5/25 Tien] a test property
+    public bool Yes { get; set; } = false;
 
 
     // Start is called before the first frame update
