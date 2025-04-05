@@ -31,8 +31,13 @@ public class NPCInteract : MonoBehaviour
     // NPC before and modify behavior as a result
     private bool firstTime = true;
     // [3/28/25 Tien]
-    // dialogueScripts stores all dialogue scripts used by that NPC
+    // dialogueScripts stores all (non-random) dialogue scripts used
+    // by that NPC
     [SerializeField] private List<TextAsset> dialogueScripts;
+    // [4/5/25 Tien]
+    // randomScripts stores dialogue for the NPC to randomly cycle 
+    // through (for example, for more lively "default" case interactions)
+    [SerializeField] private List<TextAsset> randomScripts;
     // [3/29/25 Tien]
     // scriptChoices is a dictionary of conditions to indexes of dialogue
     // stored in dialogueScript
@@ -65,7 +70,18 @@ public class NPCInteract : MonoBehaviour
      */
     public void onInteract()
     {
-        Debug.Log(dialogueScripts[scriptSelect()].text);
+        int dialogueIndex = scriptSelect();
+        // if dialogueIndex is positive, get that script from dialogueScripts
+        // and initiate dialogue
+        // else, choose a random script in randomScripts
+        if (dialogueIndex >= 0)
+        {
+            Debug.Log(dialogueScripts[scriptSelect()].text);
+        }
+        else
+        {
+            Debug.Log(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)].text);
+        }
         firstTime = false;
     }
 
@@ -76,6 +92,9 @@ public class NPCInteract : MonoBehaviour
      * Returns an integer corresponding to a dialogue script
      * in the instance's dialogueScript list determined by
      * parsing the condition keys in scriptChoices
+     * 
+     * A positive integer (and 0) means a specific dialogue script,
+     * while a negative indicates random choice from 
      */
     private int scriptSelect()
     {
@@ -125,7 +144,7 @@ public class NPCInteract : MonoBehaviour
                         chosen = false;
                         break;
                     }
-                    
+
                 }
                 // [4/5/25 Tien] "get" keyword - fetch property of a specified component
                 // from the list of tracked GameObjects
@@ -141,7 +160,7 @@ public class NPCInteract : MonoBehaviour
                 {
                     List<string> parameters = new List<string>(condition.Split(','));
                     Component component = trackedObjects[int.Parse(parameters[1])].GetComponent(parameters[2]);
-                    if (component != null) 
+                    if (component != null)
                     {
                         PropertyInfo fetchedProperty = component.GetType().GetProperty(parameters[3]);
                         if (fetchedProperty != null)
@@ -151,7 +170,7 @@ public class NPCInteract : MonoBehaviour
                             {
                                 chosen = false;
                                 break;
-                            } 
+                            }
                         }
                         else
                         {
@@ -172,7 +191,7 @@ public class NPCInteract : MonoBehaviour
             // immediately break and use that index
             // this means that order of dialogue choices in the config script
             // are important, and should be entered in order of priority
-            if (chosen) 
+            if (chosen)
             {
                 choice = key;
                 break;
@@ -222,21 +241,11 @@ public class NPCInteract : MonoBehaviour
                 // next line, if present
                 if (!string.IsNullOrEmpty(configLines[i + 1]))
                 {
-                    for (int a = 0; a < configLines[i + 1].Length; a++)
+                    bool success = int.TryParse(configLines[i + 1], out value);
+                    if (!success)
                     {
-                        if (Char.IsWhiteSpace(configLines[i + 1][a]))
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            bool success = int.TryParse(configLines[i + 1].Substring(a, configLines[i + 1].Length - a), out value);
-                            if (!success)
-                            {
-                                Debug.LogWarning("ERROR: Unable to parse dialogueScripts index into an int - are you sure it contains a number?", this);
-                                break;
-                            }
-                        }
+                        Debug.LogWarning("ERROR: Unable to parse dialogueScripts index into an int - are you sure it contains a number?", this);
+                        break;
                     }
                     // [3/28/25 Tien] if all is well, make an entry in configScriptDict
                     configScriptDict.Add(key, value);

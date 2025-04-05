@@ -5,4 +5,4 @@
 { get,0,PlayerData,Yes,False;has,testItem,1 }
 	2
 { default }
-	0
+	-1

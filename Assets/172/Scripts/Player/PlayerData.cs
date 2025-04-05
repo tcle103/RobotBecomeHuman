@@ -36,7 +36,7 @@ public class PlayerData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventoryAdd("testItem");
+        //inventoryAdd("testItem");
     }
 
     // [3/29/25 Tien] does what it says it does

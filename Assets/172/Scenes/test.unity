@@ -2201,6 +2201,12 @@ MonoBehaviour:
   dialogueScripts:
   - {fileID: 4900000, guid: e9085012449cb63459797cc1a299a922, type: 3}
   - {fileID: 4900000, guid: ffd26b877d6fb6242a8be25d840d1459, type: 3}
+  - {fileID: 4900000, guid: 62d9a3c09020fa646a0c595a851ea4fc, type: 3}
+  - {fileID: 4900000, guid: bfffdc0cca8304847b872ef25a48b579, type: 3}
+  randomScripts:
+  - {fileID: 4900000, guid: f6c3d4ae48456354aa777ca9897cee5a, type: 3}
+  - {fileID: 4900000, guid: 7f54cbb2589f4664e98bc070151d8073, type: 3}
+  - {fileID: 4900000, guid: e4ad1470b604c10419583029d64ac44b, type: 3}
   trackedObjects:
   - {fileID: 462427061}
 --- !u!114 &1883398615
