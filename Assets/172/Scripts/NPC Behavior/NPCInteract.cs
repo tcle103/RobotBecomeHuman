@@ -31,7 +31,7 @@ public class NPCInteract : MonoBehaviour
     // [3/28/25 Tien]
     // firstTime is used to see if player has interacted with
     // NPC before and modify behavior as a result
-    private bool firstTime = true;
+    public bool firstTime = true;
     // [3/28/25 Tien]
     // dialogueScripts stores all (non-random) dialogue scripts used
     // by that NPC
