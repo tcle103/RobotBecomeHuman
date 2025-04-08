@@ -20,8 +20,7 @@ using AYellowpaper.SerializedCollections;
 public class DialogueNode
 {
     public string Label { get; set; }
-    public string Text { get; set; }
-    public string Speaker { get; set; }
+    public List<string> text;
     // [4/7/25 Tien] this is essentially a list of edges
     public List<DialogueChoice> choices;
     // [4/7/25 Tien] stores a bunch of strings containing
