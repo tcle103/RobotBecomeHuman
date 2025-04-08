@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/5/25
+ * Last modified on: 4/7/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -17,6 +17,8 @@ using System;
 using System.Reflection;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using AYellowpaper.SerializedCollections;
 
 public class NPCInteract : MonoBehaviour
 {
@@ -50,6 +52,11 @@ public class NPCInteract : MonoBehaviour
     // the NPC needs to track
     // used in: dialogue switching
     [SerializeField] private List<GameObject> trackedObjects;
+    // [4/7/25 Tien]
+    // actions is a dict of events the NPC may cause during an interaction
+    // e.g. saving
+    [SerializedDictionary("Label", "Action")]
+    public SerializedDictionary<string, UnityEvent> actions;
 
     // Start is called before the first frame update
     void Start()
@@ -238,13 +245,13 @@ public class NPCInteract : MonoBehaviour
             // which is equivalent to an index in dialogueScripts
             if (configLines[i][0] == '{')
             {
-                string key = configLines[i].Substring(2, configLines[i].Length - 5);
-                int value = -1;
+                string key = configLines[i].Substring(1, configLines[i].Length - 3).Trim();
 
                 // [3/28/25 Tien] isolate dialogueScripts index contained in
                 // next line, if present
                 if (!string.IsNullOrEmpty(configLines[i + 1]))
                 {
+                    int value;
                     bool success = int.TryParse(configLines[i + 1], out value);
                     if (!success)
                     {
