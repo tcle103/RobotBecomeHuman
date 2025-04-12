@@ -1,5 +1,5 @@
 { firstTime }
-	3
+	0
 { get,0,PlayerData,Yes,True;has,testItem,1 }
 	1
 { get,0,PlayerData,Yes,False;has,testItem,1 }

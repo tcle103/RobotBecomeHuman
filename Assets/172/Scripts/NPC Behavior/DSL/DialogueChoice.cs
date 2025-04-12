@@ -21,4 +21,10 @@ public class DialogueChoice
 {
     public string Text {  get; set; }
     public string To {  get; set; }
+
+    public DialogueChoice(string text, string to)
+    {
+        Text = text;
+        To = to;
+    }
 }

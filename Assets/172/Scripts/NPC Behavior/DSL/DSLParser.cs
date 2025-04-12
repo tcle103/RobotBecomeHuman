@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/7/25
+ * Last modified on: 4/12/25
  * 
  * Based on the work done by Ben Hess in the 171 version of
  * this project for our dialogue system. 
@@ -32,6 +32,7 @@ public class DSLParser
 
     public Dictionary<string, DialogueNode> parse()
     {
+        Debug.Log(Input.text);
         // [4/7/25 Tien] go line by line
         List<string> inputLines = new List<string>(Input.text.Split('\n'));
         bool nextNode = false;
@@ -40,6 +41,7 @@ public class DSLParser
         {
             if (nextNode)
             {
+                dialogueTree.Add(currNode.Label, currNode);
                 currNode = new DialogueNode();
                 nextNode = false;
             }
@@ -50,8 +52,9 @@ public class DSLParser
             }
             // [4/7/25 Tien] if line ends with ':' 
             // is a label
-            else if (line[^2..].Equals(':'))
+            if (line[^2] == ':')
             {
+            
                 currNode.Label = line[0..^2];
                 continue;
             }
@@ -62,7 +65,7 @@ public class DSLParser
             {
                 currNode.text.Add(line);
             }
-            // [4/7/25 Tien] if line ends with '-'
+            // [4/7/25 Tien] if next char is '-'
             // now is either signifying end of a node or
             // a choice
             // check for both
@@ -74,8 +77,20 @@ public class DSLParser
                     nextNode = true;
                     continue;
                 }
+                // [4/11/25 Tien] else is an choice to
+                // another node
+                else
+                {
+                    // [4/12/25 Tien] should grab the display text which will be in quotes
+                    string text = line[(line.IndexOf('"') + 1)..line.LastIndexOf('"')];
+                    // [4/12/25 Tien] should grab the label of next node, which will be at
+                    // the end after "->"
+                    string to = line[(line.IndexOf('>') + 1)..^0].Trim();
+                    currNode.addChoice(new DialogueChoice(text, to));
+                }
             }
         }
+        dialogueTree.Add(currNode.Label, currNode);
         return dialogueTree;
     }
 }

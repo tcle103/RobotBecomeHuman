@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/7/25
+ * Last modified on: 4/11/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -83,7 +83,10 @@ public class NPCInteract : MonoBehaviour
         // else, choose a random script in randomScripts
         if (dialogueIndex >= 0)
         {
-            Debug.Log(dialogueScripts[scriptSelect()].text);
+            DSLParser parser = new DSLParser(dialogueScripts[scriptSelect()]);
+            parser.parse();
+            // Debug.Log(parser.dialogueTree["Test"].text[0]);
+            // Debug.Log(dialogueScripts[scriptSelect()].text);
         }
         else
         {

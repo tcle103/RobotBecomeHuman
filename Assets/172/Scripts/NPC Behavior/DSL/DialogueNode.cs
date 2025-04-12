@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/7/25
+ * Last modified on: 4/12/25
  * 
  * Based on the work done by Ben Hess in the 171 version of
  * this project for our dialogue system. 
@@ -26,6 +26,13 @@ public class DialogueNode
     // [4/7/25 Tien] stores a bunch of strings containing
     // action keywords and their parameters
     public List<string> actions;
+
+    public DialogueNode()
+    {
+        text = new List<string>();
+        choices = new List<DialogueChoice>();
+        actions = new List<string>();
+    }
 
     public void addChoice(DialogueChoice choice)
     {
