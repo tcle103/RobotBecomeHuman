@@ -1,11 +1,9 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 3/29/25
+ * Last modified on: 4/12/25
  * 
  * ItemData.cs defines the ItemData class inheriting from
- * ScriptableObject used to instantiate all items into the project,
- * as well as the ItemDict class used to maintain the master list of
- * all items.
+ * ScriptableObject used to instantiate all items into the project.
  * 
  * Created by: Tien Le
  * Created on: 3/29/25
@@ -15,7 +13,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using AYellowpaper.SerializedCollections;
 
 // [3/29/25 Tien] This allows you to create an
 // "ItemData" instance as an asset :D
@@ -37,16 +34,4 @@ public class ItemData : ScriptableObject
     // to the actual data functioning of it as a string.
     [TextAreaAttribute]
     public string description;
-}
-
-// [3/29/25 Tien] This masterlist should hold
-// string-ItemData pairs that represent
-// a label corresponding to the data of an item
-// fancy serialized dictionary class from ayellowpaper here:
-// https://assetstore.unity.com/packages/tools/utilities/serialized-dictionary-243052
-[CreateAssetMenu]
-public class ItemDict : ScriptableObject
-{
-    [SerializedDictionary("Label", "ItemData")]
-    public SerializedDictionary<string, ItemData> List;
 }
