@@ -140,25 +140,53 @@ public class NPCInteract : MonoBehaviour
         // if dialogueIndex is positive, get that script from dialogueScripts
         // and initiate dialogue
         // else, choose a random script in randomScripts
+        DSLParser parser;
         if (dialogueIndex >= 0)
         {
-            DSLParser parser = new DSLParser(dialogueScripts[scriptSelect()]);
-            parser.parse();
-            dialogueTree = parser.dialogueTree;
-            currNode = dialogueTree["Start"];
+            parser = new DSLParser(dialogueScripts[scriptSelect()]);
         }
         else
         {
-            DSLParser parser = new DSLParser(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)]);
-            parser.parse();
-            dialogueTree = parser.dialogueTree;
-            currNode = dialogueTree["Start"];
+            parser = new DSLParser(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)]);
         }
+        parser.parse();
+        dialogueTree = parser.dialogueTree;
+        setNode("Start");
+
         firstTime = false;
         dialogueDisplay = true;
         updateDialogue();
         dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
         interacted = true;
+    }
+
+    /* [4/17/25 Tien]
+     * setNode()
+     * Sets current node and parses/runs actions
+     */
+    private void setNode(string label)
+    {
+        currNode = dialogueTree[label];
+        foreach (string action in currNode.actions) 
+        {
+            if (action.Contains("give") || action.Contains("take"))
+            {
+                List<string> parameters = new List<string>(action.Split(','));
+                if (parameters[0] == "give")
+                {
+                    playerData.inventoryAdd(parameters[1], int.Parse(parameters[2]));
+                }
+                else if (parameters[0] == "take")
+                {
+                    playerData.inventoryRemove(parameters[1], int.Parse(parameters[2]));
+                }
+            }
+            else
+            {
+                actions[action].Invoke();
+            }
+
+        }
     }
 
     /* [4/16/25 Tien]
