@@ -1,4 +1,4 @@
 Start:
-{ give,testItem,1 }
+{ give,testItem,1;testEvent }
 "test!"
 --
