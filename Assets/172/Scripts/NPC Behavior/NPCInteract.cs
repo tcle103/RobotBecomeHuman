@@ -167,6 +167,7 @@ public class NPCInteract : MonoBehaviour
     private void setNode(string label)
     {
         currNode = dialogueTree[label];
+        currText = 0;
         foreach (string action in currNode.actions) 
         {
             if (action.Contains("give") || action.Contains("take"))
