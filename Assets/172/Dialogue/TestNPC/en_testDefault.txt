@@ -1,4 +1,3 @@
 Start:
 "test!"
-- "go to a" -> End
 --

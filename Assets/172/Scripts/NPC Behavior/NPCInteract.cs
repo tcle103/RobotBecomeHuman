@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/16/25
+ * Last modified on: 4/17/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -9,7 +9,7 @@
  *
  * Created by: Tien Le
  * Created on: 3/28/25
- * Contributors: Tien Le
+ * Contributors: Tien Le, Kellum Inglin
  */
 
 
@@ -20,6 +20,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using AYellowpaper.SerializedCollections;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class NPCInteract : MonoBehaviour
 {
@@ -73,6 +74,10 @@ public class NPCInteract : MonoBehaviour
     // [4/16/25 Tien]
     // integer representing current line in node
     private int currText = 0;
+    // [4/17/Tien]
+    // interact button for progressing dialogue - took from Bucket's interact script
+    private InputAction interactAction;
+    private bool interacted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -82,14 +87,43 @@ public class NPCInteract : MonoBehaviour
         // with NPCConfigParse()
         scriptChoices = NPCConfigParse();
         playerData = GameObject.Find("Player").GetComponent<PlayerData>();
+
+        // [4/17/25 Tien] grab "interact" input from input system
+        interactAction = InputSystem.actions.FindAction("Interact");
     }
 
     void Update()
     {
+        if (interactAction.WasReleasedThisFrame())
+        {
+            interacted = false;
+        }
         if (dialogueDisplay)
         {
-
-            
+            // [4/17/25 Tien] if not at last line, progress to next line
+            if (currText < currNode.text.Count - 1)
+            {
+                if (!interacted && interactAction.WasPressedThisFrame())
+                {
+                    interacted = true;
+                    currText++;
+                    updateDialogue();
+                }
+            }
+            else
+            {
+                // [4/17/25 Tien] if no choices (responses) specified,
+                // exit on hitting interact
+                if (currNode.choices.Count == 0)
+                {
+                    if (!interacted && interactAction.WasPressedThisFrame())
+                    {
+                        dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
+                        dialogueDisplay = false;
+                    }
+                    
+                }
+            }
         }
     }
 
@@ -124,6 +158,7 @@ public class NPCInteract : MonoBehaviour
         dialogueDisplay = true;
         updateDialogue();
         dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
+        interacted = true;
     }
 
     /* [4/16/25 Tien]
@@ -148,7 +183,8 @@ public class NPCInteract : MonoBehaviour
                 toDisplay = toDisplay[(toDisplay.IndexOf(']') + 1)..^0].Trim();
             }
             currConfig.transform.Find("body").gameObject.GetComponent<TMP_Text>().text = toDisplay[1..^2];
-            if (currText >= (currNode.text.Count - 1))
+            // [4/17/25 Tien] populate choices if last "page"/"line" of dialogue in node
+            if (currText >= (currNode.text.Count - 1) && currNode.choices.Count > 0)
             {
                 currConfig.transform.Find("choices").gameObject.GetComponent<TMP_Text>().text = "";
                 for (int i = 0; i < currNode.choices.Count; i++)
