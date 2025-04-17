@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/11/25
+ * Last modified on: 4/16/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using AYellowpaper.SerializedCollections;
+using TMPro;
 
 public class NPCInteract : MonoBehaviour
 {
@@ -57,6 +58,21 @@ public class NPCInteract : MonoBehaviour
     // e.g. saving
     [SerializedDictionary("Label", "Action")]
     public SerializedDictionary<string, UnityEvent> actions;
+    // [4/16/25 Tien]
+    // if in interaction
+    private bool dialogueDisplay = false;
+    // [4/16/25 Tien]
+    // reference to the dialogue UI object
+    [SerializeField] private GameObject dialogueUI;
+    // [4/16/25 Tien]
+    // reference to current dialogue tree
+    private Dictionary<string,DialogueNode> dialogueTree;
+    // [4/16/25 Tien]
+    // reference to current node in dialogue tree
+    private DialogueNode currNode;
+    // [4/16/25 Tien]
+    // integer representing current line in node
+    private int currText = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +82,15 @@ public class NPCInteract : MonoBehaviour
         // with NPCConfigParse()
         scriptChoices = NPCConfigParse();
         playerData = GameObject.Find("Player").GetComponent<PlayerData>();
+    }
+
+    void Update()
+    {
+        if (dialogueDisplay)
+        {
+
+            
+        }
     }
 
     /*
@@ -85,16 +110,57 @@ public class NPCInteract : MonoBehaviour
         {
             DSLParser parser = new DSLParser(dialogueScripts[scriptSelect()]);
             parser.parse();
-            // Debug.Log(parser.dialogueTree["Test"].text[0]);
-            // Debug.Log(dialogueScripts[scriptSelect()].text);
+            dialogueTree = parser.dialogueTree;
+            currNode = dialogueTree["Start"];
         }
         else
         {
-            Debug.Log(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)].text);
+            DSLParser parser = new DSLParser(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)]);
+            parser.parse();
+            dialogueTree = parser.dialogueTree;
+            currNode = dialogueTree["Start"];
         }
         firstTime = false;
+        dialogueDisplay = true;
+        updateDialogue();
+        dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
     }
 
+    /* [4/16/25 Tien]
+     * updateDialogue()
+     * Updates the dialogue display based on the curent node
+     */
+    private void updateDialogue()
+    {
+        if (currNode != null)
+        {
+            string toDisplay = currNode.text[currText];
+            dialogueUI.transform.Find("not speaker").gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            dialogueUI.transform.Find("speaker").gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            GameObject currConfig = dialogueUI.transform.GetChild(0).gameObject;
+            currConfig.transform.Find("choices").gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            // [4/16/25 Tien]
+            // has a speaker label
+            if (currNode.text[currText][0].Equals('['))
+            {
+                currConfig = dialogueUI.transform.GetChild(1).gameObject;
+                currConfig.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = toDisplay[0..(toDisplay.IndexOf(']') + 1)];
+                toDisplay = toDisplay[(toDisplay.IndexOf(']') + 1)..^0].Trim();
+            }
+            currConfig.transform.Find("body").gameObject.GetComponent<TMP_Text>().text = toDisplay[1..^2];
+            if (currText >= (currNode.text.Count - 1))
+            {
+                currConfig.transform.Find("choices").gameObject.GetComponent<TMP_Text>().text = "";
+                for (int i = 0; i < currNode.choices.Count; i++)
+                {
+                    currConfig.transform.Find("choices").gameObject.GetComponent<TMP_Text>().text += $"[{i + 1}] {currNode.choices[i].Text}\n";
+                }
+                currConfig.transform.Find("choices").gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            }
+            currConfig.GetComponent<CanvasGroup>().alpha = 1;
+
+        }
+    }
 
     /*
      * [3/28/25 Tien]
@@ -213,7 +279,6 @@ public class NPCInteract : MonoBehaviour
         }
         return scriptChoices[choice];
     }
-
 
     /* 
      * [3/28/25 Tien]

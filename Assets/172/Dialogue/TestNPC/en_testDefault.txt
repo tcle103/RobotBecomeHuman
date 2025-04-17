@@ -1,4 +1,4 @@
-Test:
+Start:
 "test!"
-- "go to a" -> a
+- "go to a" -> End
 --
