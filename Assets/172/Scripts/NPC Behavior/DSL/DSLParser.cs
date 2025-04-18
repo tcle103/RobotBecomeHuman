@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/12/25
+ * Last modified on: 4/18/25
  * 
  * Based on the work done by Ben Hess in the 171 version of
  * this project for our dialogue system. 
@@ -46,7 +46,7 @@ public class DSLParser
                 nextNode = false;
             }
 
-            if (string.IsNullOrEmpty(line))
+            if (string.IsNullOrWhiteSpace(line))
             {
                 continue;
             }
@@ -57,6 +57,14 @@ public class DSLParser
             
                 currNode.Label = line[0..^2];
                 continue;
+            }
+            // [4/16/25 Tien] if line starts with '{', contains actions for that node
+            // should look something like
+            // { command,param,param;command,param;... }
+            // adds each ; separated clause as an "action" (is read by the display)
+            else if (line[0].Equals('{'))
+            {
+                currNode.actions = new List<string>(line[1..^2].Trim().Split(';'));
             }
             // [4/7/25 Tien] if line starts with '[' (speaker tag) or '"'
             // it's to be displayed as dialogue text

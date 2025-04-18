@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/11/25
+ * Last modified on: 4/18/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -9,7 +9,7 @@
  *
  * Created by: Tien Le
  * Created on: 3/28/25
- * Contributors: Tien Le
+ * Contributors: Tien Le, Ben Hess, Kellum Inglin
  */
 
 
@@ -19,6 +19,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using AYellowpaper.SerializedCollections;
+using TMPro;
+using UnityEngine.InputSystem;
 
 public class NPCInteract : MonoBehaviour
 {
@@ -57,6 +59,25 @@ public class NPCInteract : MonoBehaviour
     // e.g. saving
     [SerializedDictionary("Label", "Action")]
     public SerializedDictionary<string, UnityEvent> actions;
+    // [4/16/25 Tien]
+    // if in interaction
+    private bool dialogueDisplay = false;
+    // [4/16/25 Tien]
+    // reference to the dialogue UI object
+    [SerializeField] private GameObject dialogueUI;
+    // [4/16/25 Tien]
+    // reference to current dialogue tree
+    private Dictionary<string, DialogueNode> dialogueTree;
+    // [4/16/25 Tien]
+    // reference to current node in dialogue tree
+    private DialogueNode currNode;
+    // [4/16/25 Tien]
+    // integer representing current line in node
+    private int currText = 0;
+    // [4/17/25 Tien]
+    // interact button for progressing dialogue - took from Bucket's interact script
+    private InputAction interactAction;
+    private bool interacted = false;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +87,73 @@ public class NPCInteract : MonoBehaviour
         // with NPCConfigParse()
         scriptChoices = NPCConfigParse();
         playerData = GameObject.Find("Player").GetComponent<PlayerData>();
+
+        // [4/17/25 Tien] grab "interact" input from input system
+        interactAction = InputSystem.actions.FindAction("Interact");
+    }
+
+    void Update()
+    {
+        if (interactAction.WasReleasedThisFrame())
+        {
+            interacted = false;
+        }
+        if (dialogueDisplay)
+        {
+            // [4/17/25 Tien] if not at last line, progress to next line
+            if (currText < currNode.text.Count - 1)
+            {
+                if (!interacted && interactAction.WasPressedThisFrame())
+                {
+                    interacted = true;
+                    currText++;
+                    updateDialogue();
+                }
+            }
+            else
+            {
+                // [4/17/25 Tien] if no choices (responses) specified,
+                // exit on hitting interact
+                if (currNode.choices.Count == 0)
+                {
+                    if (!interacted && interactAction.WasPressedThisFrame())
+                    {
+                        dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
+                        dialogueDisplay = false;
+                    }
+
+                }
+                else
+                {
+                    if ((Input.GetKeyDown(KeyCode.Alpha1)))
+                    {
+                        setNode(currNode.choices[0].To);
+                    }
+                    else if ((Input.GetKeyDown(KeyCode.Alpha2)))
+                    {
+                        if (currNode.choices.Count > 1)
+                        {
+                            setNode(currNode.choices[1].To);
+                            Debug.Log(currNode.choices[1].To);
+                        }
+                    }
+                    else if ((Input.GetKeyDown(KeyCode.Alpha3)))
+                    {
+                        if (currNode.choices.Count > 2)
+                        {
+                            setNode(currNode.choices[2].To);
+                        }
+                    }
+                    else if ((Input.GetKeyDown(KeyCode.Alpha4)))
+                    {
+                        if (currNode.choices.Count > 3)
+                        {
+                            setNode(currNode.choices[3].To);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /*
@@ -77,24 +165,106 @@ public class NPCInteract : MonoBehaviour
      */
     public void onInteract()
     {
-        int dialogueIndex = scriptSelect();
-        // if dialogueIndex is positive, get that script from dialogueScripts
-        // and initiate dialogue
-        // else, choose a random script in randomScripts
-        if (dialogueIndex >= 0)
+        if (!dialogueDisplay)
         {
-            DSLParser parser = new DSLParser(dialogueScripts[scriptSelect()]);
+            int dialogueIndex = scriptSelect();
+            // if dialogueIndex is positive, get that script from dialogueScripts
+            // and initiate dialogue
+            // else, choose a random script in randomScripts
+            DSLParser parser;
+            if (dialogueIndex >= 0)
+            {
+                parser = new DSLParser(dialogueScripts[scriptSelect()]);
+            }
+            else
+            {
+                parser = new DSLParser(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)]);
+            }
             parser.parse();
-            // Debug.Log(parser.dialogueTree["Test"].text[0]);
-            // Debug.Log(dialogueScripts[scriptSelect()].text);
+            dialogueTree = parser.dialogueTree;
+
+            firstTime = false;
+            dialogueDisplay = true;
+            setNode("Start");
+            dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
+            interacted = true;
+        }
+    }
+
+    /* [4/17/25 Tien]
+     * setNode()
+     * Sets current node and parses/runs actions
+     */
+    private void setNode(string label)
+    {
+        if (label == "End")
+        {
+            dialogueDisplay = false;
+            dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
         }
         else
         {
-            Debug.Log(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)].text);
+            currNode = dialogueTree[label];
+            currText = 0;
+            foreach (string action in currNode.actions)
+            {
+                if (action.Contains("give") || action.Contains("take"))
+                {
+                    List<string> parameters = new List<string>(action.Split(','));
+                    if (parameters[0] == "give")
+                    {
+                        playerData.inventoryAdd(parameters[1], int.Parse(parameters[2]));
+                    }
+                    else if (parameters[0] == "take")
+                    {
+                        playerData.inventoryRemove(parameters[1], int.Parse(parameters[2]));
+                    }
+                }
+                else
+                {
+                    actions[action].Invoke();
+                }
+            }
+            updateDialogue();
         }
-        firstTime = false;
     }
 
+    /* [4/16/25 Tien]
+     * updateDialogue()
+     * Updates the dialogue display based on the curent node
+     */
+    private void updateDialogue()
+    {
+        if (currNode != null)
+        {
+            string toDisplay = currNode.text[currText];
+            dialogueUI.transform.Find("not speaker").gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            dialogueUI.transform.Find("speaker").gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            GameObject currConfig = dialogueUI.transform.GetChild(0).gameObject;
+            currConfig.transform.Find("choices").gameObject.GetComponent<CanvasGroup>().alpha = 0;
+            // [4/16/25 Tien]
+            // has a speaker label
+            if (currNode.text[currText][0].Equals('['))
+            {
+                currConfig = dialogueUI.transform.GetChild(1).gameObject;
+                currConfig.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().text = toDisplay[0..(toDisplay.IndexOf(']') + 1)];
+                toDisplay = toDisplay[(toDisplay.IndexOf(']') + 1)..];
+            }
+            currConfig.transform.Find("body").gameObject.GetComponent<TMP_Text>().text = toDisplay.Trim()[1..^1];
+            // [4/17/25 Tien] populate choices if last "page"/"line" of dialogue in node
+            if (currText >= (currNode.text.Count - 1) && currNode.choices.Count > 0)
+            {
+                currConfig.transform.Find("choices").gameObject.GetComponent<TMP_Text>().text = "";
+                for (int i = 0; i < currNode.choices.Count; i++)
+                {
+                    currConfig.transform.Find("choices").gameObject.GetComponent<TMP_Text>().text += $"[{i + 1}] {currNode.choices[i].Text}\n";
+                }
+                currConfig.transform.Find("choices").gameObject.GetComponent<CanvasGroup>().alpha = 1;
+            }
+            currConfig.GetComponent<CanvasGroup>().alpha = 1;
+
+        }
+    }
 
     /*
      * [3/28/25 Tien]
@@ -213,7 +383,6 @@ public class NPCInteract : MonoBehaviour
         }
         return scriptChoices[choice];
     }
-
 
     /* 
      * [3/28/25 Tien]
