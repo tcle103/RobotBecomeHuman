@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/16/25
+ * Last modified on: 4/18/25
  * 
  * Based on the work done by Ben Hess in the 171 version of
  * this project for our dialogue system. 
@@ -46,7 +46,7 @@ public class DSLParser
                 nextNode = false;
             }
 
-            if (string.IsNullOrEmpty(line))
+            if (string.IsNullOrWhiteSpace(line))
             {
                 continue;
             }

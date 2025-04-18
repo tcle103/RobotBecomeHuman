@@ -1,4 +1,18 @@
 Start:
 { give,testItem,1;testEvent }
 "test!"
+[bot] "this is a test"
+- "go to a" -> a
+- "go to b" -> b
+--
+
+a:
+{ take,testItem,1;testEvent }
+"omg we're at a"
+- "go to b" -> b
+- "exit" -> End
+--
+
+b:
+"this is the end"
 --
