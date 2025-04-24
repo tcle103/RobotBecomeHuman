@@ -18,6 +18,7 @@ using UnityEngine.Events;
 public class PuzzleManager : MonoBehaviour
 {
     [SerializeField] private PuzzleZone puzzleZone;
+    [SerializeField] private bool anyTileSolution;
     [SerializeField] private List<DaleTile> solution;
     [SerializeField] private GameObject resetPoint;
     [SerializeField] private UnityEvent successEvent;
@@ -35,16 +36,29 @@ public class PuzzleManager : MonoBehaviour
         // [4/23/25 Tien] puzzle validation
         if (puzzleZone.puzzleActive && !puzzleZone.completed)
         {
-            foreach (DaleTile tile in solution) 
+            if (anyTileSolution)
             {
-                if (!tile.isActive)
+                foreach (DaleTile tile in solution)
                 {
-                    return;
-                }
-                
-            }
-            puzzleSuccess();
+                    if (tile.isActive)
+                    {
+                        puzzleSuccess();
+                    }
 
+                }
+            }
+            else
+            {
+                foreach (DaleTile tile in solution)
+                {
+                    if (!tile.isActive)
+                    {
+                        return;
+                    }
+
+                }
+                puzzleSuccess();
+            }
         }
     }
 
