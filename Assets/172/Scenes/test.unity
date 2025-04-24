@@ -1036,12 +1036,6 @@ Transform:
   m_Children:
   - {fileID: 626474336}
   - {fileID: 1049466464}
-<<<<<<< Updated upstream
-  - {fileID: 763101528}
-  - {fileID: 2053776129}
-  - {fileID: 1095478804}
-  - {fileID: 258018405}
-=======
   - {fileID: 603608756}
   - {fileID: 736771776}
   - {fileID: 1048083515}
@@ -1055,7 +1049,6 @@ Transform:
   - {fileID: 635366025}
   - {fileID: 2026791461}
   - {fileID: 253544438}
->>>>>>> Stashed changes
   - {fileID: 1967529398}
   - {fileID: 128108080}
   - {fileID: 1532029916}
@@ -1106,11 +1099,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-<<<<<<< Updated upstream
---- !u!1 &258018404
-=======
 --- !u!1 &253544434
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1118,49 +1107,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
-  - component: {fileID: 258018405}
-  - component: {fileID: 258018408}
-  - component: {fileID: 258018407}
-  - component: {fileID: 258018406}
-  m_Layer: 0
-  m_Name: hole
-=======
   - component: {fileID: 253544438}
   - component: {fileID: 253544437}
   - component: {fileID: 253544436}
   - component: {fileID: 253544435}
   m_Layer: 0
   m_Name: dale tile (11)
->>>>>>> Stashed changes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< Updated upstream
---- !u!4 &258018405
-Transform:
-=======
 --- !u!114 &253544435
 MonoBehaviour:
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 258018404}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24, y: -2.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 221977408}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &258018406
-=======
   m_GameObject: {fileID: 253544434}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1184,17 +1147,12 @@ MonoBehaviour:
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
 --- !u!61 &253544436
->>>>>>> Stashed changes
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 258018404}
-=======
   m_GameObject: {fileID: 253544434}
->>>>>>> Stashed changes
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -1233,49 +1191,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
-<<<<<<< Updated upstream
---- !u!114 &258018407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 258018404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 597b96faf4bc42d4b8ac4c03145d1fc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  failEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 221977409}
-        m_TargetAssemblyTypeName: PuzzleManager, Assembly-CSharp
-        m_MethodName: puzzleFail
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  puzzleZone: {fileID: 626474338}
---- !u!212 &258018408
-=======
 --- !u!212 &253544437
->>>>>>> Stashed changes
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-  m_GameObject: {fileID: 258018404}
-=======
   m_GameObject: {fileID: 253544434}
->>>>>>> Stashed changes
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1311,11 +1233,7 @@ SpriteRenderer:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-<<<<<<< Updated upstream
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-=======
   m_Color: {r: 1, g: 0, b: 0, a: 1}
->>>>>>> Stashed changes
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1325,8 +1243,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
-<<<<<<< Updated upstream
-=======
 --- !u!4 &253544438
 Transform:
   m_ObjectHideFlags: 0
@@ -1347,7 +1263,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 867616872373825560, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
   m_PrefabInstance: {fileID: 1993411448}
   m_PrefabAsset: {fileID: 0}
->>>>>>> Stashed changes
 --- !u!1001 &293960368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1411,7 +1326,7 @@ PrefabInstance:
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
       value: 
-      objectReference: {fileID: 626474338}
+      objectReference: {fileID: 435694946}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: failEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -12333,6 +12248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleZone: {fileID: 942301770}
+  anyTileSolution: 0
   solution:
   - {fileID: 1045319353}
   - {fileID: 135485717}
