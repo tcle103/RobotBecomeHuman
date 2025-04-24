@@ -1542,7 +1542,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   failEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 570874040}
+        m_TargetAssemblyTypeName: testEventScript, Assembly-CSharp
+        m_MethodName: printFail
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   puzzleZone: {fileID: 626474338}
 --- !u!61 &763101530
 BoxCollider2D:
@@ -2406,7 +2418,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   failEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 570874040}
+        m_TargetAssemblyTypeName: testEventScript, Assembly-CSharp
+        m_MethodName: printFail
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   puzzleZone: {fileID: 626474338}
 --- !u!212 &1095478807
 SpriteRenderer:
