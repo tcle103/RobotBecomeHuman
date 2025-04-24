@@ -20,4 +20,14 @@ public class testEventScript : MonoBehaviour
     {
         Debug.Log("test event trigger!!!!");
     }
+
+    public void printFail()
+    {
+        Debug.Log("puzzle fail state detected, replace me with the puzzle manager fail function later!");
+    }
+
+    public void printSuccess() 
+    {
+        Debug.Log("puzzle successs state detected, replace me with the puzzle manager success function later!");
+    }
 }

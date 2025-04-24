@@ -1,8 +1,8 @@
 
 /*
-*Created by: Dale Spence
-*Created on: 4 / 23 / 25
-* Contributers: Dale Spence
+* Created by: Dale Spence
+* Created on: 4 / 23 / 25
+* Contributors: Dale Spence, Tien Le
 * 
 * Controls the behavior of each projectile. 
 * handles movement, detects collisions with player,
@@ -11,16 +11,19 @@
 */
 
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Projectile : MonoBehaviour
 {
     private Vector2 moveDirection;
     private float moveSpeed;
+    private UnityEvent failEvent;
 
-    public void Initialize(Vector2 direction, float speed)
+    public void Initialize(Vector2 direction, float speed, UnityEvent fEvent)
     {
         moveDirection = direction.normalized;
         moveSpeed = speed;
+        failEvent = fEvent;
         CancelInvoke();
         Invoke("ReturnToPool", ProjectilePool.projectileLifetime); //despawn after 
     }
@@ -39,7 +42,8 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player hit by projectile");
+            failEvent.Invoke();
+            // Debug.Log("Player hit by projectile");
             ReturnToPool();
         }
     }
