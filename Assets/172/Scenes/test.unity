@@ -200,6 +200,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &76217678
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -461,6 +465,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &135485718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -620,6 +628,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &155972877
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -892,6 +904,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &187423314
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1146,6 +1162,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &253544436
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1407,6 +1427,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &348504501
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1566,6 +1590,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &376701238
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2200,7 +2228,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2}
+  m_Offset: {x: 0, y: -0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -4732,6 +4760,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &603608754
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5025,6 +5057,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &612584946
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5274,6 +5310,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &635366023
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5433,6 +5473,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &671440116
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5592,6 +5636,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &706208280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5751,6 +5799,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &736771774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5930,6 +5982,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &756212327
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6089,6 +6145,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &763101530
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6233,6 +6293,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &775214470
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6610,6 +6674,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &833543123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7256,6 +7324,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1036084565
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7415,6 +7487,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1045319354
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7574,6 +7650,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1045987916
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7733,6 +7813,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1048083513
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7938,6 +8022,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1074630704
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8354,6 +8442,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1176338745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8513,6 +8605,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1285349443
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8672,6 +8768,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1305034183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9166,6 +9266,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1577001910
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9310,6 +9414,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1642595178
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9760,6 +9868,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1732574464
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11439,6 +11551,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1752027619
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11644,6 +11760,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1842240981
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12121,6 +12241,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &1910463708
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12491,6 +12615,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &2026791459
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12665,6 +12793,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 942301770}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &2028154762
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12809,6 +12941,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   puzzleZone: {fileID: 626474338}
+  _neighbors: []
+  isRootTile: 0
+  onTile: 0
+  requiredOverlap: 0.4
 --- !u!61 &2053776127
 BoxCollider2D:
   m_ObjectHideFlags: 0
