@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/23/25
+ * Last modified on: 4/24/25
  * 
  * NikoTile.cs contains functionality for a tile that
  * causes a fail state when it is active
@@ -22,6 +22,15 @@ public class NikoTile : MonoBehaviour
     // fail/reset stuff in response to a fail state
     [SerializeField] private UnityEvent failEvent;
     [SerializeField] private PuzzleZone puzzleZone;
+    private SpriteRenderer spriteRenderer;
+    private Collider2D collider;
+    private bool playerInBox = false;
+
+    void Start()
+    {
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        collider = GetComponentInParent<Collider2D>();
+    }
 
     // [4/23/25 Tien]
     // place a tile to be active
@@ -29,11 +38,20 @@ public class NikoTile : MonoBehaviour
     // such as being triggered by beatsync
     public void activate()
     {
-        isActive = true;
+        if (!puzzleZone.completed)
+        {
+            spriteRenderer.color = Color.red;
+            isActive = true;
+            if (playerInBox)
+            {
+                failEvent.Invoke();
+            }
+        }
     }
 
     public void deactivate()
     {
+        spriteRenderer.color = Color.blue;
         isActive = false;
     }
 
@@ -48,7 +66,19 @@ public class NikoTile : MonoBehaviour
                 // (fail state)
                 failEvent.Invoke();
             }
+            else if (!isActive && other.CompareTag("Player"))
+            {
+                playerInBox = true;
+            }
         }
 
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (playerInBox)
+        {
+            playerInBox = false;
+        }
     }
 }

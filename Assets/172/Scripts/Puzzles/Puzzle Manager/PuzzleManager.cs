@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/23/25
+ * Last modified on: 4/24/25
  * 
  * PuzzleManager.cs contains functionality for fail state (reset)
  * and validation of tiles
@@ -13,17 +13,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PuzzleManager : MonoBehaviour
 {
     [SerializeField] private PuzzleZone puzzleZone;
     [SerializeField] private List<DaleTile> solution;
     [SerializeField] private GameObject resetPoint;
+    [SerializeField] private UnityEvent successEvent;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -38,8 +41,10 @@ public class PuzzleManager : MonoBehaviour
                 {
                     return;
                 }
+                
             }
-            
+            puzzleSuccess();
+
         }
     }
 
@@ -48,6 +53,12 @@ public class PuzzleManager : MonoBehaviour
     public void puzzleSuccess()
     {
         puzzleZone.setComplete();
+        successEvent.Invoke();
+        Component[] nikoTiles = GetComponentsInChildren<NikoTile>();
+        foreach (NikoTile tile in nikoTiles)
+        {
+            tile.deactivate();
+        }
     }
 
     // [4/23/25 Tien]
@@ -55,7 +66,12 @@ public class PuzzleManager : MonoBehaviour
     // ex. resetting the player, etc.
     public void puzzleFail()
     {
-
+        player.transform.position = resetPoint.transform.position;
+        Component[] daleTiles = GetComponentsInChildren<DaleTile>();
+        foreach (DaleTile tile in daleTiles)
+        {
+            tile.deactivate();
+        }
     }
 
 }

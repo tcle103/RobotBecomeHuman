@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/23/25
+ * Last modified on: 4/24/25
  * 
  * DaleTile.cs contains tile functionality that activates (and stays active)
  * on entry
@@ -23,6 +23,12 @@ public class DaleTile : MonoBehaviour
     // fail/reset stuff in response to a fail state
     [SerializeField] private UnityEvent failEvent;
     [SerializeField] private PuzzleZone puzzleZone;
+    private SpriteRenderer spriteRenderer;
+
+    void Start()
+    {
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -33,6 +39,8 @@ public class DaleTile : MonoBehaviour
                 // [4/23/25 Tien]
                 // functionality for activating tile here
                 // (ex. changing the sprite to reflect active state)
+                spriteRenderer.color = Color.green;
+                isActive = true;
             }
             else if (isActive && other.CompareTag("Player"))
             {
@@ -43,5 +51,11 @@ public class DaleTile : MonoBehaviour
             }
         }
 
+    }
+
+    public void deactivate()
+    {
+        isActive = false;
+        spriteRenderer.color = Color.red;
     }
 }

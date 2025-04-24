@@ -19,14 +19,18 @@ public class ProjectileSpawner : MonoBehaviour
     public Vector2 direction = Vector2.right;
     public float speed = 5f;
     [SerializeField] private UnityEvent failEvent;
+    [SerializeField] private PuzzleZone puzzleZone;
 
     public void FireProjectile()
     {
-        GameObject proj = ProjectilePool.Instance.GetProjectile();
-        if (proj != null)
+        if (!puzzleZone.completed && puzzleZone.puzzleActive)
         {
-            proj.transform.position = firePoint.position;
-            proj.GetComponent<Projectile>().Initialize(direction, speed, failEvent);
+            GameObject proj = ProjectilePool.Instance.GetProjectile();
+            if (proj != null)
+            {
+                proj.transform.position = firePoint.position;
+                proj.GetComponent<Projectile>().Initialize(direction, speed, failEvent);
+            }
         }
     }
 }
