@@ -1,0 +1,6 @@
+Start:
+"Hey there! [Press E to progress dialogue]"
+"Thanks for playtesting our game :D"
+"Controls: WASD"
+"Do your best!!! See you at the end~"
+--

@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/18/25
+ * Last modified on: 4/24/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -188,6 +188,38 @@ public class NPCInteract : MonoBehaviour
             setNode("Start");
             dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
             interacted = true;
+        }
+    }
+
+    /*
+     * [4/24/25 Tien]
+     * triggerInteract()
+     * same as onInteract() just doesn't disable immediate interact input
+     */
+    public void triggerInteract()
+    {
+        if (!dialogueDisplay)
+        {
+            int dialogueIndex = scriptSelect();
+            // if dialogueIndex is positive, get that script from dialogueScripts
+            // and initiate dialogue
+            // else, choose a random script in randomScripts
+            DSLParser parser;
+            if (dialogueIndex >= 0)
+            {
+                parser = new DSLParser(dialogueScripts[scriptSelect()]);
+            }
+            else
+            {
+                parser = new DSLParser(randomScripts[UnityEngine.Random.Range(0, randomScripts.Count)]);
+            }
+            parser.parse();
+            dialogueTree = parser.dialogueTree;
+
+            firstTime = false;
+            dialogueDisplay = true;
+            setNode("Start");
+            dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
         }
     }
 
