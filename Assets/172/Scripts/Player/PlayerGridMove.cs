@@ -49,6 +49,10 @@ public class PlayerGridMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // [4/30/25 Tien] this just reads the direction specified by the
+        // move input system thing
+        // it will basically be a Vector2 for a direction
+        // i.e. (0,1) = Vector2.up; (1,0) = Vector2.right
         Vector2 movement = moveAction.ReadValue<Vector2>();
         // [4/30/25 Tien] controller stuff by Tony
         Vector2 controllerMovement;
@@ -67,7 +71,8 @@ public class PlayerGridMove : MonoBehaviour
             if (!_audioSource.isPlaying) _audioSource.PlayOneShot(step, 0.1f);
         }
         
-
+        // [4/30/25 Tien] this is just all the graphical keybind stuff w/ controller support 
+        // seemed kinday brokey so i commented it out for now
         //if ((movement == Vector2.up || (controllerMovement.y > 0.2) && Mathf.Abs(controllerMovement.y) > Mathf.Abs(controllerMovement.x)) && !isMoving)
         //{
         //    Debug.Log("up");
@@ -102,6 +107,11 @@ public class PlayerGridMove : MonoBehaviour
         }
     }
 
+    // [4/30/25 Tien] this is basically equivalent
+    // to a "transform.position += direction"
+    // direction being a Vector3, usually like. 
+    // Vector3.up, etc.
+    // it just does it over a small period of time
     private IEnumerator MovePlayer(Vector3 direction)
     {
         isMoving = true;
