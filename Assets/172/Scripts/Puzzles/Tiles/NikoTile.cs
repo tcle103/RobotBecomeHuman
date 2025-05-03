@@ -38,25 +38,21 @@ public class NikoTile : MonoBehaviour
     // such as being triggered by beatsync
     public void activate()
     {
-        if (!isActive){
-            if (!puzzleZone.completed)
-            {
-                spriteRenderer.color = Color.red;
-                isActive = true;
-                if (playerInBox)
-                {
-                    failEvent.Invoke();
-                }
-            }
-        }
-        else{
-            spriteRenderer.color = Color.blue;
-            isActive = false;
-        }
+         Debug.Log("actiavte");
+         if (!puzzleZone.completed)
+         {
+             spriteRenderer.color = Color.red;
+             isActive = true;
+             if (playerInBox)
+             {
+                 failEvent.Invoke();
+             }
+         }
     }
 
     public void deactivate()
     {
+        Debug.Log("deact");
         spriteRenderer.color = Color.blue;
         isActive = false;
     }
