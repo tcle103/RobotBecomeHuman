@@ -81,6 +81,8 @@ public class PuzzleManager : MonoBehaviour
     public void puzzleFail()
     {
         player.transform.position = resetPoint.transform.position;
+        // stop player movement coroutine in the player controller class
+        player.GetComponent<PlayerController>().MoveInterrupt(resetPoint.transform.position);
         Component[] daleTiles = GetComponentsInChildren<DaleTile>();
         foreach (DaleTile tile in daleTiles)
         {
