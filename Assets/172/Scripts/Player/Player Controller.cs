@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,16 +27,24 @@ public class PlayerController : MonoBehaviour
         controls.Disable();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-       controls.Main.Movement.performed += ctx => Move(ctx.ReadValue<Vector2>());
-    }
+    private void Update(){
+        Vector2 controlValue = controls.Main.Movement.ReadValue<Vector2>();
 
-    private void Move(Vector2 direction){
-        if (CanMove(direction) && !isMoving){
-            //transform.position += (Vector3)direction;
-            StartCoroutine(MovePlayer((Vector3)direction));
+        if (!isMoving && controlValue != Vector2.zero)
+        {
+            Vector2 dir;
+            if (Mathf.Abs(controlValue.x) > Mathf.Abs(controlValue.y)) //future proofing for controller later
+            {
+                dir = new Vector2(Mathf.Sign(controlValue.x), 0);
+            }
+            else
+            {
+                dir = new Vector2(0, Mathf.Sign(controlValue.y));
+            }
+            if (CanMove(dir))
+            {
+                StartCoroutine(MovePlayer(dir));
+            }
         }
     }
 
@@ -54,14 +63,14 @@ public class PlayerController : MonoBehaviour
     // direction being a Vector3, usually like. 
     // Vector3.up, etc.
     // it just does it over a small period of time
-    private IEnumerator MovePlayer(Vector3 direction)
+    private IEnumerator MovePlayer(Vector2 direction)
     {
         isMoving = true;
 
         float elapsedTime = 0;
 
         origPos = transform.position;
-        targetPos = origPos + direction;
+        targetPos = origPos + (Vector3)direction;
 
         while (elapsedTime < timeToMove)
         {
@@ -77,9 +86,10 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    public void MoveInterrupt()
+    public void MoveInterrupt(Vector3 newPosition)
     {
         isMoving = false;
         StopAllCoroutines();
+        transform.position = newPosition;
     }
 }
