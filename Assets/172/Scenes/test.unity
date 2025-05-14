@@ -1137,12 +1137,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeMove: 1
-  loop: 0
-  baseSpeed: 0.1
+  loop: 1
+  baseSpeed: 0.3
   path:
   - {fileID: 272355197}
   - {fileID: 2081199188}
   - {fileID: 1028590995}
+  moveCompleteEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &221977407
 GameObject:
   m_ObjectHideFlags: 0
