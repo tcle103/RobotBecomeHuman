@@ -17,6 +17,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NPCMove : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class NPCMove : MonoBehaviour
     [SerializeField] private float baseSpeed = 0.2f;
     [SerializeField] private List<GameObject> path;
     private int point = 0;
+    [SerializeField] private UnityEvent moveCompleteEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,10 @@ public class NPCMove : MonoBehaviour
             path.Reverse();
             point = 0;
             StartCoroutine(Move(path));
+        }
+        else
+        {
+            moveCompleteEvent.Invoke();
         }
 
     }
