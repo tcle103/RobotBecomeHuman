@@ -25683,7 +25683,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -36252,6 +36252,7 @@ MonoBehaviour:
   end:
     m_PersistentCalls:
       m_Calls: []
+  playerMovementScript: {fileID: 0}
 --- !u!4 &1012248939
 Transform:
   m_ObjectHideFlags: 0
@@ -42736,6 +42737,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  playerMovementScript: {fileID: 462427073}
 --- !u!1001 &1463645502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58909,6 +58911,7 @@ MonoBehaviour:
   end:
     m_PersistentCalls:
       m_Calls: []
+  playerMovementScript: {fileID: 0}
 --- !u!4 &2087047733
 Transform:
   m_ObjectHideFlags: 0
