@@ -79,6 +79,7 @@ public class NPCInteract : MonoBehaviour
     private InputAction interactAction;
     private bool interacted = false;
     [SerializeField] private UnityEvent end;
+    public PlayerController playerMovementScript;
 
     // Start is called before the first frame update
     void Start()
@@ -122,6 +123,10 @@ public class NPCInteract : MonoBehaviour
                         dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
                         dialogueDisplay = false;
                         interacted = true;
+                        if (playerMovementScript != null)
+                        {
+                            playerMovementScript.enabled = true;
+                        }
                         end.Invoke();
                     }
 
@@ -191,6 +196,10 @@ public class NPCInteract : MonoBehaviour
             setNode("Start");
             dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
             interacted = true;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = false;
+            }
         }
     }
 
@@ -236,6 +245,10 @@ public class NPCInteract : MonoBehaviour
         {
             dialogueDisplay = false;
             dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = true;
+            }
             end.Invoke();
         }
         else
