@@ -1,0 +1,4 @@
+Start:
+{ give,recorder,1 }
+"hello world"
+--
