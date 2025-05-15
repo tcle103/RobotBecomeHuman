@@ -2258,6 +2258,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundTilemap: {fileID: 1746208528}
   collisionTilemap: {fileID: 539972910}
+  doorLayer:
+    serializedVersion: 2
+    m_Bits: 64
   timeToMove: 0.2
 --- !u!4 &472152135 stripped
 Transform:
@@ -4875,6 +4878,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.19
@@ -4921,15 +4932,15 @@ PrefabInstance:
       objectReference: {fileID: -1511385075, guid: bc45fdf02c423ce4cad7cdf87515f6eb, type: 3}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Offset.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11663,6 +11674,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door
       objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.9
@@ -11709,15 +11728,15 @@ PrefabInstance:
       objectReference: {fileID: -1511385075, guid: bc45fdf02c423ce4cad7cdf87515f6eb, type: 3}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Offset.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
+    [SerializeField] LayerMask doorLayer;
     private PlayerMovement controls;
     // [4/30/25 Tien] this is the "speed" of the player technically
     [SerializeField] private float timeToMove = 0.1f;
@@ -54,7 +55,9 @@ public class PlayerController : MonoBehaviour
             return false;
         }
         else{
-            return true;
+            //also check if the tile is a door
+            Vector3 worldCenter = groundTilemap.GetCellCenterWorld(gridPosition);
+            return !Physics2D.OverlapPoint(worldCenter, doorLayer);
         }
     }
 

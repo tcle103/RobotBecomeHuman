@@ -40,6 +40,7 @@ public class DoorController : MonoBehaviour
         _doorCollider.isTrigger = true;
         _doorRenderer.color = _openColor;
         _isOpen = true;
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     public void Open() {
@@ -55,6 +56,7 @@ public class DoorController : MonoBehaviour
     public void Close() {
         _doorCollider.isTrigger = false;
         _doorRenderer.color = _closedColor;
+        gameObject.layer = LayerMask.NameToLayer("Door");
         if (_isOpen) _audioSource.Play();
         _isOpen = false;
     }
