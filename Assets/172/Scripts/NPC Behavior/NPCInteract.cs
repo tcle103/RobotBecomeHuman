@@ -120,6 +120,7 @@ public class NPCInteract : MonoBehaviour
                     {
                         dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
                         dialogueDisplay = false;
+                        interacted = true;
                     }
 
                 }
@@ -165,7 +166,7 @@ public class NPCInteract : MonoBehaviour
      */
     public void onInteract()
     {
-        if (!dialogueDisplay)
+        if (!dialogueDisplay && !interacted)
         {
             int dialogueIndex = scriptSelect();
             // if dialogueIndex is positive, get that script from dialogueScripts
