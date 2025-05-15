@@ -22,7 +22,11 @@ public class PuzzleManager : MonoBehaviour
     [SerializeField] private List<DaleTile> solution;
     [SerializeField] private GameObject resetPoint;
     [SerializeField] private UnityEvent successEvent;
+    private int FailCount = 0;
     private GameObject player;
+    
+    private float timeStart = 0;
+    private float timeEnd = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +37,15 @@ public class PuzzleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         // [4/23/25 Tien] puzzle validation
         if (puzzleZone.puzzleActive && !puzzleZone.completed)
         {
+            //start timer if not started already
+            if (timeStart == 0)
+            {
+                timeStart = Time.time;
+            }
             if (anyTileSolution)
             {
                 foreach (DaleTile tile in solution)
@@ -73,6 +83,17 @@ public class PuzzleManager : MonoBehaviour
         {
             tile.deactivate();
         }
+        timeEnd = Time.time;
+        float timeTaken = timeEnd - timeStart;
+        
+        // Write time taken and fail count to a file
+        string filePath = Application.persistentDataPath + "/puzzle_data.txt";
+        System.IO.File.AppendAllText(filePath, "Puzzle solved in " + timeTaken + " seconds with " + FailCount + " fails.\n");
+        Debug.Log("Puzzle solved in " + timeTaken + " seconds with " + FailCount + " fails.");
+        // Reset
+        timeStart = 0;
+        timeEnd = 0;
+        FailCount = 0;
     }
 
     // [4/23/25 Tien]
@@ -88,6 +109,7 @@ public class PuzzleManager : MonoBehaviour
         {
             tile.deactivate();
         }
+        FailCount++;
     }
 
 }
