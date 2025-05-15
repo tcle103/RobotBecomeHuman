@@ -12,10 +12,7 @@ public class PuzzleStats : MonoBehaviour
     void Start()
     {
         filePath = Application.persistentDataPath + "/puzzle_data.txt";
-        if (File.Exists(filePath))
-        {
-            filePath = GetUniqueFilePath(Application.persistentDataPath, filePath, ".txt");
-        }
+        filePath = GetUniqueFilePath(Application.persistentDataPath, filePath, ".txt");
     }
 
     // Update is called once per frame
@@ -27,6 +24,11 @@ public class PuzzleStats : MonoBehaviour
     public void PuzzleUpdate(float timeTaken, int fails)
     {
         System.IO.File.AppendAllText(filePath, "Puzzle solved in " + timeTaken + " seconds with " + fails + " fails.\n");
+    }
+    
+    public void FrameRateUpdate(float frameRate)
+    {
+        System.IO.File.AppendAllText(filePath, "Frame rate: " + frameRate + "\n");
     }
     
     private string GetUniqueFilePath(string directory, string pathName, string extension)

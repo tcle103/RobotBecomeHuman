@@ -28,6 +28,8 @@ public class PuzzleManager : MonoBehaviour
     
     private float timeStart = 0;
     private float timeEnd = 0;
+    private float frameTimeStart = 0;
+    private float frameTimeEnd = 0;
 
     private PuzzleStats puzzleStats;
 
@@ -49,6 +51,7 @@ public class PuzzleManager : MonoBehaviour
             if (timeStart == 0)
             {
                 timeStart = Time.time;
+                frameTimeEnd = Time.deltaTime;
             }
             if (anyTileSolution)
             {
@@ -88,9 +91,12 @@ public class PuzzleManager : MonoBehaviour
             tile.deactivate();
         }
         timeEnd = Time.time;
+        frameTimeEnd = Time.deltaTime;
         float timeTaken = timeEnd - timeStart;
+        float frameTimeTaken = 1.0f / (frameTimeEnd - frameTimeStart);
 
         puzzleStats.PuzzleUpdate(timeTaken, failCount);
+        puzzleStats.FrameRateUpdate(frameTimeTaken);
         Debug.Log("Puzzle solved in " + timeTaken + " seconds with " + failCount + " fails.");
         // Reset
         timeStart = 0;
