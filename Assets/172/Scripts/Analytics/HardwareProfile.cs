@@ -48,7 +48,7 @@ public class HardwareProfile : MonoBehaviour
 
     private void WriteJsonToFile(string json)
     {
-        var path = GetUniqueFilePath(Application.persistentDataPath, baseFileName, ".json");
+        var path = Path.Combine(Application.persistentDataPath, baseFileName + ".json");
         
         try {
             File.WriteAllText(path, json);
@@ -56,19 +56,5 @@ public class HardwareProfile : MonoBehaviour
         } catch (Exception e) { 
             Debug.LogError($"Probably read-only folder or no write permissions?");
         }
-    }
-
-    private string GetUniqueFilePath(string directory, string pathName, string extension)
-    {
-        var fileName = Path.GetFileNameWithoutExtension(pathName) + "_";
-        string candidate;
-        int counter = 0;
-
-        do {
-            candidate = Path.Combine(directory, $"{fileName}{counter}{extension}");
-            counter++;
-        } while (File.Exists(candidate));
-
-        return candidate;
     }
 }
