@@ -232,6 +232,10 @@ public class NPCInteract : MonoBehaviour
             dialogueDisplay = true;
             setNode("Start");
             dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = false;
+            }
         }
     }
 
