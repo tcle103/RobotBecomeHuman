@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   List:
     _serializedList:
-    - Key: testItem
+    - Key: test
       Value: {fileID: 11400000, guid: c7847798ea43e484f9da508161587906, type: 2}

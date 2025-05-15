@@ -1497,19 +1497,7 @@ MonoBehaviour:
   detailDescription: {fileID: 1384302232}
   playerMovementScript: {fileID: 462427073}
   gameIsPaused: 0
-  inventoryItems:
-  - name: Example Item
-    description: This is a description about this item
-  - name: Example Item2
-    description: 'This is another description about another item. it is a very cool
-      item. '
-  - name: Example Item3
-    description: 'This is another description about another item. it is a very cool
-      item. '
-  - name: test
-    description: test
-  - name: test
-    description: test
+  itemDatabase: {fileID: 11400000, guid: d882d25202d58c0478aff049c445362c, type: 2}
 --- !u!1 &221977407
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
-
-/*Last modified by: Dale Spence
+/*
+ * Last modified by: Dale Spence
  * Last modified on: 5 / 15 / 25
  *
  * Inventory Menu Controller handles navigating and managing the player inventory
@@ -18,21 +18,22 @@ public class InventoryMenuController : MonoBehaviour
     public PlayerController playerMovementScript;
     public bool gameIsPaused = false;
 
+    public ItemDict itemDatabase; // reference to ItemDict ScriptableObject
+
+    private List<ItemData> inventoryItems = new List<ItemData>(); // Replace inner ItemData class
+
     private int selectedIndex = 0;
     private bool isOpen = false;
-
-    [System.Serializable]
-    public class ItemData
-    {
-        public string name;
-        public string description;
-    }
-
-    public List<ItemData> inventoryItems;
 
     void Update()
     {
         if (gameIsPaused) return; // block all inventory input if paused
+
+        if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            AddItemByID("test");
+            Debug.Log("Test item added.");
+        }
 
         if (Keyboard.current.iKey.wasPressedThisFrame)
         {
@@ -83,7 +84,7 @@ public class InventoryMenuController : MonoBehaviour
         {
             if (i < inventoryItems.Count)
             {
-                string label = inventoryItems[i].name;
+                string label = inventoryItems[i].itemName; // Uses ScriptableObject itemName
                 itemLabels[i].text = (i == selectedIndex ? "> " : "  ") + label;
             }
             else
@@ -94,7 +95,7 @@ public class InventoryMenuController : MonoBehaviour
 
         if (selectedIndex < inventoryItems.Count)
         {
-            detailName.text = inventoryItems[selectedIndex].name;
+            detailName.text = inventoryItems[selectedIndex].itemName; // Uses ScriptableObject itemName
             detailDescription.text = inventoryItems[selectedIndex].description;
         }
         else
@@ -104,23 +105,29 @@ public class InventoryMenuController : MonoBehaviour
         }
     }
 
-public void ForceCloseInventory()
-{
-    isOpen = false;
-    inventoryCanvasGroup.alpha = 0;
-    inventoryCanvasGroup.interactable = false;
-    inventoryCanvasGroup.blocksRaycasts = false;
-}
-
-    /*
-    public void AddItem(string name, string description)
+    public void ForceCloseInventory()
     {
-        inventoryItems.Add(new ItemData { name = name, description = description });
+        isOpen = false;
+        inventoryCanvasGroup.alpha = 0;
+        inventoryCanvasGroup.interactable = false;
+        inventoryCanvasGroup.blocksRaycasts = false;
+    }
 
-        if (isOpen)
+    // Add item by ID using the ItemDict database
+    public void AddItemByID(string id)
+    {
+        if (itemDatabase != null && itemDatabase.List.ContainsKey(id))
         {
-            UpdateInventoryDisplay();
+            inventoryItems.Add(itemDatabase.List[id]);
+
+            if (isOpen)
+            {
+                UpdateInventoryDisplay();
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Item ID not found in ItemDict: " + id);
         }
     }
-    */
 }
