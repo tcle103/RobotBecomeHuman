@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/24/25
+ * Last modified on: 5/15/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -78,6 +78,8 @@ public class NPCInteract : MonoBehaviour
     // interact button for progressing dialogue - took from Bucket's interact script
     private InputAction interactAction;
     private bool interacted = false;
+    [SerializeField] private UnityEvent end;
+    public PlayerController playerMovementScript;
 
     // Start is called before the first frame update
     void Start()
@@ -120,6 +122,12 @@ public class NPCInteract : MonoBehaviour
                     {
                         dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
                         dialogueDisplay = false;
+                        interacted = true;
+                        if (playerMovementScript != null)
+                        {
+                            playerMovementScript.enabled = true;
+                        }
+                        end.Invoke();
                     }
 
                 }
@@ -165,7 +173,7 @@ public class NPCInteract : MonoBehaviour
      */
     public void onInteract()
     {
-        if (!dialogueDisplay)
+        if (!dialogueDisplay && !interacted)
         {
             int dialogueIndex = scriptSelect();
             // if dialogueIndex is positive, get that script from dialogueScripts
@@ -188,6 +196,10 @@ public class NPCInteract : MonoBehaviour
             setNode("Start");
             dialogueUI.GetComponent<CanvasGroup>().alpha = 1;
             interacted = true;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = false;
+            }
         }
     }
 
@@ -233,6 +245,11 @@ public class NPCInteract : MonoBehaviour
         {
             dialogueDisplay = false;
             dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = true;
+            }
+            end.Invoke();
         }
         else
         {
