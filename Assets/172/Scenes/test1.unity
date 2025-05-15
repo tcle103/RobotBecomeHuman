@@ -10445,7 +10445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &198981438
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -36249,6 +36249,9 @@ MonoBehaviour:
   actions:
     _serializedList: []
   dialogueUI: {fileID: 818745276}
+  end:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1012248939
 Transform:
   m_ObjectHideFlags: 0
@@ -42703,24 +42706,23 @@ MonoBehaviour:
   randomScripts: []
   trackedObjects: []
   actions:
-    _serializedList:
-    - Key: destroy
-      Value:
-        m_PersistentCalls:
-          m_Calls:
-          - m_Target: {fileID: 1457566880}
-            m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_MethodName: SetActive
-            m_Mode: 6
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
+    _serializedList: []
   dialogueUI: {fileID: 818745276}
+  end:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1457566880}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1463645502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58891,6 +58893,9 @@ MonoBehaviour:
   actions:
     _serializedList: []
   dialogueUI: {fileID: 818745276}
+  end:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &2087047733
 Transform:
   m_ObjectHideFlags: 0
