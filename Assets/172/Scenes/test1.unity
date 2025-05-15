@@ -9417,6 +9417,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Poke_Door '
       objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.728
@@ -13483,7 +13487,7 @@ MonoBehaviour:
   collisionTilemap: {fileID: 1847761127}
   doorLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   timeToMove: 0.2
 --- !u!1 &465018759
 GameObject:
@@ -25723,6 +25727,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: C1_Door
       objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16
@@ -25769,15 +25777,15 @@ PrefabInstance:
       objectReference: {fileID: -1511385075, guid: bc45fdf02c423ce4cad7cdf87515f6eb, type: 3}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Offset.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26943,6 +26951,10 @@ PrefabInstance:
     - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Name
       value: Proj_Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalScale.y
@@ -35612,6 +35624,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: C2_Door
       objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -35658,15 +35674,15 @@ PrefabInstance:
       objectReference: {fileID: -1511385075, guid: bc45fdf02c423ce4cad7cdf87515f6eb, type: 3}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.x
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Size.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7215575955772842685, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Offset.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9053270486930854735, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: MinDistance
@@ -36842,6 +36858,10 @@ PrefabInstance:
     - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Name
       value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41004,6 +41024,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Door0376
       objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -41298,6 +41322,51 @@ Transform:
   - {fileID: 930209483}
   - {fileID: 1509114496}
   m_Father: {fileID: 461554685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1312706125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1312706127}
+  - component: {fileID: 1312706126}
+  m_Layer: 0
+  m_Name: Analytics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1312706126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312706125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b683be073b127e34c91892a79738a3f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseFileName: hardware_profile
+--- !u!4 &1312706127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312706125}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.218519, y: -8.17971, z: -0.14531931}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1355185381
 GameObject:
@@ -48239,6 +48308,10 @@ PrefabInstance:
     - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_Name
       value: East_Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205585766310493466, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3378291030384811018, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
       propertyPath: m_LocalScale.y
@@ -59376,3 +59449,4 @@ SceneRoots:
   - {fileID: 570874041}
   - {fileID: 461554685}
   - {fileID: 1786689694}
+  - {fileID: 1312706127}
