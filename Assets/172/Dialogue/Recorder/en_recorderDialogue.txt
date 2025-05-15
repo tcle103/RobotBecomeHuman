@@ -1,4 +1,7 @@
 Start:
 { give,recorder,1 }
-"hello world"
+"hi!!!! welcome to playtest :0 [E to progress dialogue]"
+"in addition to WASD move + E interact (which you should have by now),"
+"you can open your inventory with I and menu with ESC!"
+"once you're done talking to me & pick me up, you'll be free to progress!"
 --
