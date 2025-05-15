@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 4/24/25
+ * Last modified on: 5/15/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -78,6 +78,7 @@ public class NPCInteract : MonoBehaviour
     // interact button for progressing dialogue - took from Bucket's interact script
     private InputAction interactAction;
     private bool interacted = false;
+    [SerializeField] private UnityEvent end;
 
     // Start is called before the first frame update
     void Start()
@@ -121,6 +122,7 @@ public class NPCInteract : MonoBehaviour
                         dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
                         dialogueDisplay = false;
                         interacted = true;
+                        end.Invoke();
                     }
 
                 }
@@ -234,6 +236,7 @@ public class NPCInteract : MonoBehaviour
         {
             dialogueDisplay = false;
             dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
+            end.Invoke();
         }
         else
         {
