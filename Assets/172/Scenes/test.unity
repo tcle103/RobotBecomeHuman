@@ -22073,7 +22073,7 @@ MonoBehaviour:
   measureLength: 4
   intervals:
   - noteLength: 0.25
-    everyOther: 1
+    everyOther: 0
     measureGap: 0
     trigger:
       m_PersistentCalls:
