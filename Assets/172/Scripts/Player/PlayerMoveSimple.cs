@@ -24,6 +24,14 @@ public class PlayerMoveSimple : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //04/24/2025 - Tony
+        //Take out when we have proper menu stuff readded
+        //reset scene on 9 press
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        }
+        
         Vector2 movement = moveAction.ReadValue<Vector2>();
         Vector2 controllerMovement;
         if (Gamepad.current == null)

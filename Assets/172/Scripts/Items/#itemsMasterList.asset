@@ -16,3 +16,5 @@ MonoBehaviour:
     _serializedList:
     - Key: testItem
       Value: {fileID: 11400000, guid: c7847798ea43e484f9da508161587906, type: 2}
+    - Key: recorder
+      Value: {fileID: 11400000, guid: 1030c18270c952540a1faa667ea4d7ee, type: 2}
