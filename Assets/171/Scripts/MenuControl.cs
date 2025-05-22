@@ -12,7 +12,7 @@ using UnityEngine.InputSystem.Controls;
 public class MenuControl : MonoBehaviour
 {
     
-    public static SettingsSave settingsSave;
+    public static SaveSystem settingsSave;
     
     private String[] languages = {"English", "Japanese", "Chinese"};
     [SerializeField] private GameObject logo;
@@ -35,7 +35,7 @@ public class MenuControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave = FindObjectOfType<SaveSystem>();
         settingsSave.npcs.Clear();
         menuSprites = new Dictionary<String, Sprite>();
         Sprite[] sprites = Resources.LoadAll<Sprite>("Menus");
@@ -246,6 +246,7 @@ public class MenuControl : MonoBehaviour
     public void StartButton()
     {
         Debug.Log("Start button pressed");
+        settingsSave.SaveSettings();
         SceneManager.LoadScene("DevRoom");
     }
     
@@ -264,6 +265,7 @@ public class MenuControl : MonoBehaviour
     public void BackButton()
     {
         Debug.Log("Back button pressed");
+        settingsSave.SaveSettings();
         SceneManager.LoadScene("StartMenu");
     }
     
@@ -271,13 +273,13 @@ public class MenuControl : MonoBehaviour
     {
         Debug.Log("Language button pressed");
         //move to the next language option in the languages array and change playerpref (loop through)
-        
-        int currentLanguageIndex = Array.IndexOf(languages, PlayerPrefs.GetString("Language"));
+        //instead of reading playerprefs use the json system
+        //int currentLanguageIndex = Array.IndexOf(languages, PlayerPrefs.GetString("Language"));
+        int currentLanguageIndex = Array.IndexOf(languages, settingsSave.language);
         currentLanguageIndex++;
         currentLanguageIndex %= languages.Length;
         
         settingsSave.language = languages[currentLanguageIndex];
-        PlayerPrefs.SetString("Language", settingsSave.language);
         Debug.Log(settingsSave.language);
     }
 
@@ -285,7 +287,8 @@ public class MenuControl : MonoBehaviour
     {
         Debug.Log("Contrast button pressed");
         //switch contrast
-        if(PlayerPrefs.GetString("Contrast") == "Normal")
+        //if(PlayerPrefs.GetString("Contrast") == "Normal")
+        if(settingsSave.contrast == "Normal")
         {
             settingsSave.contrast = "High";
         }
