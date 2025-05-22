@@ -12609,7 +12609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 7
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -14355,7 +14355,7 @@ Transform:
   m_GameObject: {fileID: 462427061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.51, y: -15.3, z: 0}
+  m_LocalPosition: {x: 43.56, y: -15.39, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26950,7 +26950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 7
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -27760,7 +27760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935365221293c4339bff1f7883b3ed4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileLifetimeEditable: 1.5
+  projectileLifetimeEditable: 3
   projectilePrefab: {fileID: 5538217282536901844, guid: 5952ee97cdd8b40efb8d1cfdbdfc7afb, type: 3}
   poolSize: 30
 --- !u!4 &584951331
@@ -44347,7 +44347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 7
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -66795,7 +66795,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 7
+      value: 5.2
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
