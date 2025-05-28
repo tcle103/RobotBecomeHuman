@@ -1,6 +1,6 @@
 /* 
- * Last modified by: Tien Le
- * Last modified on: 4/21/25
+ * Last modified by: Niko Otsuki
+ * Last modified on: 5/28/25
  * 
  * BeatSync.cs contains code for syncing music up to a track
  * w/ a provided BPM using the method discussed in this tutorial
@@ -10,7 +10,7 @@
  * 
  * Created by: Tien Le
  * Created on: 4/21/25
- * Contributors: Tien Le, b3agz
+ * Contributors: Tien Le, b3agz, Niko 
  */
 
 using System.Collections;
@@ -22,18 +22,26 @@ public class BeatSync : MonoBehaviour
 {
     [SerializeField] private float bpm;
     [SerializeField] private AudioSource audio;
-    [SerializeField] private int measureLength;
+    [SerializeField] public int measureLength;
     [SerializeField] private Intervals[] intervals;
 
     // Update is called once per frame
     private void Update()
     {
-        foreach (var interval in intervals) 
+        foreach (var interval in intervals)
         {
             //Debug.Log(audio.timeSamples);
             float sampledTime = (audio.timeSamples / (audio.clip.frequency * interval.GetIntervalLength(bpm)));
             float measureTime = (audio.timeSamples / (audio.clip.frequency * interval.GetMeasure(bpm, measureLength)));
-            interval.CheckForNewInterval(sampledTime, measureTime);
+            //if you have custom beats enabled, only custom beats will work
+            if (interval.customBeats == true)
+            {
+                interval.CheckForCustomInterval(sampledTime, measureTime);
+            }
+            else
+            {
+                interval.CheckForNewInterval(sampledTime, measureTime);
+            }
         }
     }
 }
@@ -71,11 +79,33 @@ public class Intervals
     // ex. if you wanted quarter notes on the offbeats every other measure
     // noteLength 1, everyOther true, measureGap 1
     [SerializeField] private int measureGap;
+    //[5/28/25 Niko]
+    //can be a value between 0 and 3 and determines which beat in a measure is single out ot be played
+    //so if you want only the 3rd beat to play, you would enter 2 as the soloBeat
+    [SerializeField] private int soloBeat;
+    //[5/28/25 Niko]
+    //just a check if you want to single out a beat.
+    [SerializeField] private bool singleBeat;
+    //[5/28/25 Niko]
+    //a list of 4 (has to be 4) numbers that are either 0 or 1 that represent which beat will be played during the first measure
+    [SerializeField] private List<int> measure1;
+    //[5/28/25 Niko]
+    //same as above bu for the second measure. [PLEASE follow the rules of 4 elements of 1 or 0 I'm sorry it's like this]
+    [SerializeField] private List<int> measure2;
+    //[5/28/25 Niko]
+    //a check whether or not you want to use custom beats
+    [SerializeField] public bool customBeats;
+    //[5/28/25 Niko]
+    //just to switch between first and second measure
+    private bool m1 = true;
+    //a simple incrementer
+    private int i = 0;
     // [4/21/25 Tien]
     // event that triggers when the specified interval has passed
     [SerializeField] private UnityEvent trigger;
     private int lastInterval;
     private int lastMeasureInt;
+    private int beat;
 
     public float GetIntervalLength(float bpm)
     {
@@ -87,14 +117,10 @@ public class Intervals
         return (60f / (bpm)) * measureLength;
     }
 
-    // [4/21/25 Tien]
-    // this checks if a new interval has passed based on if
-    // the time passed has exceeded the interval 
-    // because of its usage in the Beat Sync class it actually measures in time
-    // based on packets/samples, not in beats
-    public void CheckForNewInterval(float interval, float measureInterval)
+    //[5/28/25 Niko]
+    //Similar to the normal function below, its just that custom beats interferes with solo beats and normal processes so it needs its own function.
+    public void CheckForCustomInterval(float interval, float measureInterval)
     {
-        
         if (Mathf.FloorToInt(measureInterval) != lastMeasureInt)
         {
             lastMeasureInt = Mathf.FloorToInt(measureInterval);
@@ -102,19 +128,90 @@ public class Intervals
         if ((Mathf.FloorToInt(interval) != lastInterval))
         {
             lastInterval = Mathf.FloorToInt(interval);
-            if ((lastMeasureInt % (measureGap + 1) == 1) || measureGap == 0)
+            if (m1)
             {
-                if (everyOther)
+                beat = measure1[i];
+            }
+            else
+            {
+                beat = measure2[i];
+            }
+            if (beat == 1)
+            {
+                if ((lastMeasureInt % (measureGap + 1) == 1) || measureGap == 0)
                 {
-                    if (lastInterval % 2 == 1)
+                    if (everyOther)
+                    {
+                        if (lastInterval % 2 == 1)
+                        {
+                            trigger.Invoke();
+                        }
+                    }
+                    else
                     {
                         trigger.Invoke();
                     }
                 }
+            }
+            i++;
+            if (i > 3)
+            {
+                i = 0;
+                if (m1)
+                {
+                    m1 = false;
+                }
                 else
                 {
-                    trigger.Invoke();
+                    m1 = true;
                 }
+            }
+
+        }
+    }
+
+    // [4/21/25 Tien]
+    // this checks if a new interval has passed based on if
+    // the time passed has exceeded the interval 
+    // because of its usage in the Beat Sync class it actually measures in time
+    // based on packets/samples, not in beats
+    public void CheckForNewInterval(float interval, float measureInterval)
+    {
+        if (Mathf.FloorToInt(measureInterval) != lastMeasureInt)
+        {
+            lastMeasureInt = Mathf.FloorToInt(measureInterval);
+        }
+        if ((Mathf.FloorToInt(interval) != lastInterval))
+        {
+            lastInterval = Mathf.FloorToInt(interval);
+            if (soloBeat == 0)
+            {
+                if ((lastMeasureInt % (measureGap + 1) == 1) || measureGap == 0)
+                {
+                    if (everyOther)
+                    {
+                        if (lastInterval % 2 == 1)
+                        {
+                            trigger.Invoke();
+                            if (singleBeat)
+                            {
+                                soloBeat = 3;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        trigger.Invoke();
+                        if (singleBeat)
+                        {
+                            soloBeat = 3;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                soloBeat--;
             }
         }
     }

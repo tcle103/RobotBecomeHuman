@@ -14355,7 +14355,7 @@ Transform:
   m_GameObject: {fileID: 462427061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.56, y: -15.39, z: 0}
+  m_LocalPosition: {x: 30.527, y: -15.35, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27515,9 +27515,14 @@ MonoBehaviour:
   audio: {fileID: 570874042}
   measureLength: 4
   intervals:
-  - noteLength: 0.25
+  - noteLength: 1
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 1
+    measure1: 01000000010000000000000000000000
+    measure2: 00000000000000000100000001000000
+    customBeats: 1
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27545,9 +27550,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - noteLength: 0.5
+  - noteLength: 1
     everyOther: 0
     measureGap: 0
+    soloBeat: 1
+    singleBeat: 1
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27575,9 +27585,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - noteLength: 0.5
+  - noteLength: 1
     everyOther: 0
     measureGap: 0
+    soloBeat: 2
+    singleBeat: 1
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27606,8 +27621,13 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
   - noteLength: 1
-    everyOther: 1
-    measureGap: 1
+    everyOther: 0
+    measureGap: 0
+    soloBeat: 3
+    singleBeat: 1
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27638,6 +27658,11 @@ MonoBehaviour:
   - noteLength: 0.5
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27656,6 +27681,11 @@ MonoBehaviour:
   - noteLength: 0.5
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27674,6 +27704,11 @@ MonoBehaviour:
   - noteLength: 0.25
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27704,6 +27739,11 @@ MonoBehaviour:
   - noteLength: 0.375
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
