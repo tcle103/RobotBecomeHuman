@@ -137,6 +137,17 @@ public class PauseMenuController : MonoBehaviour
         {
             case 0:
                 Debug.Log("Load selected");
+                // find the save system and load the game
+                var saveSystem = FindObjectOfType<SaveSystem>();
+                if (saveSystem != null)
+                {
+                    saveSystem.gameLoad();
+                    Debug.Log("Game loaded successfully.");
+                }
+                else
+                {
+                    Debug.LogError("SaveSystem not found!");
+                }
                 break;
             case 1:
                 Debug.Log("Options selected");

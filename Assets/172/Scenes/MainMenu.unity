@@ -1050,7 +1050,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2118501346}
-  - component: {fileID: 2118501345}
   - component: {fileID: 2118501344}
   m_Layer: 0
   m_Name: SettingsSave
@@ -1073,20 +1072,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   npcs: []
---- !u!114 &2118501345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118501343}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c91a827bb27e624abbb4ff5eb5f512d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  npcs: []
+  playerData: {fileID: 0}
 --- !u!4 &2118501346
 Transform:
   m_ObjectHideFlags: 0

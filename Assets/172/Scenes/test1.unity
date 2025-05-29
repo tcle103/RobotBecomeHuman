@@ -38818,6 +38818,7 @@ GameObject:
   - component: {fileID: 1105009708}
   - component: {fileID: 1105009707}
   - component: {fileID: 1105009706}
+  - component: {fileID: 1105009710}
   m_Layer: 0
   m_Name: save point collider
   m_TagString: Untagged
@@ -38953,6 +38954,43 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.47}
   serializedVersion: 2
   m_Radius: 1.5
+--- !u!114 &1105009710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105009704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6223b14e9219e674d8c8af103c634cd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NPCConfig: {fileID: 4900000, guid: 1e77212370e04dc5a074cb4364cade90, type: 3}
+  firstTime: 1
+  dialogueScripts:
+  - {fileID: 4900000, guid: b7ff629d2ad6406bbfa01e9d2c550ede, type: 3}
+  randomScripts: []
+  trackedObjects: []
+  actions:
+    _serializedList: []
+  dialogueUI: {fileID: 818745276}
+  end:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1105009707}
+        m_TargetAssemblyTypeName: NPCSave, Assembly-CSharp
+        m_MethodName: save_point
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  playerMovementScript: {fileID: 462427073}
 --- !u!1 &1111391135
 GameObject:
   m_ObjectHideFlags: 0
