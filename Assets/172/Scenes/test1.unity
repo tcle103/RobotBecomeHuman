@@ -11002,7 +11002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (4)
+      value: ProjectileSpawner (8)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11509,14 +11509,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 234264250}
+  - {fileID: 1369147288}
   - {fileID: 741354874}
   - {fileID: 263150088}
   - {fileID: 1463645503}
   - {fileID: 1259831312}
   - {fileID: 260588950}
   - {fileID: 153592974}
-  - {fileID: 234264250}
-  - {fileID: 1369147288}
   m_Father: {fileID: 1929667160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &220929367
@@ -11891,17 +11891,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 867616872373825560, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
   m_PrefabInstance: {fileID: 756831752}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &234264251 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
-  m_PrefabInstance: {fileID: 756831752}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97338e9be5f1c48258e73900c2cd151f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &242657228
 GameObject:
   m_ObjectHideFlags: 0
@@ -12483,7 +12472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (5)
+      value: ProjectileSpawner (7)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12609,7 +12598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 5.2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -13599,7 +13588,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
   m_PrefabInstance: {fileID: 1921956932}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1921956933}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97338e9be5f1c48258e73900c2cd151f, type: 3}
@@ -14355,7 +14344,7 @@ Transform:
   m_GameObject: {fileID: 462427061}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.527, y: -15.35, z: 0}
+  m_LocalPosition: {x: 43.56, y: -15.36, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26950,7 +26939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 5.2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -27261,7 +27250,7 @@ Transform:
   m_GameObject: {fileID: 558637563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.39, y: -26.95, z: 0}
+  m_LocalPosition: {x: 5.181, y: -26.655, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27513,7 +27502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bpm: 120
   audio: {fileID: 570874042}
-  measureLength: 4
+  measureLength: 48
   intervals:
   - noteLength: 1
     everyOther: 0
@@ -27521,12 +27510,12 @@ MonoBehaviour:
     soloBeat: 0
     singleBeat: 1
     measure1: 01000000010000000000000000000000
-    measure2: 00000000000000000100000001000000
+    measure2: 01000000010000000000000000000000
     customBeats: 1
     trigger:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 234264251}
+        - m_Target: {fileID: 1369147289}
           m_TargetAssemblyTypeName: ProjectileSpawner, Assembly-CSharp
           m_MethodName: FireProjectile
           m_Mode: 1
@@ -27706,9 +27695,55 @@ MonoBehaviour:
     measureGap: 0
     soloBeat: 0
     singleBeat: 0
-    measure1: 
-    measure2: 
-    customBeats: 0
+    measure1: 00000000000000000000000000000000
+    measure2: 00000000000000000000000000000000
+    customBeats: 1
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 756831753}
+          m_TargetAssemblyTypeName: ProjectileSpawner, Assembly-CSharp
+          m_MethodName: FireProjectile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - noteLength: 0.25
+    everyOther: 0
+    measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 00000000000000000000000000000000
+    measure2: 01000000000000000000000000000000
+    customBeats: 1
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1921956933}
+          m_TargetAssemblyTypeName: ProjectileSpawner, Assembly-CSharp
+          m_MethodName: FireProjectile
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - noteLength: 1
+    everyOther: 0
+    measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 01000000000000000000000000000000
+    measure2: 01000000000000000000000000000000
+    customBeats: 1
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27724,6 +27759,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - noteLength: 1
+    everyOther: 0
+    measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 01000000000000000100000000000000
+    measure2: 01000000000000000100000000000000
+    customBeats: 1
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
         - m_Target: {fileID: 778249767}
           m_TargetAssemblyTypeName: ProjectileSpawner, Assembly-CSharp
           m_MethodName: FireProjectile
@@ -27736,14 +27782,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - noteLength: 0.375
+  - noteLength: 1
     everyOther: 0
     measureGap: 0
     soloBeat: 0
     singleBeat: 0
-    measure1: 
-    measure2: 
-    customBeats: 0
+    measure1: 01000000000000000100000000000000
+    measure2: 01000000000000000100000000000000
+    customBeats: 1
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27759,6 +27805,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - noteLength: 1
+    everyOther: 0
+    measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 00000000000000000100000000000000
+    measure2: 00000000000000000100000000000000
+    customBeats: 1
+    trigger:
+      m_PersistentCalls:
+        m_Calls:
         - m_Target: {fileID: 384286288}
           m_TargetAssemblyTypeName: ProjectileSpawner, Assembly-CSharp
           m_MethodName: FireProjectile
@@ -27802,7 +27859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileLifetimeEditable: 3
   projectilePrefab: {fileID: 5538217282536901844, guid: 5952ee97cdd8b40efb8d1cfdbdfc7afb, type: 3}
-  poolSize: 30
+  poolSize: 60
 --- !u!4 &584951331
 Transform:
   m_ObjectHideFlags: 0
@@ -29481,7 +29538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (9)
+      value: ProjectileSpawner (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29536,6 +29593,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
+--- !u!1 &756831753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
+  m_PrefabInstance: {fileID: 756831752}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &766759237
 GameObject:
   m_ObjectHideFlags: 0
@@ -40788,7 +40850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (10)
+      value: ProjectileSpawner (2)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40800,7 +40862,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 7.5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -44387,7 +44449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 5.2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -45168,7 +45230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (3)
+      value: ProjectileSpawner (6)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -48361,7 +48423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (6)
+      value: ProjectileSpawner (5)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -65880,7 +65942,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (2)
+      value: ProjectileSpawner (3)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -66835,7 +66897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: speed
-      value: 5.2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6617778089411837501, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: puzzleZone
@@ -66882,6 +66944,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
+--- !u!1 &1921956933 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
+  m_PrefabInstance: {fileID: 1921956932}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1923264147
 GameObject:
   m_ObjectHideFlags: 0
@@ -68005,7 +68072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1847179822911674220, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_Name
-      value: ProjectileSpawner (1)
+      value: ProjectileSpawner (4)
       objectReference: {fileID: 0}
     - target: {fileID: 2804224598379084060, guid: 8d574681cf01f48479ea8c2ba3086b8c, type: 3}
       propertyPath: m_LocalPosition.x

@@ -121,10 +121,10 @@ public class Intervals
     //Similar to the normal function below, its just that custom beats interferes with solo beats and normal processes so it needs its own function.
     public void CheckForCustomInterval(float interval, float measureInterval)
     {
-        if (Mathf.FloorToInt(measureInterval) != lastMeasureInt)
-        {
-            lastMeasureInt = Mathf.FloorToInt(measureInterval);
-        }
+        //if (Mathf.FloorToInt(measureInterval) != lastMeasureInt)
+        //{
+        //    lastMeasureInt = Mathf.FloorToInt(measureInterval);
+        //}
         if ((Mathf.FloorToInt(interval) != lastInterval))
         {
             lastInterval = Mathf.FloorToInt(interval);
@@ -138,8 +138,8 @@ public class Intervals
             }
             if (beat == 1)
             {
-                if ((lastMeasureInt % (measureGap + 1) == 1) || measureGap == 0)
-                {
+                //if ((lastMeasureInt % (measureGap + 1) == 1) || measureGap == 0)
+                //{
                     if (everyOther)
                     {
                         if (lastInterval % 2 == 1)
@@ -151,7 +151,7 @@ public class Intervals
                     {
                         trigger.Invoke();
                     }
-                }
+                //}
             }
             i++;
             if (i > 3)
