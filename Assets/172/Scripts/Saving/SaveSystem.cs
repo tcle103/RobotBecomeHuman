@@ -128,7 +128,7 @@ public class SaveSystem : MonoBehaviour
 
         if (player != null)
         {
-            player.transform.position = new Vector3(data.playerX, data.playerY, player.transform.position.z);
+            player.GetComponent<PlayerController>().MoveInterrupt(new Vector3(data.playerX, data.playerY, player.transform.position.z));
 
             playerData = player.GetComponent<PlayerData>();
             playerData.LoadInventory(data.inventory);
