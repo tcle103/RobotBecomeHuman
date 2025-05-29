@@ -180,4 +180,16 @@ public class SaveSystem : MonoBehaviour
         string json = JsonUtility.ToJson(data);
         File.WriteAllText(savePath, json);
     }
+
+    public void DeleteFiles()
+    {
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+        }
+        if (File.Exists(settingsPath))
+        {
+            File.Delete(settingsPath);
+        }
+    }
 }
