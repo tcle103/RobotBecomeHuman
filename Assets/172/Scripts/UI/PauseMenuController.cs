@@ -17,7 +17,7 @@ public class PauseMenuController : MonoBehaviour
     public GameObject firstSelected;
     public AudioSource musicSource;
 
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     [Header("Menu Navigation")]
     public List<TextMeshProUGUI> menuOptions; // Load, Options, Menu, Quit

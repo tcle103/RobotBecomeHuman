@@ -62,6 +62,7 @@ public class NPCInteract : MonoBehaviour
     // [4/16/25 Tien]
     // if in interaction
     private bool dialogueDisplay = false;
+    private PauseMenuController pauseMenu;
     // [4/16/25 Tien]
     // reference to the dialogue UI object
     [SerializeField] private GameObject dialogueUI;
@@ -89,6 +90,7 @@ public class NPCInteract : MonoBehaviour
         // with NPCConfigParse()
         scriptChoices = NPCConfigParse();
         playerData = GameObject.Find("Player").GetComponent<PlayerData>();
+        pauseMenu = FindObjectOfType<PauseMenuController>();
 
         // [4/17/25 Tien] grab "interact" input from input system
         interactAction = InputSystem.actions.FindAction("Interact");
@@ -173,7 +175,7 @@ public class NPCInteract : MonoBehaviour
      */
     public void onInteract()
     {
-        if (!dialogueDisplay && !interacted)
+        if (!dialogueDisplay && !pauseMenu.isPaused && !interacted)
         {
             int dialogueIndex = scriptSelect();
             // if dialogueIndex is positive, get that script from dialogueScripts
