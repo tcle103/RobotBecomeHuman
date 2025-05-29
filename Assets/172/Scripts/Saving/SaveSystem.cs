@@ -29,7 +29,7 @@ public class SaveSystem : MonoBehaviour
     {
         public float playerX;
         public float playerY;
-        public string inventory;
+        //public string inventory;
         public List<int> openDoorIds = new();
         public List<int> npcFileIds = new();
     }
@@ -130,11 +130,11 @@ public class SaveSystem : MonoBehaviour
         {
             player.transform.position = new Vector3(data.playerX, data.playerY, player.transform.position.z);
 
-            inventoryState = player.GetComponent<InventoryState>();
+            /*inventoryState = player.GetComponent<InventoryState>();
             if (!string.IsNullOrEmpty(data.inventory))
             {
                 inventoryState.LoadInventory(data.inventory);
-            }
+            }*/
 
             doors = FindObjectsOfType<DoorController>();
             Debug.Assert(doors != null);
@@ -165,7 +165,7 @@ public class SaveSystem : MonoBehaviour
 
         Debug.Log("playerX: " + player.position.x);
         Debug.Log("playerY: " + player.position.y);
-        Debug.Log("inventory: " + player.GetComponent<InventoryState>().SaveInventory());
+        //Debug.Log("inventory: " + player.GetComponent<InventoryState>().SaveInventory());
         Debug.Log("npcs: " + npcs.Count);
         doors = FindObjectsOfType<DoorController>();
         Debug.Log("doors null: " + (doors == null));
@@ -175,7 +175,7 @@ public class SaveSystem : MonoBehaviour
         {
             playerX = player.position.x,
             playerY = player.position.y,
-            inventory = player.GetComponent<InventoryState>().SaveInventory(),
+            //inventory = player.GetComponent<InventoryState>().SaveInventory(),
             npcFileIds = npcs.Select(npc => npc.dialogueFile.GetInstanceID()).ToList(),
             openDoorIds = doors.Where(d => d.isOpen()).Select(d => d.id).ToList()
         };

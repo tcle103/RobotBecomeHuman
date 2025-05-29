@@ -27,6 +27,10 @@ public class HardwareProfile : MonoBehaviour
 
     void Start()
     {
+        
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 300; //you can change this later, 300 is just what i normally have it set as
+        
         var profile = new HardwareInfo
         {
             userName              = Environment.UserName,
