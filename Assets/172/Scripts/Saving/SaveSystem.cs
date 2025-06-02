@@ -14,8 +14,10 @@ public class SaveSystem : MonoBehaviour
 
     public Transform player;
 
-    public List<NPCBehavior> npcs = new();
+    public List<NPCInteract> npcs = new();
     private int npcCount;
+    private List<bool> npcFT = new();
+    private List<bool> npcAC = new();
 
     public PlayerData playerData;
 
@@ -31,7 +33,8 @@ public class SaveSystem : MonoBehaviour
         public float playerY;
         public string inventory;
         public List<int> openDoorIds = new();
-        public List<int> npcFileIds = new();
+        public List<bool> npcFirstTimes = new();
+        public List<bool> npcActive = new();
     }
 
     [Serializable]
@@ -114,6 +117,8 @@ public class SaveSystem : MonoBehaviour
         {
             File.Delete(settingsPath);
         }
+        npcs.Clear();
+        npcFT.Clear();
         language = "English";
         contrast = "Normal";
         SaveSettings();
@@ -144,13 +149,39 @@ public class SaveSystem : MonoBehaviour
                 }
             }
         }
-
+        
+        npcs = GameObject.FindGameObjectsWithTag("NPC").Select(go => go.GetComponent<NPCInteract>()).ToList();
+        //if any npcs are null, remove them from the list
+        npcs.RemoveAll(npc => npc == null);
+        npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+            
         npcCount = npcs.Count;
         Debug.Log("NpcCount: " + npcCount);
-        for (int i = 0; i < npcCount && i < data.npcFileIds.Count; i++)
+        for (int i = 0; i < npcCount; i++)
         {
-            int fileId = data.npcFileIds[i];
-            Debug.Log(fileId);
+            Debug.Log("npcftcount" + npcFT.Count);
+            Debug.Log("npcACcount" + npcAC.Count);
+            Debug.Log("datanpcftcount" + data.npcFirstTimes.Count);
+            Debug.Log("datanpcACcount" + data.npcActive.Count);
+            
+            //npc first time is a public boolean variable in npc interact=
+            if (data.npcFirstTimes.Count > 0 && i < data.npcFirstTimes.Count)
+            {
+                if (npcFT.Count > i) { npcFT[i] = data.npcFirstTimes[i]; } else { npcFT.Add(data.npcFirstTimes[i]); }
+                if (npcAC.Count > i) { npcAC[i] = data.npcActive[i]; } else { npcAC.Add(data.npcActive[i]); }
+            }
+            else
+            {
+                if (npcFT.Count > i) { npcFT[i] = true; } else { npcFT.Add(true); }
+                if (npcAC.Count > i) { npcAC[i] = false; } else { npcAC.Add(false); }
+            }
+            
+            Debug.Log("npcftcount" + npcFT.Count);
+            Debug.Log("datanpcftcount" + data.npcFirstTimes.Count);
+            Debug.Log("npcACcount" + npcAC.Count);
+            npcs[i].firstTime = npcFT[i];
+            npcs[i].gameObject.SetActive(npcAC[i]);
+            Debug.Log(npcs[i].name + ": " + npcs[i].firstTime);
         }
     }
 
@@ -167,14 +198,20 @@ public class SaveSystem : MonoBehaviour
         doors = FindObjectsOfType<DoorController>();
         Debug.Log("doors null: " + (doors == null));
         Debug.Log("doors: " + doors.Length);
+        npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+        Debug.Log("npc first times null: " + (npcFT == null));
+        Debug.Log("npc active null: " + (npcAC == null));
+        Debug.Log("npcs ft + npc list match length: " + (npcFT.Count == npcs.Count));
+        Debug.Log("npcs ac + npc list match length: " + (npcAC.Count == npcs.Count));
         
         SaveData data = new SaveData
         {
             playerX = player.position.x,
             playerY = player.position.y,
             inventory = playerData.SaveInventory(),
-            npcFileIds = npcs.Select(npc => npc.dialogueFile.GetInstanceID()).ToList(),
-            openDoorIds = doors.Where(d => d.isOpen()).Select(d => d.id).ToList()
+            openDoorIds = doors.Where(d => d.isOpen()).Select(d => d.id).ToList(),
+            npcFirstTimes = npcs.Select(npc => npc.firstTime).ToList(),
+            npcActive = npcs.Select(npc => npc.gameObject.activeInHierarchy).ToList()
         };
 
         string json = JsonUtility.ToJson(data);

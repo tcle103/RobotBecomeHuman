@@ -27712,6 +27712,7 @@ MonoBehaviour:
   pauseCanvasGroup: {fileID: 1755687098}
   firstSelected: {fileID: 1381723453}
   musicSource: {fileID: 0}
+  isPaused: 0
   menuOptions:
   - {fileID: 1381723455}
   - {fileID: 1408525931}
@@ -28308,7 +28309,7 @@ GameObject:
   - component: {fileID: 724480774}
   m_Layer: 0
   m_Name: end npc
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38407,7 +38408,7 @@ GameObject:
   - component: {fileID: 1012248936}
   m_Layer: 0
   m_Name: tutorialNPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46013,7 +46014,7 @@ GameObject:
   - component: {fileID: 1457566882}
   m_Layer: 0
   m_Name: Recorder
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63302,7 +63303,7 @@ GameObject:
   - component: {fileID: 2087047730}
   m_Layer: 0
   m_Name: endNPC
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
