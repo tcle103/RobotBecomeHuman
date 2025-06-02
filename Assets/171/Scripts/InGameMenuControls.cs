@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class newMenuControl : MonoBehaviour
 {
 
-    public static SettingsSave settingsSave;
+    public static SaveSystem settingsSave;
 
     private String[] languages = { "English", "Japanese", "Chinese" };
     [SerializeField] private GameObject logo;
@@ -27,7 +27,7 @@ public class newMenuControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave = FindObjectOfType<SaveSystem>();
         settingsSave.npcs.Clear();
         menuSprites = new Dictionary<String, Sprite>();
         Sprite[] sprites = Resources.LoadAll<Sprite>("Menus");
@@ -136,7 +136,7 @@ public class newMenuControl : MonoBehaviour
         Debug.Log("Language button pressed");
         //move to the next language option in the languages array and change playerpref (loop through)
 
-        int currentLanguageIndex = Array.IndexOf(languages, PlayerPrefs.GetString("Language"));
+        int currentLanguageIndex = Array.IndexOf(languages, settingsSave.language);
         currentLanguageIndex++;
         currentLanguageIndex %= languages.Length;
 
@@ -147,7 +147,7 @@ public class newMenuControl : MonoBehaviour
     {
         Debug.Log("Contrast button pressed");
         //switch contrast
-        if (PlayerPrefs.GetString("Contrast") == "Normal")
+        if (settingsSave.contrast == "Normal")
         {
             settingsSave.contrast = "High";
         }

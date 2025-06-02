@@ -12,7 +12,7 @@ public class InventoryState : MonoBehaviour
     [SerializeField] private GameObject inventoryUI;
     private Dictionary<String, Sprite> itemSprites;
     private List<GameObject> itemSlots;
-    public static SettingsSave settingsSave;
+    public static SaveSystem settingsSave;
     // tien things
     private CanvasGroup canvasgroup;
     public bool menuOpen = false;
@@ -21,7 +21,7 @@ public class InventoryState : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave = FindObjectOfType<SaveSystem>();
         itemSprites = new Dictionary<String, Sprite>();
 
         canvasgroup = GameObject.Find("UICanvas").GetComponent<CanvasGroup>();

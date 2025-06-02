@@ -28,14 +28,14 @@ public class NPCBehavior : MonoBehaviour
     private DialogNode entryPoint;
     private DialogNode currentNode;
     private DialogueBox dialogueBox;
-    private SettingsSave settingsSave;
+    private SaveSystem settingsSave;
 
     private bool isActive = false;
     
     // Start is called before the first frame update
     public void Start()
     {
-        settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave = FindObjectOfType<SaveSystem>();
         settingsSave.npcs.Add(this);
         settingsSave.gameLoad();
 
@@ -43,8 +43,8 @@ public class NPCBehavior : MonoBehaviour
         FillDictionary();
         Debug.Log("Start");
         
-        //use prefs to determine which dialogue file to use
-        string language = PlayerPrefs.GetString("Language");
+        //use settings save to get language
+        string language = settingsSave.language;
         Debug.Log("Language: " + language);
         if (language == "English")
         {

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class NPCSave : MonoBehaviour
 {
-    public static SettingsSave settingsSave;
+    public static SaveSystem settingsSave;
 
     // Start is called before the first frame update
     void Start()
     {
-        settingsSave = FindObjectOfType<SettingsSave>();
+        settingsSave = FindObjectOfType<SaveSystem>();
     }
 
     // Update is called once per frame
