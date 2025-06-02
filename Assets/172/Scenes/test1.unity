@@ -48857,41 +48857,39 @@ MonoBehaviour:
   puzzleZone: {fileID: 848092424}
   anyTileSolution: 0
   solution:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 36098615}
+  - {fileID: 1704410658}
+  - {fileID: 1433103788}
+  - {fileID: 1942669031}
+  - {fileID: 2018537757}
+  - {fileID: 2037974849}
+  - {fileID: 1832841923}
+  - {fileID: 1897877967}
+  - {fileID: 832963036}
+  - {fileID: 1434987364}
+  - {fileID: 1543043249}
+  - {fileID: 1218630622}
+  - {fileID: 1923264148}
+  - {fileID: 417666339}
+  - {fileID: 1510534018}
+  - {fileID: 1018220884}
+  - {fileID: 1778737054}
+  - {fileID: 727310965}
+  - {fileID: 2060359174}
+  - {fileID: 1933069975}
+  - {fileID: 611230997}
+  - {fileID: 124899809}
+  - {fileID: 1088353328}
+  - {fileID: 539499231}
+  - {fileID: 1602193532}
+  - {fileID: 1317088577}
+  - {fileID: 1970453660}
+  - {fileID: 1080551915}
+  - {fileID: 989164376}
+  - {fileID: 242657230}
+  - {fileID: 1389161860}
+  - {fileID: 1753236905}
+  - {fileID: 318376618}
   resetPoint: {fileID: 2088979383}
   successEvent:
     m_PersistentCalls:

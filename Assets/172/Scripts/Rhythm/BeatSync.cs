@@ -138,8 +138,8 @@ public class Intervals
             }
             if (beat == 1)
             {
-                //if ((lastMeasureInt % (measureGap + 1) == 1) || measureGap == 0)
-                //{
+                if ((lastMeasureInt % (measureGap + 1) == 1) || measureGap == 0)
+                {
                     if (everyOther)
                     {
                         if (lastInterval % 2 == 1)
@@ -151,7 +151,7 @@ public class Intervals
                     {
                         trigger.Invoke();
                     }
-                //}
+                }
             }
             i++;
             if (i > 3)
@@ -175,6 +175,8 @@ public class Intervals
     // the time passed has exceeded the interval 
     // because of its usage in the Beat Sync class it actually measures in time
     // based on packets/samples, not in beats
+    // [5/28/25] Niko
+    // added soloBeat capability so you can now single out a beat (0-3) to play each meassure
     public void CheckForNewInterval(float interval, float measureInterval)
     {
         if (Mathf.FloorToInt(measureInterval) != lastMeasureInt)
