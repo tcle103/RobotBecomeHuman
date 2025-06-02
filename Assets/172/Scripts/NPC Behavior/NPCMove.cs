@@ -85,26 +85,22 @@ public class NPCMove : MonoBehaviour
 
     }
 
-    private void MoveLerp(Vector3 direction, float speed)
+    private IEnumerator MoveLerp(Vector3 direction, float speed)
     {
         //float elapsedTime = 0;
 
         origPos = transform.position;
         targetPos = origPos + direction;
 
-        rb.MovePosition(targetPos);
-
-        // while (elapsedTime < timeToMove)
-        // {
-        //     //switch to rb.MovePosition? or split into individual cells and check if player is in the cell before moving into it?
-        //     //transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
-
-        //     //elapsedTime += Time.deltaTime;   
-        //     yield return null;
-        // }
+        while (Vector3.Dot((targetPos - transform.position), direction) > 0)
+        {
+            //switch to rb.MovePosition? or split into individual cells and check if player is in the cell before moving into it?
+            rb.MovePosition(targetPos);   
+            yield return null;
+        }
 
         // [4/30/25 Tien] just make sure you are precisely
         // at targetPos at the end of Lerp
-        //transform.position = targetPos;
+        transform.position = targetPos;
     }
 }
