@@ -54,14 +54,14 @@ public class NPCMove : MonoBehaviour
         Debug.Log("moving x");
         Debug.Log(path[point].transform.position.x);
         float moveX = path[point].transform.position.x - transform.position.x;
-        MoveLerp(new Vector3(moveX, 0, 0), baseSpeed * Math.Abs(moveX));
+        MoveTo(new Vector3(moveX, 0, 0), baseSpeed * Math.Abs(moveX));
         while (transform.position.x != path[point].transform.position.x)
         {
             yield return null;
         }
         Debug.Log("moving y");
         float moveY = path[point].transform.position.y - transform.position.y;
-        MoveLerp(new Vector3(0, moveY, 0), baseSpeed * Math.Abs(moveY));
+        MoveTo(new Vector3(0, moveY, 0), baseSpeed * Math.Abs(moveY));
         while (transform.position.y != path[point].transform.position.y)
         {
             yield return null;
@@ -85,17 +85,18 @@ public class NPCMove : MonoBehaviour
 
     }
 
-    private IEnumerator MoveLerp(Vector3 direction, float speed)
+    private IEnumerator MoveTo(Vector3 direction, float speed)
     {
         //float elapsedTime = 0;
 
         origPos = transform.position;
         targetPos = origPos + direction;
 
-        while (Vector3.Dot((targetPos - transform.position), direction) > 0)
+        while (Vector3.Dot(targetPos - transform.position, direction) > 0)
         {
+            Vector3 nextMove = transform.position + Vector3.Normalize(direction) * speed;
             //switch to rb.MovePosition? or split into individual cells and check if player is in the cell before moving into it?
-            rb.MovePosition(targetPos);   
+            rb.MovePosition(nextMove);   
             yield return null;
         }
 
