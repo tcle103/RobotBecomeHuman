@@ -10835,13 +10835,14 @@ GameObject:
   - component: {fileID: 198981439}
   - component: {fileID: 198981438}
   - component: {fileID: 198981441}
+  - component: {fileID: 198981442}
   m_Layer: 0
   m_Name: test walk npc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!61 &198981438
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10948,7 +10949,7 @@ Transform:
   m_GameObject: {fileID: 198981437}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 99.55, y: -39.58, z: 0}
+  m_LocalPosition: {x: 10.5, y: -4, z: 0}
   m_LocalScale: {x: 0.75, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10968,7 +10969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activeMove: 1
   loop: 1
-  baseSpeed: 0.3
+  baseSpeed: 5
   path:
   - {fileID: 272355197}
   - {fileID: 2081199188}
@@ -10976,7 +10977,7 @@ MonoBehaviour:
   moveCompleteEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 98891950}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 0
@@ -10988,6 +10989,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!50 &198981442
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198981437}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &216980394
 GameObject:
   m_ObjectHideFlags: 0
@@ -12555,7 +12583,7 @@ Transform:
   m_GameObject: {fileID: 272355197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: -15, z: 0}
+  m_LocalPosition: {x: 4.5, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13475,6 +13503,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62ca74d783be346678f7e26d08946c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fpsController: {fileID: 0}
+  fpsText: {fileID: 0}
+  showFPS: 1
+  updateInterval: 0.5
 --- !u!4 &401205761
 Transform:
   m_ObjectHideFlags: 0
@@ -14442,7 +14474,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462427061}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -27357,6 +27389,11 @@ MonoBehaviour:
   - noteLength: 0.25
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27387,6 +27424,11 @@ MonoBehaviour:
   - noteLength: 0.5
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27417,6 +27459,11 @@ MonoBehaviour:
   - noteLength: 0.5
     everyOther: 0
     measureGap: 0
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27447,6 +27494,11 @@ MonoBehaviour:
   - noteLength: 1
     everyOther: 1
     measureGap: 1
+    soloBeat: 0
+    singleBeat: 0
+    measure1: 
+    measure2: 
+    customBeats: 0
     trigger:
       m_PersistentCalls:
         m_Calls:
@@ -27911,6 +27963,11 @@ MonoBehaviour:
   - {fileID: 1436065994}
   - {fileID: 1039283482}
   - {fileID: 1466866806}
+  fpsSettingsPanelGroup: {fileID: 0}
+  fpsLimitItems: []
+  fpsDisplayItems: []
+  fpsController: {fileID: 0}
+  fpsCounter: {fileID: 0}
 --- !u!4 &613137855
 Transform:
   m_ObjectHideFlags: 0
@@ -39356,7 +39413,7 @@ Transform:
   m_GameObject: {fileID: 1028590995}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: -18.5, z: 0}
+  m_LocalPosition: {x: 3.5, y: -10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63683,7 +63740,7 @@ Transform:
   m_GameObject: {fileID: 2081199188}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5, y: -16.5, z: 0}
+  m_LocalPosition: {x: 2.5, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
