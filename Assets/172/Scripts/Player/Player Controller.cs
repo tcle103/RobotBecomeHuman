@@ -57,7 +57,17 @@ public class PlayerController : MonoBehaviour
         else{
             //also check if the tile is a door
             Vector3 worldCenter = groundTilemap.GetCellCenterWorld(gridPosition);
-            return !Physics2D.OverlapPoint(worldCenter, doorLayer);
+            if (Physics2D.OverlapPoint(worldCenter, doorLayer))
+            {
+                return false;
+            }
+            else
+            {
+                //[6/2/25 Ian] check if there's an NPC in the way of movement
+                LayerMask npcOnly = LayerMask.GetMask("NPC");
+                bool isNPC = Physics2D.Raycast((Vector2)transform.position - new Vector2(0f, 0.5f), direction, 1.5f, npcOnly);
+                return !isNPC;
+            }
         }
     }
 
