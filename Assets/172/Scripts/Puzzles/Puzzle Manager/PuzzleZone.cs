@@ -20,6 +20,8 @@ public class PuzzleZone : MonoBehaviour
     public bool puzzleActive { get; private set; } = false;
     public bool completed { get; private set; } = false;
 
+    private SaveSystem settingsSave;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !completed)
@@ -41,5 +43,40 @@ public class PuzzleZone : MonoBehaviour
     public void setComplete()
     {
         completed = true;
+        //find parent of puzzle zone
+        PuzzleManager puzzleManager = GetComponentInParent<PuzzleManager>();
+        if (puzzleManager != null)
+        {
+            puzzleManager.gameObject.SetActive(false);
+        }
+    }
+
+    void Start()
+    {
+        settingsSave = FindObjectOfType<SaveSystem>();
+        if (settingsSave.puzzleZones.Count == 0)
+        {
+            Debug.Log("No puzzle zones in save file, adding this puzzle zone");
+            settingsSave.puzzleZones.Add(this);
+        }
+
+        for (int i = 0; i < settingsSave.puzzleZones.Count; i++)
+        {
+            if (settingsSave.puzzleZones[i] == null)
+            {
+                Debug.Log("Puzzle " + this.name + " already exists in save file, replacing save");
+                settingsSave.puzzleZones[i] = this;
+                return;
+            }else if (settingsSave.puzzleZones[i].name == this.name)
+            {
+                return;
+            }else if (i == settingsSave.puzzleZones.Count - 1) //last index
+            {
+                Debug.Log("Puzzlee " + this.name + " does not exist in save file, adding to save");
+                settingsSave.puzzleZones.Add(this);
+            }
+        }
+        
+        settingsSave.gameLoad();
     }
 }

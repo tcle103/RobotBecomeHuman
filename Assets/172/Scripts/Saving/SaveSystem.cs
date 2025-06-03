@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -14,15 +16,21 @@ public class SaveSystem : MonoBehaviour
 
     public Transform player;
 
-    public List<NPCBehavior> npcs = new();
+    public List<NPCInteract> npcs = new();
     private int npcCount;
 
-    private InventoryState inventoryState;
+    public Dictionary<string, List<bool>> npcData = new();
+
+    public PlayerData playerData;
 
     private DoorController[] doors;
     
+    public List<PuzzleZone> puzzleZones = new();
+    public Dictionary<string, bool> puzzleStates = new();
     private string savePath => Path.Combine(Application.persistentDataPath, "saveData.json");
     private string settingsPath => Path.Combine(Application.persistentDataPath, "settings.json");
+    
+    public bool sceneLoaded = false;
     
     [Serializable]
     private class SaveData
@@ -31,7 +39,8 @@ public class SaveSystem : MonoBehaviour
         public float playerY;
         public string inventory;
         public List<int> openDoorIds = new();
-        public List<int> npcFileIds = new();
+        public Dictionary<string, List<bool>> npcFirstActive = new();
+        public Dictionary<string, bool> puzzleCompletion = new();
     }
 
     [Serializable]
@@ -65,6 +74,15 @@ public class SaveSystem : MonoBehaviour
         }
 
         LoadSettings();
+    }
+
+    public void LateUpdate()
+    {
+        if (SceneManager.GetActiveScene().name == "test1" && !sceneLoaded)
+        {
+            sceneLoaded = true;
+            gameLoad();
+        }
     }
 
     public void SaveSettings()
@@ -114,6 +132,8 @@ public class SaveSystem : MonoBehaviour
         {
             File.Delete(settingsPath);
         }
+        npcs.Clear();
+        npcData.Clear();
         language = "English";
         contrast = "Normal";
         SaveSettings();
@@ -124,17 +144,14 @@ public class SaveSystem : MonoBehaviour
         if (!File.Exists(savePath)) return;
 
         string json = File.ReadAllText(savePath);
-        SaveData data = JsonUtility.FromJson<SaveData>(json);
+        SaveData data = JsonConvert.DeserializeObject<SaveData>(json);
 
         if (player != null)
         {
-            player.transform.position = new Vector3(data.playerX, data.playerY, player.transform.position.z);
+            player.GetComponent<PlayerController>().MoveInterrupt(new Vector3(data.playerX, data.playerY, player.transform.position.z));
 
-            inventoryState = player.GetComponent<InventoryState>();
-            if (!string.IsNullOrEmpty(data.inventory))
-            {
-                inventoryState.LoadInventory(data.inventory);
-            }
+            playerData = player.GetComponent<PlayerData>();
+            playerData.LoadInventory(data.inventory);
 
             doors = FindObjectsOfType<DoorController>();
             Debug.Assert(doors != null);
@@ -147,14 +164,97 @@ public class SaveSystem : MonoBehaviour
                 }
             }
         }
-
+        
+        
+        npcs = GameObject.FindGameObjectsWithTag("NPC").Select(go => go.GetComponent<NPCInteract>()).ToList();
+        
+        
+        //find all inactive game objects with the tag "NPC" and get their components
+        NPCInteract[] allNpcComponents = UnityEngine.Object.FindObjectsByType<NPCInteract>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        List<NPCInteract> inactiveNpcs = allNpcComponents
+            .Where(npc => npc.CompareTag("NPC") && !npc.gameObject.activeInHierarchy)
+            .ToList();
+        //add inactive npcs to the list
+        npcs.AddRange(inactiveNpcs);
+        Debug.Log("inactive npcs found: " + inactiveNpcs.Count);
+        
+        
+        //if any npcs are null, remove them from the list
+        npcs.RemoveAll(npc => npc == null);
+        npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+        //list all names in log
+        Debug.Log("NPCs loaded: " + string.Join(", ", npcs.Select(npc => npc.name)));
+            
         npcCount = npcs.Count;
         Debug.Log("NpcCount: " + npcCount);
-        for (int i = 0; i < npcCount && i < data.npcFileIds.Count; i++)
+
+        npcData.Clear();
+
+        foreach (var kvp in data.npcFirstActive)
         {
-            int fileId = data.npcFileIds[i];
-            Debug.Log(fileId);
+            string npcName = kvp.Key;
+            List<bool> bools = kvp.Value;
+
+            if (!npcData.ContainsKey(npcName))
+            {
+                npcData.Add(npcName, new List<bool>(new bool[npcCount]));
+            }
+
+            for (int i = 0; i < Math.Min(bools.Count, npcCount); i++)
+            {
+                npcData[npcName][i] = bools[i];
+            }
         }
+
+        for (int i = 0; i < npcCount; i++)
+        {
+            string npcName = npcs[i].name;
+
+            if (npcData.ContainsKey(npcName))
+            {
+                npcs[i].firstTime = npcData[npcName][0];
+                npcs[i].gameObject.SetActive(npcData[npcName][1]);
+                Debug.Log($"{npcName}: firstTime = {npcs[i].firstTime}, active = {npcData[npcName][1]}");
+            }
+        }
+
+        //debug log the npcData
+        foreach (var kvp in npcData)
+        {
+            Debug.Log($"NPC: {kvp.Key}, FirstTime: {kvp.Value[0]}, Active: {kvp.Value[1]}");
+        }
+        
+        // Find all PuzzleZones in the scene (including inactive)
+        PuzzleZone[] allPuzzleZones = UnityEngine.Object.FindObjectsByType<PuzzleZone>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        puzzleZones = allPuzzleZones.ToList();
+        
+        puzzleZones.RemoveAll(p => p == null);
+        puzzleZones.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+        
+        Debug.Log("PuzzleZones loaded: " + string.Join(", ", puzzleZones.Select(p => p.name)));
+
+        puzzleStates.Clear();
+        
+        if (data.puzzleCompletion != null)
+        {
+            foreach (var kvp in data.puzzleCompletion)
+            {
+                puzzleStates[kvp.Key] = kvp.Value;
+            }
+        }
+        
+        foreach (var puzzle in puzzleZones)
+        {
+            if(puzzleStates.ContainsKey(puzzle.name))
+            {
+                if (puzzleStates[puzzle.name])
+                {
+                    puzzle.setComplete();
+                }
+                Debug.Log($"Puzzle {puzzle.name}: completed = {puzzleStates[puzzle.name]}");
+            }
+        }
+
     }
 
     public void Save()
@@ -165,22 +265,41 @@ public class SaveSystem : MonoBehaviour
 
         Debug.Log("playerX: " + player.position.x);
         Debug.Log("playerY: " + player.position.y);
-        Debug.Log("inventory: " + player.GetComponent<InventoryState>().SaveInventory());
+        Debug.Log("inventory: " + playerData.SaveInventory());
         Debug.Log("npcs: " + npcs.Count);
         doors = FindObjectsOfType<DoorController>();
         Debug.Log("doors null: " + (doors == null));
         Debug.Log("doors: " + doors.Length);
-        
+        npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+        Debug.Log("npc data null: " + (npcData == null));
+        Debug.Log("npcs ft + npc list match length: " + (npcData.Count == npcs.Count));
+        Debug.Log("puzzleZones: " + puzzleZones.Count);
+
         SaveData data = new SaveData
         {
             playerX = player.position.x,
             playerY = player.position.y,
-            inventory = player.GetComponent<InventoryState>().SaveInventory(),
-            npcFileIds = npcs.Select(npc => npc.dialogueFile.GetInstanceID()).ToList(),
-            openDoorIds = doors.Where(d => d.isOpen()).Select(d => d.id).ToList()
+            inventory = playerData.SaveInventory(),
+            openDoorIds = doors.Where(d => d.isOpen()).Select(d => d.id).ToList(),
+            npcFirstActive = npcs.ToDictionary(npc => npc.name,
+                npc => new List<bool> { npc.firstTime, npc.gameObject.activeInHierarchy }),
+            puzzleCompletion = puzzleZones.ToDictionary(puzzle => puzzle.name, 
+                puzzle => puzzle.completed)
         };
 
-        string json = JsonUtility.ToJson(data);
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
         File.WriteAllText(savePath, json);
+    }
+
+    public void DeleteFiles()
+    {
+        if (File.Exists(savePath))
+        {
+            File.Delete(savePath);
+        }
+        if (File.Exists(settingsPath))
+        {
+            File.Delete(settingsPath);
+        }
     }
 }

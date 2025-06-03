@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,9 +16,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float timeToMove = 0.1f;
     private bool isMoving;
     private Vector3 origPos, targetPos;
+    private SaveSystem settingsSave;
 
     private void Awake(){
         controls = InputSystem.actions.FindAction("Movement");
+    }
+
+    void Start()
+    {
+        settingsSave = FindObjectOfType<SaveSystem>();
+        settingsSave.player = transform;
+        settingsSave.gameLoad();
     }
 
     private void OnEnable(){
