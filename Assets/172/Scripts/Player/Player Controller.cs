@@ -16,8 +16,12 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private Vector3 origPos, targetPos;
 
+    private Animator animator;
+
+
     private void Awake(){
         controls = InputSystem.actions.FindAction("Movement");
+        animator = GetComponent<Animator>();
     }
 
     private void OnEnable(){
@@ -34,18 +38,18 @@ public class PlayerController : MonoBehaviour
         if (!isMoving && controlValue != Vector2.zero)
         {
             Vector2 dir;
-            if (Mathf.Abs(controlValue.x) > Mathf.Abs(controlValue.y)) //future proofing for controller later
-            {
+            if (Mathf.Abs(controlValue.x) > Mathf.Abs(controlValue.y))
                 dir = new Vector2(Mathf.Sign(controlValue.x), 0);
-            }
             else
-            {
                 dir = new Vector2(0, Mathf.Sign(controlValue.y));
-            }
+
+
             if (CanMove(dir))
-            {
                 StartCoroutine(MovePlayer(dir));
-            }
+        }
+        else if (!isMoving && controlValue == Vector2.zero)
+        {
+            animator.SetBool("isMoving", false);
         }
     }
 
@@ -70,6 +74,11 @@ public class PlayerController : MonoBehaviour
     {
         isMoving = true;
 
+        // Set animation parameters *here*, only if we're actually going to move
+        animator.SetBool("isMoving", true);
+        animator.SetFloat("MoveX", (int)direction.x);
+        animator.SetFloat("MoveY", (int)direction.y);
+
         float elapsedTime = 0;
 
         origPos = transform.position;
@@ -87,11 +96,16 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
+        animator.SetBool("isMoving", false);
+
     }
+
+
 
     public void MoveInterrupt(Vector3 newPosition)
     {
         isMoving = false;
+        //animator.SetBool("isMoving", false);
         StopAllCoroutines();
         transform.position = newPosition;
     }
