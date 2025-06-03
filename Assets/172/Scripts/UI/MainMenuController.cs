@@ -28,7 +28,7 @@ public class MainMenuController : MonoBehaviour
     
     public void StartGame()
     {
-        SceneManager.LoadScene("test1"); // Replace with your actual gameplay scene name
+        SceneManager.LoadScene("e+w"); // Replace with your actual gameplay scene name
     }
 
     public void QuitGame()
