@@ -164,6 +164,18 @@ public class SaveSystem : MonoBehaviour
         
         
         npcs = GameObject.FindGameObjectsWithTag("NPC").Select(go => go.GetComponent<NPCInteract>()).ToList();
+        
+        
+        //find all inactive game objects with the tag "NPC" and get their components
+        var inactiveNpcs = GameObject.FindGameObjectsWithTag("NPC")
+            .Where(go => !go.activeInHierarchy)
+            .Select(go => go.GetComponent<NPCInteract>())
+            .ToList();
+        //add inactive npcs to the list
+        npcs.AddRange(inactiveNpcs);
+        Debug.Log("inactive npcs found: " + inactiveNpcs.Count);
+        
+        
         //if any npcs are null, remove them from the list
         npcs.RemoveAll(npc => npc == null);
         npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
