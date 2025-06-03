@@ -1,6 +1,6 @@
 /*
  * Last modified by: Tien Le
- * Last modified on: 4/24/25
+ * Last modified on: 6/3/25
  * 
  * NikoTile.cs contains functionality for a tile that
  * causes a fail state when it is active
@@ -25,10 +25,15 @@ public class NikoTile : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Collider2D collider;
     private bool playerInBox = false;
+    private Animator animator;
+    [SerializeField] private Sprite deactivated;
 
     void Start()
     {
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
+        animator = GetComponentInParent<Animator>();
+        animator.enabled = false;
+        spriteRenderer.sprite = deactivated;
         collider = GetComponentInParent<Collider2D>();
     }
 
@@ -40,7 +45,7 @@ public class NikoTile : MonoBehaviour
     {
         if (!puzzleZone.completed)
         {
-            spriteRenderer.color = Color.red;
+            animator.enabled = true;
             isActive = true;
             if (playerInBox)
             {
@@ -51,7 +56,8 @@ public class NikoTile : MonoBehaviour
 
     public void deactivate()
     {
-        spriteRenderer.color = Color.blue;
+        animator.enabled = false;
+        spriteRenderer.sprite = deactivated;
         isActive = false;
     }
 
