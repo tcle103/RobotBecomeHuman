@@ -120,7 +120,8 @@ public class NPCInteract : MonoBehaviour
                 settingsSave.npcs.Add(this);
             }
         }
-        settingsSave.npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+        
+        settingsSave.npcs.Sort((a, b) => string.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
         settingsSave.gameLoad();
     }
 

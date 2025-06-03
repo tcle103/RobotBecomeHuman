@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Newtonsoft.Json;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -16,8 +18,8 @@ public class SaveSystem : MonoBehaviour
 
     public List<NPCInteract> npcs = new();
     private int npcCount;
-    private List<bool> npcFT = new();
-    private List<bool> npcAC = new();
+
+    public Dictionary<string, List<bool>> npcData = new();
 
     public PlayerData playerData;
 
@@ -26,6 +28,8 @@ public class SaveSystem : MonoBehaviour
     private string savePath => Path.Combine(Application.persistentDataPath, "saveData.json");
     private string settingsPath => Path.Combine(Application.persistentDataPath, "settings.json");
     
+    public bool sceneLoaded = false;
+    
     [Serializable]
     private class SaveData
     {
@@ -33,8 +37,7 @@ public class SaveSystem : MonoBehaviour
         public float playerY;
         public string inventory;
         public List<int> openDoorIds = new();
-        public List<bool> npcFirstTimes = new();
-        public List<bool> npcActive = new();
+        public Dictionary<string, List<bool>> npcFirstActive = new();
     }
 
     [Serializable]
@@ -68,6 +71,15 @@ public class SaveSystem : MonoBehaviour
         }
 
         LoadSettings();
+    }
+
+    public void LateUpdate()
+    {
+        if (SceneManager.GetActiveScene().name == "test1" && !sceneLoaded)
+        {
+            sceneLoaded = true;
+            gameLoad();
+        }
     }
 
     public void SaveSettings()
@@ -118,7 +130,7 @@ public class SaveSystem : MonoBehaviour
             File.Delete(settingsPath);
         }
         npcs.Clear();
-        npcFT.Clear();
+        npcData.Clear();
         language = "English";
         contrast = "Normal";
         SaveSettings();
@@ -129,7 +141,7 @@ public class SaveSystem : MonoBehaviour
         if (!File.Exists(savePath)) return;
 
         string json = File.ReadAllText(savePath);
-        SaveData data = JsonUtility.FromJson<SaveData>(json);
+        SaveData data = JsonConvert.DeserializeObject<SaveData>(json);
 
         if (player != null)
         {
@@ -150,39 +162,53 @@ public class SaveSystem : MonoBehaviour
             }
         }
         
+        
         npcs = GameObject.FindGameObjectsWithTag("NPC").Select(go => go.GetComponent<NPCInteract>()).ToList();
         //if any npcs are null, remove them from the list
         npcs.RemoveAll(npc => npc == null);
         npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+        //list all names in log
+        Debug.Log("NPCs loaded: " + string.Join(", ", npcs.Select(npc => npc.name)));
             
         npcCount = npcs.Count;
         Debug.Log("NpcCount: " + npcCount);
+
+        npcData.Clear();
+
+        foreach (var kvp in data.npcFirstActive)
+        {
+            string npcName = kvp.Key;
+            List<bool> bools = kvp.Value;
+
+            if (!npcData.ContainsKey(npcName))
+            {
+                npcData.Add(npcName, new List<bool>(new bool[npcCount]));
+            }
+
+            for (int i = 0; i < Math.Min(bools.Count, npcCount); i++)
+            {
+                npcData[npcName][i] = bools[i];
+            }
+        }
+
         for (int i = 0; i < npcCount; i++)
         {
-            Debug.Log("npcftcount" + npcFT.Count);
-            Debug.Log("npcACcount" + npcAC.Count);
-            Debug.Log("datanpcftcount" + data.npcFirstTimes.Count);
-            Debug.Log("datanpcACcount" + data.npcActive.Count);
-            
-            //npc first time is a public boolean variable in npc interact=
-            if (data.npcFirstTimes.Count > 0 && i < data.npcFirstTimes.Count)
+            string npcName = npcs[i].name;
+
+            if (npcData.ContainsKey(npcName))
             {
-                if (npcFT.Count > i) { npcFT[i] = data.npcFirstTimes[i]; } else { npcFT.Add(data.npcFirstTimes[i]); }
-                if (npcAC.Count > i) { npcAC[i] = data.npcActive[i]; } else { npcAC.Add(data.npcActive[i]); }
+                npcs[i].firstTime = npcData[npcName][0];
+                npcs[i].gameObject.SetActive(npcData[npcName][1]);
+                Debug.Log($"{npcName}: firstTime = {npcs[i].firstTime}, active = {npcData[npcName][1]}");
             }
-            else
-            {
-                if (npcFT.Count > i) { npcFT[i] = true; } else { npcFT.Add(true); }
-                if (npcAC.Count > i) { npcAC[i] = false; } else { npcAC.Add(false); }
-            }
-            
-            Debug.Log("npcftcount" + npcFT.Count);
-            Debug.Log("datanpcftcount" + data.npcFirstTimes.Count);
-            Debug.Log("npcACcount" + npcAC.Count);
-            npcs[i].firstTime = npcFT[i];
-            npcs[i].gameObject.SetActive(npcAC[i]);
-            Debug.Log(npcs[i].name + ": " + npcs[i].firstTime);
         }
+
+        //debug log the npcData
+        foreach (var kvp in npcData)
+        {
+            Debug.Log($"NPC: {kvp.Key}, FirstTime: {kvp.Value[0]}, Active: {kvp.Value[1]}");
+        }
+
     }
 
     public void Save()
@@ -199,22 +225,20 @@ public class SaveSystem : MonoBehaviour
         Debug.Log("doors null: " + (doors == null));
         Debug.Log("doors: " + doors.Length);
         npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
-        Debug.Log("npc first times null: " + (npcFT == null));
-        Debug.Log("npc active null: " + (npcAC == null));
-        Debug.Log("npcs ft + npc list match length: " + (npcFT.Count == npcs.Count));
-        Debug.Log("npcs ac + npc list match length: " + (npcAC.Count == npcs.Count));
-        
+        Debug.Log("npc data null: " + (npcData == null));
+        Debug.Log("npcs ft + npc list match length: " + (npcData.Count == npcs.Count));
+
         SaveData data = new SaveData
         {
             playerX = player.position.x,
             playerY = player.position.y,
             inventory = playerData.SaveInventory(),
             openDoorIds = doors.Where(d => d.isOpen()).Select(d => d.id).ToList(),
-            npcFirstTimes = npcs.Select(npc => npc.firstTime).ToList(),
-            npcActive = npcs.Select(npc => npc.gameObject.activeInHierarchy).ToList()
+            npcFirstActive = npcs.ToDictionary(npc => npc.name,
+                npc => new List<bool> { npc.firstTime, npc.gameObject.activeInHierarchy })
         };
 
-        string json = JsonUtility.ToJson(data);
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
         File.WriteAllText(savePath, json);
     }
 

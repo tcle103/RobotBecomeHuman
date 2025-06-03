@@ -141,6 +141,7 @@ public class PauseMenuController : MonoBehaviour
                 var saveSystem = FindObjectOfType<SaveSystem>();
                 if (saveSystem != null)
                 {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                     saveSystem.gameLoad();
                     Debug.Log("Game loaded successfully.");
                 }
