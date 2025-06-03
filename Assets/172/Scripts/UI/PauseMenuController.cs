@@ -43,6 +43,9 @@ public class PauseMenuController : MonoBehaviour
     public FPSController fpsController;
     public FPSCounter fpsCounter;
 
+    public static bool IsPaused { get; private set; } 
+
+
     void Start()
     {
         HideAllPanels();
@@ -74,6 +77,7 @@ public class PauseMenuController : MonoBehaviour
     void TogglePause()
     {
         isPaused = !isPaused;
+        IsPaused = isPaused;  //stop taking movements on pause
         Time.timeScale = isPaused ? 0f : 1f;
 
         if (musicSource != null)
@@ -100,6 +104,8 @@ public class PauseMenuController : MonoBehaviour
             if (isPaused) inventory.ForceCloseInventory();
         }
     }
+
+
 
     void HandlePauseMenuInput()
     {

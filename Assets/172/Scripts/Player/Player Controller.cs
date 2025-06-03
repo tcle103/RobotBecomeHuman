@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Update(){
+
+        if (PauseMenuController.IsPaused) return;
+
         Vector2 controlValue = controls.ReadValue<Vector2>();
 
         if (!isMoving && controlValue != Vector2.zero)
