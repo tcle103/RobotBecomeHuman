@@ -96,7 +96,6 @@ public class PlayerController : MonoBehaviour
         transform.position = targetPos;
 
         isMoving = false;
-        animator.SetBool("isMoving", false);
 
     }
 
