@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
     [SerializeField] LayerMask doorLayer;
+
     private InputAction controls;
     // [4/30/25 Tien] this is the "speed" of the player technically
     [SerializeField] private float timeToMove = 0.1f;
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 origPos, targetPos;
 
     private Animator animator;
+    private Vector2 lastMoveDir = Vector2.down; // default facing back (down)
+
 
 
     private void Awake(){
@@ -32,7 +35,8 @@ public class PlayerController : MonoBehaviour
         controls.Disable();
     }
 
-    private void Update(){
+    private void Update()
+    {
         Vector2 controlValue = controls.ReadValue<Vector2>();
 
         if (!isMoving && controlValue != Vector2.zero)
@@ -43,6 +47,11 @@ public class PlayerController : MonoBehaviour
             else
                 dir = new Vector2(0, Mathf.Sign(controlValue.y));
 
+            lastMoveDir = dir;
+
+            animator.SetBool("isMoving", true);
+            animator.SetFloat("MoveX", dir.x);
+            animator.SetFloat("MoveY", dir.y);
 
             if (CanMove(dir))
                 StartCoroutine(MovePlayer(dir));
@@ -50,6 +59,9 @@ public class PlayerController : MonoBehaviour
         else if (!isMoving && controlValue == Vector2.zero)
         {
             animator.SetBool("isMoving", false);
+            // Keep player facing same direction when idle
+            animator.SetFloat("MoveX", lastMoveDir.x);
+            animator.SetFloat("MoveY", lastMoveDir.y);
         }
     }
 
