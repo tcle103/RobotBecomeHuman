@@ -25,6 +25,8 @@ public class SaveSystem : MonoBehaviour
 
     private DoorController[] doors;
     
+    public List<PuzzleZone> puzzleZones = new();
+    public Dictionary<string, bool> puzzleStates = new();
     private string savePath => Path.Combine(Application.persistentDataPath, "saveData.json");
     private string settingsPath => Path.Combine(Application.persistentDataPath, "settings.json");
     
@@ -38,6 +40,7 @@ public class SaveSystem : MonoBehaviour
         public string inventory;
         public List<int> openDoorIds = new();
         public Dictionary<string, List<bool>> npcFirstActive = new();
+        public Dictionary<string, bool> puzzleCompletion = new();
     }
 
     [Serializable]
@@ -220,6 +223,37 @@ public class SaveSystem : MonoBehaviour
         {
             Debug.Log($"NPC: {kvp.Key}, FirstTime: {kvp.Value[0]}, Active: {kvp.Value[1]}");
         }
+        
+        // Find all PuzzleZones in the scene (including inactive)
+        PuzzleZone[] allPuzzleZones = UnityEngine.Object.FindObjectsByType<PuzzleZone>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        puzzleZones = allPuzzleZones.ToList();
+        
+        puzzleZones.RemoveAll(p => p == null);
+        puzzleZones.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
+        
+        Debug.Log("PuzzleZones loaded: " + string.Join(", ", puzzleZones.Select(p => p.name)));
+
+        puzzleStates.Clear();
+        
+        if (data.puzzleCompletion != null)
+        {
+            foreach (var kvp in data.puzzleCompletion)
+            {
+                puzzleStates[kvp.Key] = kvp.Value;
+            }
+        }
+        
+        foreach (var puzzle in puzzleZones)
+        {
+            if(puzzleStates.ContainsKey(puzzle.name))
+            {
+                if (puzzleStates[puzzle.name])
+                {
+                    puzzle.setComplete();
+                }
+                Debug.Log($"Puzzle {puzzle.name}: completed = {puzzleStates[puzzle.name]}");
+            }
+        }
 
     }
 
@@ -239,6 +273,7 @@ public class SaveSystem : MonoBehaviour
         npcs.Sort((a, b) => string.Compare(a.name, b.name, StringComparison.Ordinal));
         Debug.Log("npc data null: " + (npcData == null));
         Debug.Log("npcs ft + npc list match length: " + (npcData.Count == npcs.Count));
+        Debug.Log("puzzleZones: " + puzzleZones.Count);
 
         SaveData data = new SaveData
         {
@@ -247,7 +282,9 @@ public class SaveSystem : MonoBehaviour
             inventory = playerData.SaveInventory(),
             openDoorIds = doors.Where(d => d.isOpen()).Select(d => d.id).ToList(),
             npcFirstActive = npcs.ToDictionary(npc => npc.name,
-                npc => new List<bool> { npc.firstTime, npc.gameObject.activeInHierarchy })
+                npc => new List<bool> { npc.firstTime, npc.gameObject.activeInHierarchy }),
+            puzzleCompletion = puzzleZones.ToDictionary(puzzle => puzzle.name, 
+                puzzle => puzzle.completed)
         };
 
         string json = JsonConvert.SerializeObject(data, Formatting.Indented);
