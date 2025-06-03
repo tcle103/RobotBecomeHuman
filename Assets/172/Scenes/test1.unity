@@ -14126,54 +14126,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400456223}
   m_CullTransparentMesh: 1
---- !u!1 &401205759
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 401205761}
-  - component: {fileID: 401205760}
-  m_Layer: 0
-  m_Name: FPSDisplay
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &401205760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401205759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ca74d783be346678f7e26d08946c73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fpsController: {fileID: 0}
-  fpsText: {fileID: 0}
-  showFPS: 1
-  updateInterval: 0.5
---- !u!4 &401205761
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 401205759}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.4366, y: -23.980558, z: -0.08545727}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410432161
 GameObject:
   m_ObjectHideFlags: 0
@@ -28656,7 +28608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fpsController: {fileID: 613137857}
   fpsText: {fileID: 327846224}
-  showFPS: 1
+  showFPS: 0
   updateInterval: 0.5
 --- !u!114 &613137857
 MonoBehaviour:
@@ -66328,7 +66280,6 @@ SceneRoots:
   - {fileID: 1786689694}
   - {fileID: 1312706127}
   - {fileID: 724480777}
-  - {fileID: 401205761}
   - {fileID: 983944838}
   - {fileID: 1657708893}
   - {fileID: 1753942929}
