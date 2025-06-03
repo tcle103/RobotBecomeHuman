@@ -39488,11 +39488,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563ee2c3a7468f241b2dacf9f4f3cfdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 120
+  bpm: 132
   audio: {fileID: 1251611493}
   measureLength: 4
   intervals:
-  - noteLength: 0
+  - noteLength: 1
     everyOther: 0
     measureGap: 0
     soloBeat: 0
@@ -39550,11 +39550,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: c76a08d596bae504faf0f9b1bf530aa6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d2d6ef1ca65456a4bb2296ccb39334c7, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
