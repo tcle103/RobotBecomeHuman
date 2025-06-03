@@ -26,7 +26,7 @@ public class NPCMove : MonoBehaviour
     private bool pathComplete;
     private bool isMoving;
     private Vector3 origPos, targetPos;
-    [SerializeField] private float baseSpeed = 0.2f;
+    [SerializeField] private float baseSpeed = 15f;
     [SerializeField] private List<GameObject> path;
     private int point = 0;
     [SerializeField] private UnityEvent moveCompleteEvent;
@@ -54,14 +54,14 @@ public class NPCMove : MonoBehaviour
         Debug.Log("moving x");
         Debug.Log(path[point].transform.position.x);
         float moveX = path[point].transform.position.x - transform.position.x;
-        StartCoroutine(MoveTo(new Vector3(moveX, 0, 0), baseSpeed * Math.Abs(moveX)));
+        StartCoroutine(MoveTo(new Vector3(moveX, 0, 0), baseSpeed));
         while (transform.position.x != path[point].transform.position.x)
         {
             yield return null;
         }
         Debug.Log("moving y");
         float moveY = path[point].transform.position.y - transform.position.y;
-        StartCoroutine(MoveTo(new Vector3(0, moveY, 0), baseSpeed * Math.Abs(moveY)));
+        StartCoroutine(MoveTo(new Vector3(0, moveY, 0), baseSpeed));
         while (transform.position.y != path[point].transform.position.y)
         {
             yield return null;
