@@ -167,9 +167,9 @@ public class SaveSystem : MonoBehaviour
         
         
         //find all inactive game objects with the tag "NPC" and get their components
-        var inactiveNpcs = GameObject.FindGameObjectsWithTag("NPC")
-            .Where(go => !go.activeInHierarchy)
-            .Select(go => go.GetComponent<NPCInteract>())
+        NPCInteract[] allNpcComponents = UnityEngine.Object.FindObjectsByType<NPCInteract>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        List<NPCInteract> inactiveNpcs = allNpcComponents
+            .Where(npc => npc.CompareTag("NPC") && !npc.gameObject.activeInHierarchy)
             .ToList();
         //add inactive npcs to the list
         npcs.AddRange(inactiveNpcs);
