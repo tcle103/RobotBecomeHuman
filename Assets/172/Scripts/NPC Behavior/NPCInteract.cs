@@ -29,7 +29,7 @@ public class NPCInteract : MonoBehaviour
     // how NPCs respond to the current player state
     // i.e. how to pick the appropriate script to use
     // in a dialogue interaction
-    [SerializeField] private TextAsset NPCConfig;
+    [SerializeField] public TextAsset NPCConfig;
     // [3/28/25 Tien]
     // firstTime is used to see if player has interacted with
     // NPC before and modify behavior as a result
@@ -62,6 +62,7 @@ public class NPCInteract : MonoBehaviour
     // [4/16/25 Tien]
     // if in interaction
     private bool dialogueDisplay = false;
+    private PauseMenuController pauseMenu;
     // [4/16/25 Tien]
     // reference to the dialogue UI object
     [SerializeField] private GameObject dialogueUI;
@@ -80,6 +81,8 @@ public class NPCInteract : MonoBehaviour
     private bool interacted = false;
     [SerializeField] private UnityEvent end;
     public PlayerController playerMovementScript;
+    
+    private SaveSystem settingsSave;
 
     // Start is called before the first frame update
     void Start()
@@ -89,9 +92,37 @@ public class NPCInteract : MonoBehaviour
         // with NPCConfigParse()
         scriptChoices = NPCConfigParse();
         playerData = GameObject.Find("Player").GetComponent<PlayerData>();
+        pauseMenu = FindObjectOfType<PauseMenuController>();
 
         // [4/17/25 Tien] grab "interact" input from input system
         interactAction = InputSystem.actions.FindAction("Interact");
+        
+        settingsSave = FindObjectOfType<SaveSystem>();
+        if (settingsSave.npcs.Count == 0)
+        {
+            Debug.Log("No NPCs in save file, adding this NPC");
+            settingsSave.npcs.Add(this);
+        }
+
+        for (int i = 0; i < settingsSave.npcs.Count; i++)
+        {
+            if (settingsSave.npcs[i] == null)
+            {
+                Debug.Log("NPC " + this.name + " already exists in save file, replacing save");
+                settingsSave.npcs[i] = this;
+                return;
+            }else if (settingsSave.npcs[i].name == this.name)
+            {
+                return;
+            }else if (i == settingsSave.npcs.Count - 1) //last index
+            {
+                Debug.Log("NPC " + this.name + " does not exist in save file, adding to save");
+                settingsSave.npcs.Add(this);
+            }
+        }
+        
+        settingsSave.npcs.Sort((a, b) => string.Compare(a.gameObject.name, b.gameObject.name, StringComparison.Ordinal));
+        settingsSave.gameLoad();
     }
 
     void Update()
@@ -173,7 +204,7 @@ public class NPCInteract : MonoBehaviour
      */
     public void onInteract()
     {
-        if (!dialogueDisplay && !interacted)
+        if (!dialogueDisplay && !pauseMenu.isPaused && !interacted)
         {
             int dialogueIndex = scriptSelect();
             // if dialogueIndex is positive, get that script from dialogueScripts

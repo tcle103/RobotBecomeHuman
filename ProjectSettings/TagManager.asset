@@ -12,6 +12,7 @@ TagManager:
   - Tile
   - Settings
   - highlight
+  - NPC
   layers:
   - Default
   - TransparentFX

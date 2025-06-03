@@ -36,6 +36,10 @@ public class PlayerData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //find save system
+        SaveSystem saveSystem = FindObjectOfType<SaveSystem>();
+        saveSystem.playerData = this;
+        
         //inventoryAdd("testItem");
     }
 
@@ -92,5 +96,37 @@ public class PlayerData : MonoBehaviour
         }
     }
 
+    public string SaveInventory()
+    {
+        //save inventory as a string - split by /
+        string inventoryString = "";
+        
+        foreach (KeyValuePair<string, int> item in inventory)
+        {
+            inventoryString += item.Key + ":" + item.Value + "/";
+        }
+        
+        return inventoryString;
+    }
+    
+    public void LoadInventory(string inventoryString)
+    {
+        //load inventory from string - split by /
+        string[] items = inventoryString.Split('/');
+        inventory.Clear();
+        
+        foreach (string item in items)
+        {
+            if (string.IsNullOrEmpty(item)) continue; // skip empty entries
+            
+            string[] parts = item.Split(':');
+            if (parts.Length == 2 && itemMasterList.List.ContainsKey(parts[0]))
+            {
+                string itemLabel = parts[0];
+                int amount = int.Parse(parts[1]);
+                inventoryAdd(itemLabel, amount);
+            }
+        }
+    }
 
 }

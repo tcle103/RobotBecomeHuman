@@ -36,7 +36,7 @@ public class NPCBehavior : MonoBehaviour
     public void Start()
     {
         settingsSave = FindObjectOfType<SaveSystem>();
-        settingsSave.npcs.Add(this);
+        //settingsSave.npcs.Add(this);
         settingsSave.gameLoad();
 
         // Fill dictionary with fileID, file pairs
