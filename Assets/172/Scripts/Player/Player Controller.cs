@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private Vector3 origPos, targetPos;
 
-    private void Awake(){
+    private CharacterRegistry characterRegistry;
+
+    private void Awake()
+    {
         controls = InputSystem.actions.FindAction("Movement");
     }
 
@@ -28,7 +31,15 @@ public class PlayerController : MonoBehaviour
         controls.Disable();
     }
 
-    private void Update(){
+    private void Start()
+    {
+        characterRegistry = FindAnyObjectByType<CharacterRegistry>();
+        Vector3Int cellCoords = groundTilemap.WorldToCell(transform.position);
+        characterRegistry.RegisterTile(cellCoords.x, cellCoords.y);
+    }
+
+    private void Update()
+    {
         Vector2 controlValue = controls.ReadValue<Vector2>();
 
         if (!isMoving && controlValue != Vector2.zero)
