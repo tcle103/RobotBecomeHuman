@@ -1,6 +1,6 @@
 /*
- * Last modified by: Tony Garcia
- * Last modified on: 4/24/25
+ * Last modified by: Tien Le
+ * Last modified on: 6/3/25
  * 
  * DaleTile.cs contains tile functionality that activates (and stays active)
  * on entry
@@ -25,6 +25,8 @@ public class DaleTile : MonoBehaviour
     [SerializeField] private UnityEvent failEvent;
     [SerializeField] private PuzzleZone puzzleZone;
     private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    [SerializeField] private Sprite deactivated;
     
     // [4/24/25 Tony] adding in neighbor functionality from 171->Scripts->Tile.cs
     Collider2D _colliderSelf;
@@ -37,7 +39,10 @@ public class DaleTile : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponentInParent<SpriteRenderer>();
-        
+        animator = GetComponentInParent<Animator>();
+        animator.enabled = false;
+        spriteRenderer.sprite = deactivated;
+
         //[4/24/25 Tony] adding in neighbor functionality from 171->Scripts->Tile.cs
         _colliderSelf = GetComponent<Collider2D>();
         FindNeighbors();
@@ -90,14 +95,15 @@ public class DaleTile : MonoBehaviour
                 // [4/23/25 Tien]
                 // functionality for activating tile here
                 // (ex. changing the sprite to reflect active state)
-                spriteRenderer.color = Color.green;
+                animator.enabled = true;
                 isActive = true;
             }
             else
             {
                 // [4/23/25 Tien]
                 // functionality for reentry here
-
+                animator.enabled = false;
+                spriteRenderer.sprite = deactivated;
                 failEvent.Invoke();
             }
         }
@@ -107,7 +113,8 @@ public class DaleTile : MonoBehaviour
     {
         isActive = false;
         isRootTile = false;
-        spriteRenderer.color = Color.red;
+        animator.enabled = false;
+        spriteRenderer.sprite = deactivated;
     }
     
     //[4/24/25 Tony] adding in neighbor functionality from 171->Scripts->Tile.cs

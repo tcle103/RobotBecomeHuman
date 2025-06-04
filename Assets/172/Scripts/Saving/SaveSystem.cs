@@ -78,7 +78,7 @@ public class SaveSystem : MonoBehaviour
 
     public void LateUpdate()
     {
-        if (SceneManager.GetActiveScene().name == "test1" && !sceneLoaded)
+        if (SceneManager.GetActiveScene().name == "e+w" && !sceneLoaded)
         {
             sceneLoaded = true;
             gameLoad();
@@ -165,6 +165,10 @@ public class SaveSystem : MonoBehaviour
             }
         }
         
+        //debug doors
+        Debug.Log("Doors loaded: " + doors.Length);
+        Debug.Log("Open doors: " + string.Join(", ", data.openDoorIds));
+        
         
         npcs = GameObject.FindGameObjectsWithTag("NPC").Select(go => go.GetComponent<NPCInteract>()).ToList();
         
@@ -195,7 +199,7 @@ public class SaveSystem : MonoBehaviour
             string npcName = kvp.Key;
             List<bool> bools = kvp.Value;
 
-            if (!npcData.ContainsKey(npcName))
+            /*if (!npcData.ContainsKey(npcName))
             {
                 npcData.Add(npcName, new List<bool>(new bool[npcCount]));
             }
@@ -203,6 +207,11 @@ public class SaveSystem : MonoBehaviour
             for (int i = 0; i < Math.Min(bools.Count, npcCount); i++)
             {
                 npcData[npcName][i] = bools[i];
+            }*/
+            
+            if (!npcData.ContainsKey(npcName))
+            {
+                npcData.Add(npcName, new List<bool>(bools));
             }
         }
 
@@ -212,6 +221,12 @@ public class SaveSystem : MonoBehaviour
 
             if (npcData.ContainsKey(npcName))
             {
+                Debug.Log("Loading NPC: " + npcName);
+                //debug npc data of npcname
+                Debug.Log("npc data count: " + npcData[npcName].Count);
+                
+                Debug.Log("npc data 0: " + npcData[npcName][0]);
+                Debug.Log("npc data 1: " + npcData[npcName][1]);
                 npcs[i].firstTime = npcData[npcName][0];
                 npcs[i].gameObject.SetActive(npcData[npcName][1]);
                 Debug.Log($"{npcName}: firstTime = {npcs[i].firstTime}, active = {npcData[npcName][1]}");
