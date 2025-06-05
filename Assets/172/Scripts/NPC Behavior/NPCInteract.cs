@@ -164,11 +164,11 @@ public class NPCInteract : MonoBehaviour
                 }
                 else
                 {
-                    if ((Input.GetKeyDown(KeyCode.Alpha1)))
+                    if ((Input.GetKeyDown(KeyCode.Alpha1)) || (Gamepad.current != null && Gamepad.current.leftShoulder.wasPressedThisFrame))
                     {
                         setNode(currNode.choices[0].To);
                     }
-                    else if ((Input.GetKeyDown(KeyCode.Alpha2)))
+                    else if ((Input.GetKeyDown(KeyCode.Alpha2)) || (Gamepad.current != null && Gamepad.current.rightShoulder.wasPressedThisFrame))
                     {
                         if (currNode.choices.Count > 1)
                         {
@@ -176,14 +176,14 @@ public class NPCInteract : MonoBehaviour
                             Debug.Log(currNode.choices[1].To);
                         }
                     }
-                    else if ((Input.GetKeyDown(KeyCode.Alpha3)))
+                    else if ((Input.GetKeyDown(KeyCode.Alpha3)) || (Gamepad.current != null && Gamepad.current.leftTrigger.wasPressedThisFrame))
                     {
                         if (currNode.choices.Count > 2)
                         {
                             setNode(currNode.choices[2].To);
                         }
                     }
-                    else if ((Input.GetKeyDown(KeyCode.Alpha4)))
+                    else if ((Input.GetKeyDown(KeyCode.Alpha4)) || (Gamepad.current != null && Gamepad.current.rightTrigger.wasPressedThisFrame))
                     {
                         if (currNode.choices.Count > 3)
                         {
