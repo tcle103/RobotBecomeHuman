@@ -25,24 +25,25 @@ public class NPCMove : MonoBehaviour
     public bool loop;
     private bool pathComplete;
     private bool isMoving;
+    private bool tileMove = false;
     private Vector3 origPos, targetPos;
-    [SerializeField] private float baseSpeed = 15f;
+    [SerializeField] private float baseSpeed = 5f;
     [SerializeField] private List<GameObject> path;
     private int point = 0;
     //[Ian 6/5/25] Wish there was a better way to do this...
     private float tileSize = 1f;
     [SerializeField] private UnityEvent moveCompleteEvent;
     private PlayerController player;
-    private Rigidbody2D rb;
     private CharacterRegistry characterRegistry;
     //[SerializeField] private float speed = 5f;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        characterRegistry = FindAnyObjectByType<CharacterRegistry>();
+        characterRegistry = GameObject.FindWithTag("TileTracker").GetComponent<CharacterRegistry>();
         Vector3Int cellCoords = player.MyWorldToCell(transform.position);
         characterRegistry.RegisterTile(cellCoords.x, cellCoords.y);
+        Debug.Log("Registered!");
     }
 
     // Update is called once per frame
@@ -60,15 +61,15 @@ public class NPCMove : MonoBehaviour
         Debug.Log("moving x");
         Debug.Log(path[point].transform.position.x);
         float moveX = path[point].transform.position.x - transform.position.x;
-        StartCoroutine(MoveTo(new Vector3(moveX, 0, 0), baseSpeed));
-        while (transform.position.x != path[point].transform.position.x)
+        StartCoroutine(SplitTiles(new Vector3(moveX, 0, 0), baseSpeed));
+        while (Math.Abs(transform.position.x - path[point].transform.position.x) > 0.00001) 
         {
             yield return null;
         }
         Debug.Log("moving y");
         float moveY = path[point].transform.position.y - transform.position.y;
-        StartCoroutine(MoveTo(new Vector3(0, moveY, 0), baseSpeed));
-        while (transform.position.y != path[point].transform.position.y)
+        StartCoroutine(SplitTiles(new Vector3(0, moveY, 0), baseSpeed));
+        while (Math.Abs(transform.position.y - path[point].transform.position.y) > 0.00001)
         {
             yield return null;
         }
@@ -91,9 +92,40 @@ public class NPCMove : MonoBehaviour
 
     }
 
+    private IEnumerator SplitTiles(Vector3 direction, float speed)
+    {
+        float sumDist = 0f;
+        Vector3 subDirection;
+        Vector3Int nextTile;
+        Vector3 targetPos = transform.position + direction;
+        while (sumDist < direction.magnitude)
+        {
+            if (direction.magnitude - sumDist >= tileSize)
+            {
+                subDirection = direction.normalized * tileSize;
+            }
+            else
+            {
+                subDirection = direction.normalized * (direction.magnitude - sumDist);
+            }
+            nextTile = player.MyWorldToCell(transform.position + subDirection);
+            //could also do recursively?
+            if (!tileMove && !characterRegistry.CheckTile(nextTile.x, nextTile.y))
+            {
+                StartCoroutine(MoveTo(subDirection, speed));
+                sumDist += tileSize;
+                //Debug.Log(sumDist);
+                //Debug.Log(subDirection);
+            }
+            yield return null;
+        }
+    }
+
     private IEnumerator MoveTo(Vector3 direction, float speed)
     {
         //float elapsedTime = 0;
+
+        tileMove = true;
 
         origPos = transform.position;
         targetPos = origPos + direction;
@@ -103,16 +135,16 @@ public class NPCMove : MonoBehaviour
 
         while (Vector3.Dot(targetPos - transform.position, direction) > 0)
         {
-            Vector3 nextMove = transform.position + Vector3.Normalize(direction) * speed * Time.deltaTime;
+            Vector3 nextMove = transform.position + speed * Time.deltaTime * Vector3.Normalize(direction);
             //switch to rb.MovePosition? or split into individual cells and check if player is in the cell before moving into it?
-            rb.MovePosition(nextMove);
+            transform.position = nextMove;
             yield return null;
         }
-
 
         // [4/30/25 Tien] just make sure you are precisely
         // at targetPos at the end of Lerp
         transform.position = targetPos;
         characterRegistry.UnregisterTile(origCell.x, origCell.y);
+        tileMove = false;
     }
 }

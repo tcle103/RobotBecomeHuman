@@ -12,6 +12,7 @@ TagManager:
   - Tile
   - Settings
   - highlight
+  - TileTracker
   layers:
   - Default
   - TransparentFX

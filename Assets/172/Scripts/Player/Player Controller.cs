@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        characterRegistry = FindAnyObjectByType<CharacterRegistry>();
+        characterRegistry = GameObject.FindWithTag("TileTracker").GetComponent<CharacterRegistry>();
         Vector3Int cellCoords = MyWorldToCell(transform.position);
         characterRegistry.RegisterTile(cellCoords.x, cellCoords.y);
     }

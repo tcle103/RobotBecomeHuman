@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterRegistry : MonoBehaviour
 {
-    public Dictionary<string, bool> characterRegistry;
+    public Dictionary<string, bool> characterRegistry = new();
 
     void Start()
     {
