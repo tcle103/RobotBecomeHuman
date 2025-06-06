@@ -50,7 +50,8 @@ public class PauseMenuController : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame || 
+            (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame))
         {
             TogglePause();
         }
@@ -103,18 +104,21 @@ public class PauseMenuController : MonoBehaviour
 
     void HandlePauseMenuInput()
     {
-        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
+        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame || 
+            (Gamepad.current != null && Gamepad.current.dpad.up.wasPressedThisFrame || Gamepad.current.leftStick.up.wasPressedThisFrame))
         {
             selectedIndex = Mathf.Max(0, selectedIndex - 1);
             UpdateSelectionVisuals(menuOptions, selectedIndex);
         }
-        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
+        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame ||
+                 (Gamepad.current != null && Gamepad.current.dpad.down.wasPressedThisFrame || Gamepad.current.leftStick.down.wasPressedThisFrame))
         {
             selectedIndex = Mathf.Min(menuOptions.Count - 1, selectedIndex + 1);
             UpdateSelectionVisuals(menuOptions, selectedIndex);
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame ||
+            (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame)))
         {
             ActivateSelection();
         }
@@ -122,18 +126,21 @@ public class PauseMenuController : MonoBehaviour
 
     void HandleOptionsMenuInput()
     {
-        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
+        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame || 
+                (Gamepad.current != null && Gamepad.current.dpad.up.wasPressedThisFrame || Gamepad.current.leftStick.up.wasPressedThisFrame))
         {
             optionsSelectedIndex = Mathf.Max(0, optionsSelectedIndex - 1);
             UpdateSelectionVisuals(optionsMenuItems, optionsSelectedIndex);
         }
-        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
+        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame ||
+                 (Gamepad.current != null && Gamepad.current.dpad.down.wasPressedThisFrame || Gamepad.current.leftStick.down.wasPressedThisFrame))
         {
             optionsSelectedIndex = Mathf.Min(optionsMenuItems.Count - 1, optionsSelectedIndex + 1);
             UpdateSelectionVisuals(optionsMenuItems, optionsSelectedIndex);
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame ||
+                (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame)))
         {
             if (optionsSelectedIndex == 0) // Option1 = FPS Settings
             {
@@ -148,19 +155,23 @@ public class PauseMenuController : MonoBehaviour
 
     void HandleFPSOptionsInput()
     {
-        if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame)
+        if (Keyboard.current.aKey.wasPressedThisFrame || Keyboard.current.leftArrowKey.wasPressedThisFrame || 
+            (Gamepad.current != null && Gamepad.current.dpad.left.wasPressedThisFrame || Gamepad.current.leftStick.left.wasPressedThisFrame))
             editingLimitGroup = true;
-        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame)
+        else if (Keyboard.current.dKey.wasPressedThisFrame || Keyboard.current.rightArrowKey.wasPressedThisFrame ||
+                 (Gamepad.current != null && Gamepad.current.dpad.right.wasPressedThisFrame || Gamepad.current.leftStick.right.wasPressedThisFrame))
             editingLimitGroup = false;
 
-        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame)
+        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame || 
+                (Gamepad.current != null && Gamepad.current.dpad.up.wasPressedThisFrame || Gamepad.current.leftStick.up.wasPressedThisFrame))
         {
             if (editingLimitGroup)
                 fpsLimitIndex = Mathf.Max(0, fpsLimitIndex - 1);
             else
                 fpsDisplayIndex = Mathf.Max(0, fpsDisplayIndex - 1);
         }
-        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame)
+        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame ||
+                 (Gamepad.current != null && Gamepad.current.dpad.down.wasPressedThisFrame || Gamepad.current.leftStick.down.wasPressedThisFrame))
         {
             if (editingLimitGroup)
                 fpsLimitIndex = Mathf.Min(fpsLimitItems.Count - 1, fpsLimitIndex + 1);
@@ -168,7 +179,8 @@ public class PauseMenuController : MonoBehaviour
                 fpsDisplayIndex = Mathf.Min(fpsDisplayItems.Count - 1, fpsDisplayIndex + 1);
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame ||
+            (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame)))
         {
             if (editingLimitGroup)
             {
@@ -195,7 +207,8 @@ public class PauseMenuController : MonoBehaviour
             }
         }
 
-        if (Keyboard.current.backspaceKey.wasPressedThisFrame || Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.backspaceKey.wasPressedThisFrame || Keyboard.current.escapeKey.wasPressedThisFrame || 
+            (Gamepad.current != null && Gamepad.current.selectButton.wasPressedThisFrame || Gamepad.current.startButton.wasPressedThisFrame))
         {
             ShowOptionsPanel();
         }

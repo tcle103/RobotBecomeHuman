@@ -202,7 +202,7 @@
                 {
                     "name": "down",
                     "id": "78427d49-9aa7-45b8-8fa1-b145fa5ecc4a",
-                    "path": "<Gamepad>/leftStick/left",
+                    "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

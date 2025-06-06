@@ -145,7 +145,7 @@ public class SaveSystem : MonoBehaviour
 
         string json = File.ReadAllText(savePath);
         SaveData data = JsonConvert.DeserializeObject<SaveData>(json);
-
+        player = GameObject.FindWithTag("Player").transform;
         if (player != null)
         {
             player.GetComponent<PlayerController>().MoveInterrupt(new Vector3(data.playerX, data.playerY, player.transform.position.z));

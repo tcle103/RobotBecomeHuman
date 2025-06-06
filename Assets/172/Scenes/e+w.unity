@@ -8441,11 +8441,14 @@ MonoBehaviour:
   - {fileID: 1683824920}
   fpsSettingsPanelGroup: {fileID: 1350036978}
   fpsLimitItems:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  fpsDisplayItems: []
+  - {fileID: 464370266}
+  - {fileID: 970738950}
+  - {fileID: 994907068}
+  - {fileID: 11734613}
+  fpsDisplayItems:
+  - {fileID: 1057464991}
+  - {fileID: 482664489}
+  - {fileID: 1421070592}
   fpsController: {fileID: 720812190}
   fpsCounter: {fileID: 720812189}
 --- !u!4 &720812188
@@ -8523,34 +8526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleZone: {fileID: 1565620202}
   anyTileSolution: 0
-  solution:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  solution: []
   resetPoint: {fileID: 1218475865}
   successEvent:
     m_PersistentCalls:
@@ -10075,34 +10051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   puzzleZone: {fileID: 876292260}
   anyTileSolution: 0
-  solution:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  solution: []
   resetPoint: {fileID: 141747590}
   successEvent:
     m_PersistentCalls:
@@ -38291,7 +38240,7 @@ MonoBehaviour:
   end:
     m_PersistentCalls:
       m_Calls: []
-  playerMovementScript: {fileID: 0}
+  playerMovementScript: {fileID: 459462314}
 --- !u!114 &1160932754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46798,6 +46747,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 722774980}
+        m_TargetAssemblyTypeName: PuzzleManager, Assembly-CSharp
+        m_MethodName: puzzleSuccess
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 858500132}
+        m_TargetAssemblyTypeName: PuzzleManager, Assembly-CSharp
+        m_MethodName: puzzleSuccess
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1768073536
 Transform:
   m_ObjectHideFlags: 0
@@ -46897,7 +46870,7 @@ MonoBehaviour:
   end:
     m_PersistentCalls:
       m_Calls: []
-  playerMovementScript: {fileID: 0}
+  playerMovementScript: {fileID: 459462314}
 --- !u!114 &1785302453
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,13 +29,13 @@ public class InventoryMenuController : MonoBehaviour
     {
         if (gameIsPaused) return; // block all inventory input if paused
 
-        if (Keyboard.current.pKey.wasPressedThisFrame)
+        if (Keyboard.current.pKey.wasPressedThisFrame || ((Gamepad.current != null) && Gamepad.current.buttonEast.wasPressedThisFrame))
         {
             AddItemByID("testItem");
             Debug.Log("Test item added.");
         }
 
-        if (Keyboard.current.iKey.wasPressedThisFrame)
+        if (Keyboard.current.iKey.wasPressedThisFrame || ((Gamepad.current != null) && Gamepad.current.selectButton.wasPressedThisFrame))
         {
             ToggleInventory();
         }
@@ -57,6 +57,27 @@ public class InventoryMenuController : MonoBehaviour
         {
             //UseSelectedItem();
             Debug.Log("Using item: [not implemented]");
+        }
+        
+        // controller/gamepad inputs
+        if (Gamepad.current != null)
+        {
+            if (Gamepad.current.dpad.up.wasPressedThisFrame || Gamepad.current.leftStick.up.wasPressedThisFrame)
+            {
+                selectedIndex = Mathf.Max(0, selectedIndex - 1);
+                UpdateInventoryDisplay();
+            }
+            else if (Gamepad.current.dpad.down.wasPressedThisFrame || Gamepad.current.leftStick.down.wasPressedThisFrame)
+            {
+                selectedIndex = Mathf.Min(inventoryItems.Count - 1, selectedIndex + 1);
+                UpdateInventoryDisplay();
+            }
+
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                //UseSelectedItem();
+                Debug.Log("Using item: [not implemented]");
+            }
         }
     }
 

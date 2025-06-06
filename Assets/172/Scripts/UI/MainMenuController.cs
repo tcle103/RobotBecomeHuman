@@ -4,18 +4,19 @@
  * Basic PlaceHolder Main Menu 
 */
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
     void Update(){
-        if (Input.GetKeyDown(KeyCode.Alpha9)) // dev key to delete save files
+        if (Input.GetKeyDown(KeyCode.Alpha9) || (Gamepad.current != null && Gamepad.current.leftShoulder.isPressed && Gamepad.current.rightShoulder.isPressed)) // dev key to delete save files
         {
             var saveSystem = FindObjectOfType<SaveSystem>();
             saveSystem.DeleteFiles();
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha5)) //dev key to delete all files in persistent data path
+        if (Input.GetKeyDown(KeyCode.Alpha5) || (Gamepad.current != null && Gamepad.current.leftTrigger.isPressed && Gamepad.current.rightTrigger.isPressed)) //dev key to delete all files in persistent data path
         {
             var path = Application.persistentDataPath;
             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(path);

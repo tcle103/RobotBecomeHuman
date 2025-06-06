@@ -55,26 +55,32 @@ public class PuzzleManager : MonoBehaviour
             }
             if (anyTileSolution)
             {
-                foreach (DaleTile tile in solution)
+                if (solution.Count > 0)
                 {
-                    if (tile.isActive)
+                    foreach (DaleTile tile in solution)
                     {
-                        puzzleSuccess();
-                    }
+                        if (tile.isActive)
+                        {
+                            puzzleSuccess();
+                        }
 
+                    }
                 }
             }
             else
             {
-                foreach (DaleTile tile in solution)
+                if (solution.Count > 0)
                 {
-                    if (!tile.isActive)
+                    foreach (DaleTile tile in solution)
                     {
-                        return;
-                    }
+                        if (!tile.isActive)
+                        {
+                            return;
+                        }
 
+                    }
+                    puzzleSuccess();
                 }
-                puzzleSuccess();
             }
         }
     }
