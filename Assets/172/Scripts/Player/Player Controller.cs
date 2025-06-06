@@ -19,13 +19,20 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
     private Vector2 lastMoveDir = Vector2.down; // default facing back (down)
-
-
+    
+    private SaveSystem settingsSave;
 
     private void Awake()
     {
         controls = InputSystem.actions.FindAction("Movement");
         animator = GetComponent<Animator>();
+    }
+    
+    void Start() 
+    {
+        settingsSave = FindObjectOfType<SaveSystem>();
+        settingsSave.player = transform;
+        settingsSave.gameLoad();
     }
 
     private void OnEnable()
