@@ -12,7 +12,7 @@ public class ColorBlindUISprites : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("ToggleBool2") == 1)
         {
-            myIMGcomponent =tjhis.GetComponent<Image>();
+            myIMGcomponent = this.GetComponent<Image>();
             myIMGcomponent.sprite = protanopiaImage;
         }
         if(PlayerPrefs.GetInt("ToggleBool3") == 1)
