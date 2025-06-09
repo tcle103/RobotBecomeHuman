@@ -20,6 +20,14 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector2 lastMoveDir = Vector2.down; // default facing back (down)
 
+    private KeyCode lastKeyPressed;
+    private Dictionary<KeyCode, Vector2> keyToDir = new Dictionary<KeyCode, Vector2>
+    {
+        { KeyCode.W, Vector2.up },
+        { KeyCode.S, Vector2.down },
+        { KeyCode.A, Vector2.left },
+        { KeyCode.D, Vector2.right }
+    };
 
 
     private void Awake(){
@@ -37,35 +45,56 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        Vector2 controlValue = controls.ReadValue<Vector2>();
-
-        if (!isMoving && controlValue != Vector2.zero)
+        //Check if any key was pressed and update lastKeyPressed
+        foreach (var key in keyToDir.Keys)
         {
-            Vector2 dir;
-            if (Mathf.Abs(controlValue.x) > Mathf.Abs(controlValue.y))
-                dir = new Vector2(Mathf.Sign(controlValue.x), 0);
-            else
-                dir = new Vector2(0, Mathf.Sign(controlValue.y));
-
-            lastMoveDir = dir;
-
-            animator.SetBool("isMoving", true);
-            animator.SetFloat("MoveX", dir.x);
-            animator.SetFloat("MoveY", dir.y);
-
-            if (CanMove(dir))
-                StartCoroutine(MovePlayer(dir));
+            if (Input.GetKeyDown(key))
+            {
+                lastKeyPressed = key;
+            }
         }
-        else if (!isMoving && controlValue == Vector2.zero)
+
+        if (!isMoving)
         {
-            animator.SetBool("isMoving", false);
-            // Keep player facing same direction when idle
-            animator.SetFloat("MoveX", lastMoveDir.x);
-            animator.SetFloat("MoveY", lastMoveDir.y);
+            Vector2 controlValue = controls.ReadValue<Vector2>();
+            Vector2 moveDir = Vector2.zero;
+
+            // Prefer last key pressed if it's still being held
+            if (Input.GetKey(lastKeyPressed))
+            {
+                moveDir = keyToDir[lastKeyPressed];
+            }
+            else
+            {
+                //Fall back to any held key
+                if (Input.GetKey(KeyCode.W)) moveDir = Vector2.up;
+                else if (Input.GetKey(KeyCode.S)) moveDir = Vector2.down;
+                else if (Input.GetKey(KeyCode.A)) moveDir = Vector2.left;
+                else if (Input.GetKey(KeyCode.D)) moveDir = Vector2.right;
+            }
+
+            //If there's a direction to move, handle movement
+            if (moveDir != Vector2.zero)
+            {
+                lastMoveDir = moveDir;
+
+                animator.SetBool("isMoving", true);
+                animator.SetFloat("MoveX", moveDir.x);
+                animator.SetFloat("MoveY", moveDir.y);
+
+                if (CanMove(moveDir))
+                    StartCoroutine(MovePlayer(moveDir));
+            }
+            else
+            {
+                animator.SetBool("isMoving", false);
+                animator.SetFloat("MoveX", lastMoveDir.x);
+                animator.SetFloat("MoveY", lastMoveDir.y);
+            }
         }
     }
 
-    private bool CanMove(Vector2 direction) {
+        private bool CanMove(Vector2 direction) {
         Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position  + (Vector3)direction);
         if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition)){
             return false;
