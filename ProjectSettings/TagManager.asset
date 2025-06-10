@@ -12,8 +12,8 @@ TagManager:
   - Tile
   - Settings
   - highlight
-  - TileTracker
   - NPC
+  - TileTracker
   layers:
   - Default
   - TransparentFX
