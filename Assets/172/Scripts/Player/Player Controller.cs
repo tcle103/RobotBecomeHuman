@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
+    // [6/9/25] this is so that you can have a tilemap that can be toggled on and off but is seperate from the normal collision map
+    //currently being used for the puzzle that appears after the earthquake
+    [SerializeField] private Tilemap collisionTilemap2;
     [SerializeField] LayerMask doorLayer;
 
     private InputAction controls;
@@ -78,7 +81,7 @@ public class PlayerController : MonoBehaviour
     private bool CanMove(Vector2 direction)
     {
         Vector3Int gridPosition = groundTilemap.WorldToCell(transform.position + (Vector3)direction);
-        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition))
+        if (!groundTilemap.HasTile(gridPosition) || collisionTilemap.HasTile(gridPosition) || collisionTilemap2.HasTile(gridPosition))
         {
             return false;
         }
