@@ -39,13 +39,21 @@ public class PauseMenuController : MonoBehaviour
     private int fpsDisplayIndex = 0;
     private bool inFPSOptionsMenu = false;
     private bool editingLimitGroup = true;
+    
+    public CanvasGroup colorBlindSettingsPanelGroup;
+    public List<TextMeshProUGUI> colorBlindOptionsItems; // Return, Normal, Protanopia, Deuteranopia, Tritanopia
+    private int colorBlindOptionsIndex = 0;
+    private bool inColorBlindOptionsMenu = false;
 
     public FPSController fpsController;
     public FPSCounter fpsCounter;
+    
+    public SaveSystem saveSystem;
 
     void Start()
     {
         HideAllPanels();
+        saveSystem = FindObjectOfType<SaveSystem>();
     }
 
     void Update()
@@ -65,6 +73,9 @@ public class PauseMenuController : MonoBehaviour
         else if (inOptionsMenu)
         {
             HandleOptionsMenuInput();
+        }else if (inColorBlindOptionsMenu)
+        {
+            HandleColorBlindOptionsInput();
         }
         else
         {
@@ -142,13 +153,16 @@ public class PauseMenuController : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame ||
                 (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame)))
         {
-            if (optionsSelectedIndex == 0) // Option1 = FPS Settings
+            if (optionsSelectedIndex == 0) // Return
+            {
+                ShowPausePanel();
+            }else if (optionsSelectedIndex == 1) // Option1 = FPS Settings
             {
                 ShowFPSOptionsPanel();
             }
-            else if (optionsSelectedIndex == optionsMenuItems.Count - 1) // Return
+            else if (optionsSelectedIndex == 2) // Option 2 = Colorblind Settings
             {
-                ShowPausePanel();
+                ShowColorBlindOptionsPanel();
             }
         }
     }
@@ -190,19 +204,19 @@ public class PauseMenuController : MonoBehaviour
             {
                 if (fpsDisplayIndex == 0)
                 {
+                    ShowOptionsPanel();
+                }
+                else if (fpsDisplayIndex == 1)
+                {
                     fpsCounter.showFPS = true;
                     if (fpsCounter.fpsText != null)
                         fpsCounter.fpsText.gameObject.SetActive(true);
                 }
-                else if (fpsDisplayIndex == 1)
+                else if (fpsDisplayIndex == 2)
                 {
                     fpsCounter.showFPS = false;
                     if (fpsCounter.fpsText != null)
                         fpsCounter.fpsText.gameObject.SetActive(false);
-                }
-                else if (fpsDisplayIndex == 2)
-                {
-                    ShowOptionsPanel();
                 }
             }
         }
@@ -214,6 +228,45 @@ public class PauseMenuController : MonoBehaviour
         }
 
         UpdateFPSOptionsVisuals();
+    }
+
+    void HandleColorBlindOptionsInput()
+    {
+        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame ||
+            (Gamepad.current != null && (Gamepad.current.dpad.up.wasPressedThisFrame || Gamepad.current.leftStick.up.wasPressedThisFrame)))
+        {
+            colorBlindOptionsIndex = Mathf.Max(0, colorBlindOptionsIndex - 1);
+            UpdateSelectionVisuals(colorBlindOptionsItems, colorBlindOptionsIndex);
+        }
+        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame ||
+                 (Gamepad.current != null && (Gamepad.current.dpad.down.wasPressedThisFrame || Gamepad.current.leftStick.down.wasPressedThisFrame)))
+        {
+            colorBlindOptionsIndex = Mathf.Min(colorBlindOptionsItems.Count - 1, colorBlindOptionsIndex + 1);
+            UpdateSelectionVisuals(colorBlindOptionsItems, colorBlindOptionsIndex);
+        }
+        
+        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame ||
+            (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame)))
+        {
+            switch (colorBlindOptionsIndex)
+            {
+                case 0: // Normal
+                    ShowOptionsPanel();
+                    return;
+                case 1: // Protanopia
+                    saveSystem.SetColorblindType(0);
+                    break;
+                case 2: // Protanopia
+                    saveSystem.SetColorblindType(1);
+                    break;
+                case 3: // Deuteranopia
+                    saveSystem.SetColorblindType(2);
+                    break;
+                case 4: // Tritanopia
+                    saveSystem.SetColorblindType(3);
+                    break;
+            }
+        }
     }
 
     void ActivateSelection()
@@ -262,6 +315,7 @@ public class PauseMenuController : MonoBehaviour
 
         inOptionsMenu = false;
         inFPSOptionsMenu = false;
+        inColorBlindOptionsMenu = false;
         selectedIndex = 0;
         UpdateSelectionVisuals(menuOptions, selectedIndex);
     }
@@ -277,6 +331,7 @@ public class PauseMenuController : MonoBehaviour
 
         inOptionsMenu = true;
         inFPSOptionsMenu = false;
+        inColorBlindOptionsMenu = false;
         optionsSelectedIndex = 0;
         UpdateSelectionVisuals(optionsMenuItems, optionsSelectedIndex);
     }
@@ -292,11 +347,28 @@ public class PauseMenuController : MonoBehaviour
 
         inFPSOptionsMenu = true;
         inOptionsMenu = false;
+        inColorBlindOptionsMenu = false;
         fpsLimitIndex = 0;
         fpsDisplayIndex = 0;
         editingLimitGroup = true;
 
         UpdateFPSOptionsVisuals();
+    }
+    
+    void ShowColorBlindOptionsPanel()
+    {
+        HideAllPanels();
+
+        colorBlindSettingsPanelGroup.gameObject.SetActive(true);
+        colorBlindSettingsPanelGroup.alpha = 1;
+        colorBlindSettingsPanelGroup.interactable = true;
+        colorBlindSettingsPanelGroup.blocksRaycasts = true;
+
+        inColorBlindOptionsMenu = true;
+        inOptionsMenu = false;
+        inFPSOptionsMenu = false;
+        colorBlindOptionsIndex = 0;
+        UpdateSelectionVisuals(colorBlindOptionsItems, colorBlindOptionsIndex);
     }
 
     void HideAllPanels()
@@ -314,6 +386,11 @@ public class PauseMenuController : MonoBehaviour
         fpsSettingsPanelGroup.interactable = false;
         fpsSettingsPanelGroup.blocksRaycasts = false;
         fpsSettingsPanelGroup.gameObject.SetActive(false);
+        
+        colorBlindSettingsPanelGroup.alpha = 0;
+        colorBlindSettingsPanelGroup.interactable = false;
+        colorBlindSettingsPanelGroup.blocksRaycasts = false;
+        colorBlindSettingsPanelGroup.gameObject.SetActive(false);
     }
 
     void UpdateSelectionVisuals(List<TextMeshProUGUI> items, int selected)

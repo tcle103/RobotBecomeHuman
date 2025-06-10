@@ -7,8 +7,10 @@ using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
+using UnityEngine.UI;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -48,10 +50,13 @@ public class SaveSystem : MonoBehaviour
     {
         public string language = "English";
         public string contrast = "Normal";
+        public int colorblindFilter = 0;
     }
     
     public string language { get; set; } = "English";
     public string contrast { get; set; } = "Normal";
+    
+    public int colorblindFilter { get; set; } = 0; // 0 = none, 1 = protanopia, 2 = deuteranopia, 3 = tritanopia
     
     // Start is called before the first frame update
     
@@ -87,7 +92,7 @@ public class SaveSystem : MonoBehaviour
 
     public void SaveSettings()
     {
-        SettingsData settings = new SettingsData { language = this.language, contrast = this.contrast };
+        SettingsData settings = new SettingsData { language = this.language, contrast = this.contrast, colorblindFilter = this.colorblindFilter };
         string json = JsonUtility.ToJson(settings);
         File.WriteAllText(settingsPath, json);
     }
@@ -99,11 +104,13 @@ public class SaveSystem : MonoBehaviour
             SettingsData settings = JsonUtility.FromJson<SettingsData>(json);
             language = settings.language;
             contrast = settings.contrast;
+            SetColorblindType(settings.colorblindFilter);
         }
         else
         {
             language = "English";
             contrast = "Normal";
+            SetColorblindType(0); // Default to no filter
             SaveSettings();
         }
     }
@@ -136,6 +143,7 @@ public class SaveSystem : MonoBehaviour
         npcData.Clear();
         language = "English";
         contrast = "Normal";
+        colorblindFilter = 0; // Reset to no filter
         SaveSettings();
     }
 
@@ -315,6 +323,16 @@ public class SaveSystem : MonoBehaviour
         if (File.Exists(settingsPath))
         {
             File.Delete(settingsPath);
+        }
+    }
+    
+    public void SetColorblindType(int type)
+    {
+        var feature = Resources.FindObjectsOfTypeAll<ColorblindFeature>().FirstOrDefault();
+        if (feature != null)
+        {
+            feature.settings.Type = type;
+            colorblindFilter = type;
         }
     }
 }
