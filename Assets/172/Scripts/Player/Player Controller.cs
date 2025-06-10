@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
         settingsSave = FindObjectOfType<SaveSystem>();
         settingsSave.player = transform;
         settingsSave.gameLoad();
+        characterRegistry = GameObject.FindWithTag("TileTracker").GetComponent<CharacterRegistry>();
+        Vector3Int cellCoords = MyWorldToCell(transform.position);
+        characterRegistry.RegisterTile(cellCoords.x, cellCoords.y);
     }
 
     private void OnEnable()
@@ -44,13 +47,6 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         controls.Disable();
-    }
-
-    private void Start()
-    {
-        characterRegistry = GameObject.FindWithTag("TileTracker").GetComponent<CharacterRegistry>();
-        Vector3Int cellCoords = MyWorldToCell(transform.position);
-        characterRegistry.RegisterTile(cellCoords.x, cellCoords.y);
     }
 
     private void Update()
