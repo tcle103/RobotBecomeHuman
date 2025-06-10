@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
         { KeyCode.D, Vector2.right }
     };
 
+    private Vector3Int origCell;
+    private Vector3Int targetCell;
+
     private void Awake()
     {
         controls = InputSystem.actions.FindAction("Movement");
@@ -153,8 +156,8 @@ public class PlayerController : MonoBehaviour
 
         origPos = transform.position;
         targetPos = origPos + (Vector3)direction;
-        Vector3Int origCell = MyWorldToCell(origPos);
-        Vector3Int targetCell = MyWorldToCell(targetPos);
+        origCell = MyWorldToCell(origPos);
+        targetCell = MyWorldToCell(targetPos);
         characterRegistry.RegisterTile(targetCell.x, targetCell.y);
 
         while (elapsedTime < timeToMove)
@@ -183,6 +186,13 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
         //animator.SetBool("isMoving", false);
         StopAllCoroutines();
+        if (origCell != null && characterRegistry.CheckTile(origCell.x, origCell.y)) {
+            characterRegistry.UnregisterTile(origCell.x, origCell.y);
+        }
+        if (targetCell != null && characterRegistry.CheckTile(targetCell.x, targetCell.y)) {
+            characterRegistry.UnregisterTile(targetCell.x, targetCell.y);
+        }
+
         transform.position = newPosition;
     }
 }
