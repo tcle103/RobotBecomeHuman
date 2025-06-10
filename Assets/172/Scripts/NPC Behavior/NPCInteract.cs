@@ -1,6 +1,6 @@
 /* 
  * Last modified by: Tien Le
- * Last modified on: 5/15/25
+ * Last modified on: 6/9/25
  *
  * NPCInteract.cs contains NPC behavior that occurs on 
  * interact with the player.
@@ -78,8 +78,8 @@ public class NPCInteract : MonoBehaviour
     // interact button for progressing dialogue - took from Bucket's interact script
     private InputAction interactAction;
     private bool interacted = false;
-    [SerializeField] private UnityEvent end;
     public PlayerController playerMovementScript;
+    private NPCMove movement;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +92,8 @@ public class NPCInteract : MonoBehaviour
 
         // [4/17/25 Tien] grab "interact" input from input system
         interactAction = InputSystem.actions.FindAction("Interact");
+
+        movement = GetComponent<NPCMove>();
     }
 
     void Update()
@@ -127,7 +129,37 @@ public class NPCInteract : MonoBehaviour
                         {
                             playerMovementScript.enabled = true;
                         }
-                        end.Invoke();
+                        if (movement != null)
+                        {
+                            if (!movement.stalled)
+                            {
+                                Debug.Log("move activated again");
+                                movement.activeMove = true;
+                            }
+                        }
+                        if (dialogueTree.ContainsKey("End"))
+                        {
+                            currNode = dialogueTree["End"];
+                            foreach (string action in currNode.actions)
+                            {
+                                if (action.Contains("give") || action.Contains("take"))
+                                {
+                                    List<string> parameters = new List<string>(action.Split(','));
+                                    if (parameters[0] == "give")
+                                    {
+                                        playerData.inventoryAdd(parameters[1], int.Parse(parameters[2]));
+                                    }
+                                    else if (parameters[0] == "take")
+                                    {
+                                        playerData.inventoryRemove(parameters[1], int.Parse(parameters[2]));
+                                    }
+                                }
+                                else
+                                {
+                                    actions[action].Invoke();
+                                }
+                            }
+                        }
                     }
 
                 }
@@ -175,6 +207,15 @@ public class NPCInteract : MonoBehaviour
     {
         if (!dialogueDisplay && !interacted)
         {
+            if (movement != null)
+            {
+                if (!movement.stalled)
+                {
+                    movement.activeMove = false;
+                    movement.StopAllCoroutines();
+                    movement.MoveToInterrupt();
+                }
+            }
             int dialogueIndex = scriptSelect();
             // if dialogueIndex is positive, get that script from dialogueScripts
             // and initiate dialogue
@@ -245,20 +286,9 @@ public class NPCInteract : MonoBehaviour
      */
     private void setNode(string label)
     {
-        if (label == "End")
-        {
-            dialogueDisplay = false;
-            dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
-            if (playerMovementScript != null)
-            {
-                playerMovementScript.enabled = true;
-            }
-            end.Invoke();
-        }
-        else
+        if (dialogueTree.ContainsKey(label))
         {
             currNode = dialogueTree[label];
-            currText = 0;
             foreach (string action in currNode.actions)
             {
                 if (action.Contains("give") || action.Contains("take"))
@@ -278,6 +308,26 @@ public class NPCInteract : MonoBehaviour
                     actions[action].Invoke();
                 }
             }
+        }
+        if (label == "End")
+        {
+            dialogueDisplay = false;
+            dialogueUI.GetComponent<CanvasGroup>().alpha = 0;
+            if (playerMovementScript != null)
+            {
+                playerMovementScript.enabled = true;
+            }
+            if (movement != null)
+            {
+                if (!movement.stalled)
+                {
+                    movement.activeMove = true;
+                }
+            }
+        }
+        else
+        {
+            currText = 0;
             updateDialogue();
         }
     }

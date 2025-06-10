@@ -24,7 +24,7 @@ public class NPCMove : MonoBehaviour
     public bool activeMove;
     public bool loop;
     private bool pathComplete;
-    private bool isMoving;
+    [SerializeField] private bool isMoving;
     private bool tileMove = false;
     private Vector3 origPos, targetPos;
     [SerializeField] private float baseSpeed = 5f;
@@ -36,6 +36,10 @@ public class NPCMove : MonoBehaviour
     private PlayerController player;
     private CharacterRegistry characterRegistry;
     //[SerializeField] private float speed = 5f;
+    public bool stalled = false;
+    private Vector3Int origCell, targetCell;
+    private Vector3 currdir;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +58,10 @@ public class NPCMove : MonoBehaviour
             isMoving = true;
             StartCoroutine(Move(path));
         }
+        if (!activeMove)
+        {
+            isMoving = false;
+        }
     }
 
     private IEnumerator Move(List<GameObject> path)
@@ -62,7 +70,7 @@ public class NPCMove : MonoBehaviour
         Debug.Log(path[point].transform.position.x);
         float moveX = path[point].transform.position.x - transform.position.x;
         StartCoroutine(SplitTiles(new Vector3(moveX, 0, 0), baseSpeed));
-        while (Math.Abs(transform.position.x - path[point].transform.position.x) > 0.00001) 
+        while (Math.Abs(transform.position.x - path[point].transform.position.x) > 0.00001)
         {
             yield return null;
         }
@@ -75,7 +83,7 @@ public class NPCMove : MonoBehaviour
         }
         Debug.Log("here");
         if (point < path.Count - 1)
-        {  
+        {
             ++point;
             StartCoroutine(Move(path));
         }
@@ -112,10 +120,14 @@ public class NPCMove : MonoBehaviour
             //could also do recursively?
             if (!tileMove && !characterRegistry.CheckTile(nextTile.x, nextTile.y))
             {
+                stalled = false;
                 StartCoroutine(MoveTo(subDirection, speed));
                 sumDist += tileSize;
                 //Debug.Log(sumDist);
                 //Debug.Log(subDirection);
+            }
+            else if (!tileMove && characterRegistry.CheckTile(nextTile.x, nextTile.y)) {
+                stalled = true;
             }
             yield return null;
         }
@@ -124,13 +136,13 @@ public class NPCMove : MonoBehaviour
     private IEnumerator MoveTo(Vector3 direction, float speed)
     {
         //float elapsedTime = 0;
-
+        currdir = direction;
         tileMove = true;
 
         origPos = transform.position;
         targetPos = origPos + direction;
-        Vector3Int origCell = player.MyWorldToCell(origPos);
-        Vector3Int targetCell = player.MyWorldToCell(targetPos);
+        origCell = player.MyWorldToCell(origPos);
+        targetCell = player.MyWorldToCell(targetPos);
         characterRegistry.RegisterTile(targetCell.x, targetCell.y);
 
         while (Vector3.Dot(targetPos - transform.position, direction) > 0)
@@ -146,5 +158,44 @@ public class NPCMove : MonoBehaviour
         transform.position = targetPos;
         characterRegistry.UnregisterTile(origCell.x, origCell.y);
         tileMove = false;
+    }
+
+    public void MoveToInterrupt() 
+    {
+        characterRegistry.UnregisterTile(origCell.x, origCell.y);
+        characterRegistry.UnregisterTile(targetCell.x, targetCell.y);
+        if (Vector3.Dot(targetPos - transform.position, currdir) < Vector3.Dot(origPos - transform.position, -currdir))
+        {
+            StartCoroutine(simpleLerpMove(transform.position, targetPos));
+        }
+        else
+        {
+            StartCoroutine(simpleLerpMove(transform.position, origPos));
+        }
+        
+        tileMove = false;
+    }
+
+    private IEnumerator simpleLerpMove(Vector3 start, Vector3 end)
+    {
+        float elapsedTime = 0;
+        float timeToMove = 0.2f;
+        Vector3Int startcell = player.MyWorldToCell(start);
+        Vector3Int endcell = player.MyWorldToCell(end);
+        if (!characterRegistry.CheckTile(endcell.x, endcell.y))
+        {
+            characterRegistry.RegisterTile(endcell.x, endcell.y);
+        }
+
+        while (elapsedTime < timeToMove)
+        {
+            transform.position = Vector3.Lerp(start, end, elapsedTime / timeToMove);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = end;
+        characterRegistry.UnregisterTile(startcell.x, startcell.y);
+
     }
 }
