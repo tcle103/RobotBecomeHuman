@@ -3930,6 +3930,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97338e9be5f1c48258e73900c2cd151f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &322988135
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 322988137}
+  - component: {fileID: 322988136}
+  m_Layer: 0
+  m_Name: CharacterTracker
+  m_TagString: TileTracker
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &322988136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322988135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c062d9ae609837c418c478a478698b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &322988137
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322988135}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 15.493922, y: -5.8974285, z: -8.623891}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &334517458
 GameObject:
   m_ObjectHideFlags: 0
@@ -38237,9 +38281,6 @@ MonoBehaviour:
               m_BoolArgument: 0
             m_CallState: 2
   dialogueUI: {fileID: 1643582539}
-  end:
-    m_PersistentCalls:
-      m_Calls: []
   playerMovementScript: {fileID: 459462314}
 --- !u!114 &1160932754
 MonoBehaviour:
@@ -41382,9 +41423,6 @@ MonoBehaviour:
   actions:
     _serializedList: []
   dialogueUI: {fileID: 1643582539}
-  end:
-    m_PersistentCalls:
-      m_Calls: []
   playerMovementScript: {fileID: 0}
 --- !u!61 &1302647015
 BoxCollider2D:
@@ -42685,9 +42723,6 @@ MonoBehaviour:
   actions:
     _serializedList: []
   dialogueUI: {fileID: 1643582539}
-  end:
-    m_PersistentCalls:
-      m_Calls: []
   playerMovementScript: {fileID: 459462314}
 --- !u!4 &1433123911
 Transform:
@@ -44563,21 +44598,6 @@ MonoBehaviour:
   actions:
     _serializedList: []
   dialogueUI: {fileID: 1643582539}
-  end:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1637685336}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   playerMovementScript: {fileID: 459462314}
 --- !u!114 &1637685341
 MonoBehaviour:
@@ -46867,9 +46887,6 @@ MonoBehaviour:
               m_BoolArgument: 0
             m_CallState: 2
   dialogueUI: {fileID: 1643582539}
-  end:
-    m_PersistentCalls:
-      m_Calls: []
   playerMovementScript: {fileID: 459462314}
 --- !u!114 &1785302453
 MonoBehaviour:
@@ -61356,3 +61373,4 @@ SceneRoots:
   - {fileID: 1364273161}
   - {fileID: 1302647016}
   - {fileID: 1433123911}
+  - {fileID: 322988137}
