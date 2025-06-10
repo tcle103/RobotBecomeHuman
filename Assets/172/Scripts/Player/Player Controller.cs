@@ -44,11 +44,11 @@ public class PlayerController : MonoBehaviour
     void Start() 
     {
         settingsSave = FindObjectOfType<SaveSystem>();
-        settingsSave.player = transform;
-        settingsSave.gameLoad();
         characterRegistry = GameObject.FindWithTag("TileTracker").GetComponent<CharacterRegistry>();
         Vector3Int cellCoords = MyWorldToCell(transform.position);
         characterRegistry.RegisterTile(cellCoords.x, cellCoords.y);
+        settingsSave.player = transform;
+        settingsSave.gameLoad();
     }
 
     private void OnEnable()

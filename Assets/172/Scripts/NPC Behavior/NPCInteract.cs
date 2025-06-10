@@ -80,6 +80,8 @@ public class NPCInteract : MonoBehaviour
     private bool interacted = false;
     public PlayerController playerMovementScript;
     private NPCMove movement;
+    
+    SaveSystem settingsSave;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +96,30 @@ public class NPCInteract : MonoBehaviour
         interactAction = InputSystem.actions.FindAction("Interact");
 
         movement = GetComponent<NPCMove>();
+        
+        settingsSave = FindObjectOfType<SaveSystem>();
+        if (settingsSave.npcs.Count == 0)
+        {
+            Debug.Log("No NPCs in save file, adding this NPC");
+            settingsSave.npcs.Add(this);
+        }
+
+        for (int i = 0; i < settingsSave.npcs.Count; i++)
+        {
+            if (settingsSave.npcs[i] == null)
+            {
+                Debug.Log("NPC " + this.name + " already exists in save file, replacing save");
+                settingsSave.npcs[i] = this;
+                return;
+            }else if (settingsSave.npcs[i].name == this.name)
+            {
+                return;
+            }else if (i == settingsSave.npcs.Count - 1) //last index
+            {
+                Debug.Log("NPC " + this.name + " does not exist in save file, adding to save");
+                settingsSave.npcs.Add(this);
+            }
+        }
     }
 
     void Update()
