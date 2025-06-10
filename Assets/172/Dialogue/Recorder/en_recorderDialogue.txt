@@ -5,3 +5,7 @@ Start:
 "you can open your inventory with I and menu with ESC!"
 "once you're done talking to me & pick me up, you'll be free to progress!"
 --
+
+End:
+{ disable }
+--
