@@ -1096,6 +1096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2118501346}
   - component: {fileID: 2118501344}
+  - component: {fileID: 2118501347}
   m_Layer: 0
   m_Name: SettingsSave
   m_TagString: Settings
@@ -1120,6 +1121,7 @@ MonoBehaviour:
   playerData: {fileID: 0}
   puzzleZones: []
   sceneLoaded: 0
+  analyticsManager: {fileID: 0}
 --- !u!4 &2118501346
 Transform:
   m_ObjectHideFlags: 0
@@ -1135,6 +1137,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2118501347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118501343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037a2f67e10a5c241a9e018804ce108d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

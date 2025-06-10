@@ -872,11 +872,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 62d68198-7d73-4b97-a62a-8c0cd68cbf7c
+  cloudProjectId: 844343aa-1a24-40a9-aee8-618f2e43a220
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: RobotBecomeHuman
-  organizationId: yumprojects
+  organizationId: robot-become-human
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

@@ -34,6 +34,8 @@ public class SaveSystem : MonoBehaviour
     
     public bool sceneLoaded = false;
     
+    public AnalyticsManager analyticsManager;
+    
     [Serializable]
     private class SaveData
     {
@@ -79,6 +81,7 @@ public class SaveSystem : MonoBehaviour
         }
 
         LoadSettings();
+        
     }
 
     public void LateUpdate()
@@ -149,6 +152,9 @@ public class SaveSystem : MonoBehaviour
 
     public void gameLoad()
     {
+        
+        analyticsManager = GetComponentInParent(typeof(AnalyticsManager)) as AnalyticsManager;
+        
         if (!File.Exists(savePath)) return;
 
         string json = File.ReadAllText(savePath);

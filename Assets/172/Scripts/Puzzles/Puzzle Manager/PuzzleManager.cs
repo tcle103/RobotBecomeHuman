@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 
 public class PuzzleManager : MonoBehaviour
 {
@@ -32,12 +33,15 @@ public class PuzzleManager : MonoBehaviour
     private float frameTimeEnd = 0;
 
     private PuzzleStats puzzleStats;
+    
+    private SaveSystem settingsSave;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         puzzleStats = GameObject.Find("Analytics").GetComponent<PuzzleStats>();
+        settingsSave = FindObjectOfType<SaveSystem>();
     }
 
     // Update is called once per frame
@@ -101,6 +105,7 @@ public class PuzzleManager : MonoBehaviour
         float timeTaken = timeEnd - timeStart;
         float frameTimeTaken = 1.0f / (frameTimeEnd - frameTimeStart);
 
+        settingsSave.analyticsManager.SendPuzzleSolvedEvent(timeTaken, failCount);
         puzzleStats.PuzzleUpdate(timeTaken, failCount);
         puzzleStats.FrameRateUpdate(frameTimeTaken);
         Debug.Log("Puzzle solved in " + timeTaken + " seconds with " + failCount + " fails.");

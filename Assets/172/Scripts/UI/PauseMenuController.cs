@@ -296,6 +296,7 @@ public class PauseMenuController : MonoBehaviour
             case 2:
                 Debug.Log("Menu selected");
                 Time.timeScale = 1f;
+                saveSystem.analyticsManager.Restart();
                 SceneManager.LoadScene("MainMenu");
                 break;
             case 3:
