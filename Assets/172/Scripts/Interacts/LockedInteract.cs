@@ -23,13 +23,11 @@ public class LockedInteract : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("HI");
         Dictionary<string, int> currentInventory = playerData.inventoryGet();
-        //if (currentInventory.ContainsKey(keyItem) || keyItem == null)
-        //{
-            Debug.Log("LOse");
+        if (currentInventory.ContainsKey(keyItem) || keyItem == "none")
+        {
             action.Invoke();
-        //}
+        }
     }
 
     public void Highlight()

@@ -5760,7 +5760,7 @@ Transform:
   m_GameObject: {fileID: 459462313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5, y: -7.085, z: 0}
+  m_LocalPosition: {x: 110.51, y: 51.02, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10188,7 +10188,7 @@ GameObject:
   - component: {fileID: 885521602}
   - component: {fileID: 885521601}
   m_Layer: 0
-  m_Name: doorUnlock1
+  m_Name: doorUnlock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10203,11 +10203,11 @@ Transform:
   m_GameObject: {fileID: 885521599}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -370.51, y: -234.966, z: 0}
+  m_LocalPosition: {x: 109.48999, y: 53.533997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1643582544}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &885521601
 BoxCollider2D:
@@ -10266,13 +10266,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731bda1641585b3478019fc52bde7bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyItem: recorder
+  keyItem: none
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 686665768}
-        m_TargetAssemblyTypeName: DoorController, Assembly-CSharp
-        m_MethodName: Operate
+      - m_Target: {fileID: 1518735390}
+        m_TargetAssemblyTypeName: Earthquake, Assembly-CSharp
+        m_MethodName: Begin
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -45290,6 +45290,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd1a77061ea974845ad35023fc413219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: 0
+  duration: 1.5
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.22828999
+      value: 1.1385508
+      inSlope: 0.00006195618
+      outSlope: 0.00006195618
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7815783
+      value: 0.35709566
+      inSlope: -0.9926597
+      outSlope: -0.9926597
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.4990594
+      value: 0.00012223423
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1527182066
 GameObject:
   m_ObjectHideFlags: 0
@@ -46461,7 +46505,6 @@ RectTransform:
   m_Children:
   - {fileID: 1709776011}
   - {fileID: 571713664}
-  - {fileID: 885521600}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -66152,6 +66195,7 @@ SceneRoots:
   - {fileID: 96494503}
   - {fileID: 1637685338}
   - {fileID: 263496025}
+  - {fileID: 885521600}
   - {fileID: 1251611492}
   - {fileID: 887301153}
   - {fileID: 1968438739}

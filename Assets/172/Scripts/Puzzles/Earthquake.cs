@@ -1,3 +1,17 @@
+/* 
+ * Last modified by: Niko Otsuki
+ * Last modified on: 6/9/25
+ * 
+ * Earthquake.cs contains code for causing the screen to shake randomly 
+ * as well as smoothly using animation curves, code provided from this video
+ * by Thomas Friday:
+ * https://www.youtube.com/watch?v=BQGTdRhGmE4
+ * 
+ * Created by: Niko Otsuki
+ * Created on: 6/9/25
+ * Contributors: Thomas Friday, Niko 
+ */
+
 using System.Collections;
 using UnityEngine;
 
