@@ -41,7 +41,7 @@ public class PauseMenuController : MonoBehaviour
     private bool editingLimitGroup = true;
     
     public CanvasGroup colorBlindSettingsPanelGroup;
-    public List<TextMeshProUGUI> colorBlindOptionsItems; // Normal, Protanopia, Deuteranopia, Tritanopia, Return
+    public List<TextMeshProUGUI> colorBlindOptionsItems; // Return, Normal, Protanopia, Deuteranopia, Tritanopia
     private int colorBlindOptionsIndex = 0;
     private bool inColorBlindOptionsMenu = false;
 
@@ -153,16 +153,16 @@ public class PauseMenuController : MonoBehaviour
         if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame ||
                 (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame)))
         {
-            if (optionsSelectedIndex == 0) // Option1 = FPS Settings
-            {
-                ShowFPSOptionsPanel();
-            }else if (optionsSelectedIndex == 1) // Option 2 = Colorblind Settings
-            {
-                ShowColorBlindOptionsPanel();
-            }
-            else if (optionsSelectedIndex == optionsMenuItems.Count - 1) // Return
+            if (optionsSelectedIndex == 0) // Return
             {
                 ShowPausePanel();
+            }else if (optionsSelectedIndex == 1) // Option1 = FPS Settings
+            {
+                ShowFPSOptionsPanel();
+            }
+            else if (optionsSelectedIndex == 2) // Option 2 = Colorblind Settings
+            {
+                ShowColorBlindOptionsPanel();
             }
         }
     }
@@ -204,19 +204,19 @@ public class PauseMenuController : MonoBehaviour
             {
                 if (fpsDisplayIndex == 0)
                 {
+                    ShowOptionsPanel();
+                }
+                else if (fpsDisplayIndex == 1)
+                {
                     fpsCounter.showFPS = true;
                     if (fpsCounter.fpsText != null)
                         fpsCounter.fpsText.gameObject.SetActive(true);
                 }
-                else if (fpsDisplayIndex == 1)
+                else if (fpsDisplayIndex == 2)
                 {
                     fpsCounter.showFPS = false;
                     if (fpsCounter.fpsText != null)
                         fpsCounter.fpsText.gameObject.SetActive(false);
-                }
-                else if (fpsDisplayIndex == 2)
-                {
-                    ShowOptionsPanel();
                 }
             }
         }
@@ -251,20 +251,20 @@ public class PauseMenuController : MonoBehaviour
             switch (colorBlindOptionsIndex)
             {
                 case 0: // Normal
-                    saveSystem.SetColorblindType(0);
-                    break;
-                case 1: // Protanopia
-                    saveSystem.SetColorblindType(1);
-                    break;
-                case 2: // Deuteranopia
-                    saveSystem.SetColorblindType(2);
-                    break;
-                case 3: // Tritanopia
-                    saveSystem.SetColorblindType(3);
-                    break;
-                case 4: // Return
                     ShowOptionsPanel();
                     return;
+                case 1: // Protanopia
+                    saveSystem.SetColorblindType(0);
+                    break;
+                case 2: // Protanopia
+                    saveSystem.SetColorblindType(1);
+                    break;
+                case 3: // Deuteranopia
+                    saveSystem.SetColorblindType(2);
+                    break;
+                case 4: // Tritanopia
+                    saveSystem.SetColorblindType(3);
+                    break;
             }
         }
     }
