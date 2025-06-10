@@ -248,9 +248,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 4
     m_ConditionEvent: MoveY
     m_EventTreshold: 0.05
-  - m_ConditionMode: 4
+  - m_ConditionMode: 3
     m_ConditionEvent: MoveX
-    m_EventTreshold: -0.05
+    m_EventTreshold: 0.05
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9057600624523440545}
   m_Solo: 0
@@ -709,9 +709,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: MoveY
     m_EventTreshold: -0.05
-  - m_ConditionMode: 3
+  - m_ConditionMode: 4
     m_ConditionEvent: MoveX
-    m_EventTreshold: 0.05
+    m_EventTreshold: -0.05
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7453563808521085339}
   m_Solo: 0
