@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 public class PauseMenuController : MonoBehaviour
@@ -44,6 +45,11 @@ public class PauseMenuController : MonoBehaviour
     public List<TextMeshProUGUI> colorBlindOptionsItems; // Return, Normal, Protanopia, Deuteranopia, Tritanopia
     private int colorBlindOptionsIndex = 0;
     private bool inColorBlindOptionsMenu = false;
+    
+    public CanvasGroup languageSettingsPanelGroup;
+    public List<TextMeshProUGUI> languageOptionsItems; // Return, English, Japanese, Chinese
+    private int languageOptionsIndex = 0;
+    private bool inLanguageOptionsMenu = false;
 
     public FPSController fpsController;
     public FPSCounter fpsCounter;
@@ -79,6 +85,10 @@ public class PauseMenuController : MonoBehaviour
         }else if (inColorBlindOptionsMenu)
         {
             HandleColorBlindOptionsInput();
+        }
+        else if (inLanguageOptionsMenu)
+        {
+            HandleLanguageOptionsInput();
         }
         else
         {
@@ -173,6 +183,9 @@ public class PauseMenuController : MonoBehaviour
             else if (optionsSelectedIndex == 2) // Option 2 = Colorblind Settings
             {
                 ShowColorBlindOptionsPanel();
+            }else if (optionsSelectedIndex == 3) // Option 3 = Language Settings
+            {
+                ShowLanguageOptionsPanel();
             }
         }
     }
@@ -278,6 +291,45 @@ public class PauseMenuController : MonoBehaviour
             }
         }
     }
+    
+    void HandleLanguageOptionsInput()
+    {
+        if (Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame ||
+            (Gamepad.current != null && (Gamepad.current.dpad.up.wasPressedThisFrame || Gamepad.current.leftStick.up.wasPressedThisFrame)))
+        {
+            languageOptionsIndex = Mathf.Max(0, languageOptionsIndex - 1);
+            UpdateSelectionVisuals(languageOptionsItems, languageOptionsIndex);
+        }
+        else if (Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.downArrowKey.wasPressedThisFrame ||
+                 (Gamepad.current != null && (Gamepad.current.dpad.down.wasPressedThisFrame || Gamepad.current.leftStick.down.wasPressedThisFrame)))
+        {
+            languageOptionsIndex = Mathf.Min(languageOptionsItems.Count - 1, languageOptionsIndex + 1);
+            UpdateSelectionVisuals(languageOptionsItems, languageOptionsIndex);
+        }
+
+        if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame ||
+            (Gamepad.current != null && (Gamepad.current.buttonSouth.wasPressedThisFrame)))
+        {
+            switch (languageOptionsIndex)
+            {
+                case 0: // Return
+                    ShowOptionsPanel();
+                    return;
+                case 1: // English
+                    //change locale to English
+                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[0];
+                    break;
+                case 2: // Japanese
+                    //change locale to Japanese
+                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[1];
+                    break;
+                case 3: // Chinese
+                    //change locale to Chinese
+                    LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[2];
+                    break;
+            }
+        }
+    }
 
     void ActivateSelection()
     {
@@ -327,6 +379,7 @@ public class PauseMenuController : MonoBehaviour
         inOptionsMenu = false;
         inFPSOptionsMenu = false;
         inColorBlindOptionsMenu = false;
+        inLanguageOptionsMenu = false;
         selectedIndex = 0;
         UpdateSelectionVisuals(menuOptions, selectedIndex);
     }
@@ -343,6 +396,7 @@ public class PauseMenuController : MonoBehaviour
         inOptionsMenu = true;
         inFPSOptionsMenu = false;
         inColorBlindOptionsMenu = false;
+        inLanguageOptionsMenu = false;
         optionsSelectedIndex = 0;
         UpdateSelectionVisuals(optionsMenuItems, optionsSelectedIndex);
     }
@@ -359,6 +413,7 @@ public class PauseMenuController : MonoBehaviour
         inFPSOptionsMenu = true;
         inOptionsMenu = false;
         inColorBlindOptionsMenu = false;
+        inLanguageOptionsMenu = false;
         fpsLimitIndex = 0;
         fpsDisplayIndex = 0;
         editingLimitGroup = true;
@@ -378,8 +433,26 @@ public class PauseMenuController : MonoBehaviour
         inColorBlindOptionsMenu = true;
         inOptionsMenu = false;
         inFPSOptionsMenu = false;
+        inLanguageOptionsMenu = false;
         colorBlindOptionsIndex = 0;
         UpdateSelectionVisuals(colorBlindOptionsItems, colorBlindOptionsIndex);
+    }
+    
+    void ShowLanguageOptionsPanel()
+    {
+        HideAllPanels();
+
+        languageSettingsPanelGroup.gameObject.SetActive(true);
+        languageSettingsPanelGroup.alpha = 1;
+        languageSettingsPanelGroup.interactable = true;
+        languageSettingsPanelGroup.blocksRaycasts = true;
+
+        inLanguageOptionsMenu = true;
+        inOptionsMenu = false;
+        inFPSOptionsMenu = false;
+        inColorBlindOptionsMenu = false;
+        languageOptionsIndex = 0;
+        UpdateSelectionVisuals(languageOptionsItems, languageOptionsIndex);
     }
 
     void HideAllPanels()
@@ -402,6 +475,11 @@ public class PauseMenuController : MonoBehaviour
         colorBlindSettingsPanelGroup.interactable = false;
         colorBlindSettingsPanelGroup.blocksRaycasts = false;
         colorBlindSettingsPanelGroup.gameObject.SetActive(false);
+        
+        languageSettingsPanelGroup.alpha = 0;
+        languageSettingsPanelGroup.interactable = false;
+        languageSettingsPanelGroup.blocksRaycasts = false;
+        languageSettingsPanelGroup.gameObject.SetActive(false);
     }
 
     void UpdateSelectionVisuals(List<TextMeshProUGUI> items, int selected)
