@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Tilemap groundTilemap;
     [SerializeField] private Tilemap collisionTilemap;
     [SerializeField] LayerMask doorLayer;
+    public InventoryMenuController inventoryMenuController;
 
     private InputAction controls;
     // [4/30/25 Tien] this is the "speed" of the player technically
@@ -18,7 +19,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 origPos, targetPos;
 
     private Animator animator;
-    private Vector2 lastMoveDir = Vector2.down; // default facing back (down)
+
+    public Vector2 lastMoveDir = Vector2.down; // default facing back (down)
     
     private SaveSystem settingsSave;
     private CharacterRegistry characterRegistry;
@@ -63,14 +65,17 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //Check if any key was pressed and update lastKeyPressed
-        foreach (var key in keyToDir.Keys)
+        // Prevent movement when inventory is open
+        if (inventoryMenuController != null && inventoryMenuController.isOpen)
         {
-            if (Input.GetKeyDown(key))
-            {
-                lastKeyPressed = key;
-            }
+            // Set animator to idle with current direction
+            animator.SetBool("isMoving", false);
+            animator.SetFloat("MoveX", lastMoveDir.x);
+            animator.SetFloat("MoveY", lastMoveDir.y);
+            return;  // Prevent further movement when inventory is open
         }
+
+        if (Time.timeScale == 0f) return;
 
         if (!isMoving)
         {
@@ -84,14 +89,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                //Fall back to any held key
                 if (Input.GetKey(KeyCode.W)) moveDir = Vector2.up;
                 else if (Input.GetKey(KeyCode.S)) moveDir = Vector2.down;
                 else if (Input.GetKey(KeyCode.A)) moveDir = Vector2.left;
                 else if (Input.GetKey(KeyCode.D)) moveDir = Vector2.right;
             }
 
-            //If there's a direction to move, handle movement
             if (moveDir != Vector2.zero)
             {
                 lastMoveDir = moveDir;
@@ -111,7 +114,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     private bool CanMove(Vector2 direction) {
         Vector3Int gridPosition = MyWorldToCell(transform.position  + (Vector3)direction);
 

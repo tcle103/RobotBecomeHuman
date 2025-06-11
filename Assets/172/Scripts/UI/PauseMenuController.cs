@@ -18,6 +18,7 @@ public class PauseMenuController : MonoBehaviour
     public AudioSource musicSource;
 
     public bool isPaused = false;
+    private bool wasInventoryOpen = false; //track if inventory needs to be reopened after un-pause
 
     [Header("Menu Navigation")]
     public List<TextMeshProUGUI> menuOptions; // Load, Options, Menu, Quit
@@ -104,6 +105,23 @@ public class PauseMenuController : MonoBehaviour
             else musicSource.UnPause();
         }
 
+        var inventory = FindObjectOfType<InventoryMenuController>();
+        if (inventory != null)
+        {
+            if (isPaused)
+            {
+                wasInventoryOpen = inventory.isOpen;
+                inventory.ForceCloseInventory();
+            }
+            else
+            {
+                if (wasInventoryOpen)
+                {
+                    inventory.ToggleInventory();
+                }
+            }
+        }
+
         if (isPaused)
         {
             ShowPausePanel();
@@ -115,11 +133,10 @@ public class PauseMenuController : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
         }
 
-        var inventory = FindObjectOfType<InventoryMenuController>();
         if (inventory != null)
         {
             inventory.gameIsPaused = isPaused;
-            if (isPaused) inventory.ForceCloseInventory();
+            //if (isPaused) inventory.ForceCloseInventory();
         }
     }
 
@@ -212,21 +229,19 @@ public class PauseMenuController : MonoBehaviour
             }
             else
             {
-                if (fpsDisplayIndex == 0)
-                {
-                    ShowOptionsPanel();
-                }
-                else if (fpsDisplayIndex == 1)
+                if (fpsDisplayIndex == 0) // Show FPS
                 {
                     fpsCounter.showFPS = true;
-                    if (fpsCounter.fpsText != null)
-                        fpsCounter.fpsText.gameObject.SetActive(true);
+                    fpsCounter.fpsText?.gameObject.SetActive(true);
                 }
-                else if (fpsDisplayIndex == 2)
+                else if (fpsDisplayIndex == 1) // Hide FPS
                 {
                     fpsCounter.showFPS = false;
-                    if (fpsCounter.fpsText != null)
-                        fpsCounter.fpsText.gameObject.SetActive(false);
+                    fpsCounter.fpsText?.gameObject.SetActive(false);
+                }
+                else if (fpsDisplayIndex == 2) // Return
+                {
+                    ShowOptionsPanel();
                 }
             }
         }

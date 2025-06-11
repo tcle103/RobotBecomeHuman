@@ -19,7 +19,6 @@ public class FPSController : MonoBehaviour
     // Enum to represent all supported FPS limits
     public enum FPSLimit
     {
-        Thirty,
         Sixty,
         OneTwenty,
         TwoForty,
@@ -41,9 +40,7 @@ public class FPSController : MonoBehaviour
 
         switch (limit)
         {
-            case FPSLimit.Thirty:
-                Application.targetFrameRate = 30;
-                break;
+        
             case FPSLimit.Sixty:
                 Application.targetFrameRate = 60;
                 break;
