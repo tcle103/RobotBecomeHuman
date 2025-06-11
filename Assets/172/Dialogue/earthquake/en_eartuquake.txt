@@ -1,0 +1,8 @@
+Start:
+{ shakeActivate }
+[0-86] "!"
+--
+
+End:
+{ disable }
+--
