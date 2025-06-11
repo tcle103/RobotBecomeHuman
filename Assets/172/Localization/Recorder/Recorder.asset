@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db626ad063b13545924a9839ac5fa83, type: 3}
+  m_Name: Recorder
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 411f893d9a36c724497397a8486f8622, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 4cac4094de5cf2d4a9a5eff3f12c4b7d, type: 2}
+  - {fileID: 11400000, guid: e250bac1b546e784c9f3c36ef5170206, type: 2}
+  - {fileID: 11400000, guid: 8011c8946ad7c684da819d262eb9deb3, type: 2}
+  m_Extensions: []
+  m_Group: Asset Table
+  references:
+    version: 2
+    RefIds: []

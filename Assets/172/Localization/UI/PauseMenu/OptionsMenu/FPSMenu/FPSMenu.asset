@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: FPSMenu
+  m_EditorClassIdentifier: 
+  m_SharedTableData: {fileID: 11400000, guid: 14f521a679fd1664f9c58943fce1cb71, type: 2}
+  m_Tables:
+  - {fileID: 11400000, guid: 3f32b212f03f94948938e35d22e86d71, type: 2}
+  - {fileID: 11400000, guid: da19bc96e1bc8654e94494f9a6fc6b73, type: 2}
+  - {fileID: 11400000, guid: abe6857da60519c4cbdfeabd95534b74, type: 2}
+  m_Extensions: []
+  m_Group: String Table
+  references:
+    version: 2
+    RefIds: []

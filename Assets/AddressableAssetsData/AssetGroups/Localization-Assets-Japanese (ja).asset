@@ -17,8 +17,20 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 684e11e18b0d34f47b7c22e45adacf5a
   m_SerializeEntries:
+  - m_GUID: 35bfc8207a9be7e49801e55dea75e8c7
+    m_Address: ja_saveDialogue
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cd2beb6725042654e94221d4ff098afb
     m_Address: jp_testDefault
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e8273561b0534a54aa497343d342109e
+    m_Address: ja_recorderDialogue
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ja
