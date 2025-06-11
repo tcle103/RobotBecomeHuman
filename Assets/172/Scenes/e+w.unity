@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: FPS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5780,7 +5780,9 @@ MonoBehaviour:
   doorLayer:
     serializedVersion: 2
     m_Bits: 64
+  inventoryMenuController: {fileID: 0}
   timeToMove: 0.2
+  lastMoveDir: {x: 0, y: -1}
 --- !u!95 &459462315
 Animator:
   serializedVersion: 5
@@ -8993,6 +8995,8 @@ MonoBehaviour:
   playerData: {fileID: 459462317}
   gameIsPaused: 0
   itemDatabase: {fileID: 11400000, guid: d882d25202d58c0478aff049c445362c, type: 2}
+  playerAnimator: {fileID: 459462315}
+  isOpen: 0
 --- !u!114 &720812187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9027,9 +9031,9 @@ MonoBehaviour:
   - {fileID: 994907068}
   - {fileID: 11734613}
   fpsDisplayItems:
-  - {fileID: 1421070592}
   - {fileID: 1057464991}
   - {fileID: 482664489}
+  - {fileID: 1421070592}
   colorBlindSettingsPanelGroup: {fileID: 1774698570}
   colorBlindOptionsItems:
   - {fileID: 512121423}

@@ -20,14 +20,26 @@ public class InventoryMenuController : MonoBehaviour
     public bool gameIsPaused = false;
     public ItemDict itemDatabase; // reference to ItemDict ScriptableObject
 
+    [SerializeField] private Animator playerAnimator;
+
     private List<string> inventoryItems; // Replace inner ItemData class
 
     private int selectedIndex = 0;
-    private bool isOpen = false;
+    /**
+     * 
+     */
+    public bool isOpen = false;
     
     void Update()
     {
         if (gameIsPaused) return; // block all inventory input if paused
+        /*
+        if (FindObjectOfType<InventoryMenuController>()?.gameIsPaused == true)
+        {
+            playerAnimator.SetBool("isMoving", false);
+            return;
+        }
+        */
 
         if (Keyboard.current.pKey.wasPressedThisFrame || ((Gamepad.current != null) && Gamepad.current.buttonEast.wasPressedThisFrame))
         {
@@ -81,9 +93,16 @@ public class InventoryMenuController : MonoBehaviour
         }
     }
 
-    void ToggleInventory()
+    public void ToggleInventory()
     {
         isOpen = !isOpen;
+
+        if (isOpen && playerAnimator != null)
+        {
+            playerAnimator.SetBool("isMoving", false);  // Stop movement animation
+            playerAnimator.SetFloat("MoveX", playerMovementScript.lastMoveDir.x);  // Keep facing direction
+            playerAnimator.SetFloat("MoveY", playerMovementScript.lastMoveDir.y);  // Keep facing direction
+        }
 
         inventoryCanvasGroup.alpha = isOpen ? 1 : 0;
         inventoryCanvasGroup.interactable = isOpen;
