@@ -29,7 +29,7 @@ public class MainMenuController : MonoBehaviour
     
     public void StartGame()
     {
-        SceneManager.LoadScene("e+w"); // Replace with your actual gameplay scene name
+        SceneManager.LoadScene("final"); // Replace with your actual gameplay scene name
     }
 
     public void QuitGame()

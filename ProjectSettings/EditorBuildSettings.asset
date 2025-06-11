@@ -23,9 +23,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/172/Scenes/test1.unity
     guid: 3310ffa67469a2849b643b2eda5c02cb
-  - enabled: 1
+  - enabled: 0
     path: Assets/172/Scenes/e+w.unity
     guid: b939e2d87ea99374e8c4cb704a976e7f
+  - enabled: 1
+    path: Assets/172/Scenes/final.unity
+    guid: ccf8a7ac19f88694a881755d03a1a82b
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 3b34a33f3db9d054abceaed101a9f8fa, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 845dd69ca78d52b47b5c0fe51553f850, type: 3}
