@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: a93b6bb32357aa34b826f896f458c764
   m_SerializeEntries:
+  - m_GUID: 0f2808487f2476c4b9124f4efe670aa7
+    m_Address: b_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7a059588923488e448e081703eb7b4d5
     m_Address: Save Point_zh-Hans
     m_ReadOnly: 1

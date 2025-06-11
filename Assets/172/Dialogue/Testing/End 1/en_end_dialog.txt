@@ -1,0 +1,8 @@
+Start:
+"Thank you!!!"
+"its over now"
+--
+
+End:
+{ disable }
+--

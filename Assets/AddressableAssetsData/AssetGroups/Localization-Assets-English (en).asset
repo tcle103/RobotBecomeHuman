@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e31742411758fd7499ae18790aace00a
   m_SerializeEntries:
+  - m_GUID: 02e8dbca91f4baa42b79ddebab872d4c
+    m_Address: en_end_dialog
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 64c14dfb51658b541a236b53a36cac61
     m_Address: en_recorderDialogue
     m_ReadOnly: 1

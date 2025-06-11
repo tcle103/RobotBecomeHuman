@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: deb5210387268cb44980a89a768805e7
   m_SerializeEntries:
+  - m_GUID: a23423215504acb45a76d4656876d170
+    m_Address: b_ja
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b1aa0bc9f7d2203449733d8ef2015ad8
     m_Address: Save Point_ja
     m_ReadOnly: 1
