@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-Asset-Tables-English (en)
+  m_Name: Localization-Assets-Simplified Chinese (zh-Hans)
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-Asset-Tables-English (en)
+  m_GroupName: Localization-Assets-Simplified Chinese (zh-Hans)
   m_Data:
     m_SerializedData: []
-  m_GUID: 2c7bf5ccea278144aa34880aeafe6800
+  m_GUID: 2f095d9f2ecdbe648af3ae17523db160
   m_SerializeEntries:
-  - m_GUID: 4cac4094de5cf2d4a9a5eff3f12c4b7d
-    m_Address: Recorder_en
+  - m_GUID: 475e5856ceb3452ab58db3852db93e1d
+    m_Address: zh_recorderDialogue
     m_ReadOnly: 1
     m_SerializedLabels:
-    - Locale-en
+    - Locale-zh-Hans
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 97abcf81053264149a20e63402a6026d
-    m_Address: Save Point_en
+  - m_GUID: dacd84f458d52e04298ff10dd4f55f10
+    m_Address: zh_saveDialogue
     m_ReadOnly: 1
     m_SerializedLabels:
-    - Locale-en
+    - Locale-zh-Hans
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: a8c4d4e6759623e489c9c8b9a425a34c, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 0eebec3d6d53c9f42878c019afec68db, type: 2}
-    - {fileID: 11400000, guid: 21dacd94c2988ab4b96766b81973e735, type: 2}
+    - {fileID: 11400000, guid: f1d5cd271734d214c91a67cc6ffae648, type: 2}
+    - {fileID: 11400000, guid: 20b9b99de4319814fb54e0587f5b587f, type: 2}

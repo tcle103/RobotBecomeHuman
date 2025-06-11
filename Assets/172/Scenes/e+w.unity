@@ -9040,6 +9040,7 @@ MonoBehaviour:
   fpsController: {fileID: 720812190}
   fpsCounter: {fileID: 720812189}
   saveSystem: {fileID: 0}
+  movementScript: {fileID: 0}
 --- !u!4 &720812188
 Transform:
   m_ObjectHideFlags: 0
@@ -38897,6 +38898,7 @@ GameObject:
   - component: {fileID: 1160932755}
   - component: {fileID: 1160932754}
   - component: {fileID: 1160932753}
+  - component: {fileID: 1160932758}
   m_Layer: 0
   m_Name: save point collider
   m_TagString: Untagged
@@ -39070,6 +39072,50 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.47}
   serializedVersion: 2
   m_Radius: 1.5
+--- !u!114 &1160932758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160932751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 7455760012906594308
+  references:
+    version: 2
+    RefIds:
+    - rid: 7455760012906594308
+      type: {class: TrackedMonoBehaviourObject, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 1160932753}
+        m_TrackedProperties:
+          items:
+          - rid: 7455760012906594309
+        m_UpdateType: 1
+        m_Changed:
+          m_PersistentCalls:
+            m_Calls: []
+    - rid: 7455760012906594309
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 7455760012906594310
+        m_PropertyPath: dialogueScripts.Array.data[0]
+    - rid: 7455760012906594310
+      type: {class: LocalizedObject, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:70bdd843927e051439cae14526a2dc08
+        m_TableEntryReference:
+          m_KeyId: 9798803456
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
 --- !u!1 &1163341203
 GameObject:
   m_ObjectHideFlags: 0
@@ -45136,6 +45182,7 @@ GameObject:
   - component: {fileID: 1637685339}
   - component: {fileID: 1637685341}
   - component: {fileID: 1637685340}
+  - component: {fileID: 1637685342}
   m_Layer: 0
   m_Name: recorder
   m_TagString: NPC
@@ -45321,6 +45368,50 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1637685342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637685336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 7455760012906594314
+  references:
+    version: 2
+    RefIds:
+    - rid: 7455760012906594314
+      type: {class: TrackedMonoBehaviourObject, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 1637685340}
+        m_TrackedProperties:
+          items:
+          - rid: 7455760012906594315
+        m_UpdateType: 1
+        m_Changed:
+          m_PersistentCalls:
+            m_Calls: []
+    - rid: 7455760012906594315
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 7455760012906594316
+        m_PropertyPath: dialogueScripts.Array.data[0]
+    - rid: 7455760012906594316
+      type: {class: LocalizedObject, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:411f893d9a36c724497397a8486f8622
+        m_TableEntryReference:
+          m_KeyId: 6044901376
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
 --- !u!1 &1643582539
 GameObject:
   m_ObjectHideFlags: 0
@@ -47655,6 +47746,7 @@ GameObject:
   - component: {fileID: 1785302454}
   - component: {fileID: 1785302453}
   - component: {fileID: 1785302452}
+  - component: {fileID: 1785302457}
   m_Layer: 0
   m_Name: save point collider
   m_TagString: Untagged
@@ -47828,6 +47920,50 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.47}
   serializedVersion: 2
   m_Radius: 1.5
+--- !u!114 &1785302457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785302450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 7455760012906594322
+  references:
+    version: 2
+    RefIds:
+    - rid: 7455760012906594322
+      type: {class: TrackedMonoBehaviourObject, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 1785302452}
+        m_TrackedProperties:
+          items:
+          - rid: 7455760012906594323
+        m_UpdateType: 1
+        m_Changed:
+          m_PersistentCalls:
+            m_Calls: []
+    - rid: 7455760012906594323
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 7455760012906594324
+        m_PropertyPath: dialogueScripts.Array.data[0]
+    - rid: 7455760012906594324
+      type: {class: LocalizedObject, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:70bdd843927e051439cae14526a2dc08
+        m_TableEntryReference:
+          m_KeyId: 9798803456
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
 --- !u!1 &1789191566
 GameObject:
   m_ObjectHideFlags: 0

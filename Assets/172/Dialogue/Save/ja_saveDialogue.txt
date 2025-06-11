@@ -1,0 +1,10 @@
+Start:
+"Do you want to save your progress?"
+- "yes" -> yes
+- "no" -> End
+--
+
+yes:
+{ save }
+"Your progress has been saved!"
+--

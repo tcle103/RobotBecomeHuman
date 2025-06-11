@@ -16,7 +16,17 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 67fa60d6a978c554682487fb73cf92e8
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 411f893d9a36c724497397a8486f8622
+    m_Address: Assets/172/Localization/Recorder Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70bdd843927e051439cae14526a2dc08
+    m_Address: Assets/172/Localization/Save Point Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: a8c4d4e6759623e489c9c8b9a425a34c, type: 2}
   m_SchemaSet:

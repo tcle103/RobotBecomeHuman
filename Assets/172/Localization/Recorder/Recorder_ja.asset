@@ -9,17 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bb1838fe8befb0429646b938e757ff3, type: 3}
-  m_Name: Japanese (ja)
+  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
+  m_Name: Recorder_ja
   m_EditorClassIdentifier: 
-  m_Identifier:
+  m_LocaleId:
     m_Code: ja
+  m_SharedData: {fileID: 11400000, guid: 411f893d9a36c724497397a8486f8622, type: 2}
   m_Metadata:
     m_Items: []
-  m_LocaleName: Japanese (ja)
-  m_CustomFormatCultureCode: 
-  m_UseCustomFormatter: 0
-  m_SortOrder: 10000
+  m_TableData:
+  - m_Id: 6044901376
+    m_Localized: e8273561b0534a54aa497343d342109e
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
