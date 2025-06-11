@@ -1,10 +1,10 @@
 Start:
-"Do you want to save your progress?"
-- "yes" -> yes
-- "no" -> End
+"テスト"
+- "テスト" -> yes
+- "テスト" -> End
 --
 
 yes:
 { save }
-"Your progress has been saved!"
+"テスト"
 --

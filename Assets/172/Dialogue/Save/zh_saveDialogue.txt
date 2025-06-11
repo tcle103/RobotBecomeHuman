@@ -1,10 +1,10 @@
 Start:
-"Do you want to save your progress?"
-- "yes" -> yes
-- "no" -> End
+"测试"
+- "测试" -> yes
+- "测试" -> End
 --
 
 yes:
 { save }
-"Your progress has been saved!"
+"测试"
 --
