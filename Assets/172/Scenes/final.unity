@@ -70038,7 +70038,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1777869981}
   - component: {fileID: 1777869980}
-  - component: {fileID: 1777869982}
   - component: {fileID: 1777869979}
   - component: {fileID: 1777869978}
   m_Layer: 0
@@ -70193,38 +70192,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1777869982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1777869977}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d33e3f94e9bf29489e8d3b95a304fd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyItem: 
-  objects:
-  - {fileID: 390768918}
-  - {fileID: 328634874}
-  - {fileID: 2011681759}
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1777869982}
-        m_TargetAssemblyTypeName: LockedInteract, Assembly-CSharp
-        m_MethodName: ShowPuzzle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1785302450
 GameObject:
   m_ObjectHideFlags: 0
