@@ -50,10 +50,13 @@ public class PauseMenuController : MonoBehaviour
     
     public SaveSystem saveSystem;
 
+    public PlayerController movementScript;
+
     void Start()
     {
         HideAllPanels();
         saveSystem = FindObjectOfType<SaveSystem>();
+        movementScript = FindObjectOfType<PlayerController>();
     }
 
     void Update()
@@ -87,6 +90,13 @@ public class PauseMenuController : MonoBehaviour
     {
         isPaused = !isPaused;
         Time.timeScale = isPaused ? 0f : 1f;
+
+        if (movementScript == null)
+        {
+            movementScript = FindObjectOfType<PlayerController>();
+            
+        }
+        movementScript.enabled = !isPaused;
 
         if (musicSource != null)
         {
