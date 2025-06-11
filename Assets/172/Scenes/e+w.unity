@@ -5869,7 +5869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyItem: recorder
-  puzzles: []
+  objects: []
   action:
     m_PersistentCalls:
       m_Calls:
@@ -10166,7 +10166,7 @@ Transform:
   m_GameObject: {fileID: 459462313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.457, y: -7.001, z: 0}
+  m_LocalPosition: {x: 113.55, y: 53.96, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18078,9 +18078,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyItem: none
-  puzzles:
+  objects:
   - {fileID: 390768918}
   - {fileID: 328634874}
+  - {fileID: 2011681759}
   action:
     m_PersistentCalls:
       m_Calls:
@@ -88922,7 +88923,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2011681760
 Transform:
   m_ObjectHideFlags: 0
