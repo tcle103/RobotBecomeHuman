@@ -7869,22 +7869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731bda1641585b3478019fc52bde7bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyItem: recorder
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 686665768}
-        m_TargetAssemblyTypeName: DoorController, Assembly-CSharp
-        m_MethodName: Operate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &263496027
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12184,7 +12168,7 @@ Transform:
   m_GameObject: {fileID: 459462313}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 113.55, y: 53.96, z: 0}
+  m_LocalPosition: {x: -5.5, y: -7.085, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12809,7 +12793,7 @@ Transform:
   m_GameObject: {fileID: 480638516}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.4, y: -7.14, z: -0.040870823}
+  m_LocalPosition: {x: -6.5, y: -7.1798, z: -0.040870823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16671,17 +16655,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
---- !u!114 &686665768 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6580309035185683096, guid: 8e747b4db1cf8b543b99da3a7df753a0, type: 3}
-  m_PrefabInstance: {fileID: 686665767}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5298ce40d70835946bb004d8312e2446, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &686988887
 GameObject:
   m_ObjectHideFlags: 0
@@ -20371,34 +20344,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731bda1641585b3478019fc52bde7bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyItem: none
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1518735384}
-        m_TargetAssemblyTypeName: Earthquake, Assembly-CSharp
-        m_MethodName: Begin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 885521602}
-        m_TargetAssemblyTypeName: LockedInteract, Assembly-CSharp
-        m_MethodName: ShowPuzzle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!212 &885521603
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -22729,7 +22674,7 @@ Transform:
   m_GameObject: {fileID: 986876273}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.58, y: 6.62, z: -0.040870823}
+  m_LocalPosition: {x: 7.5, y: 6.5575743, z: -0.040870823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
