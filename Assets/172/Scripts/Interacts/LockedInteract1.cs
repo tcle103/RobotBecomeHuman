@@ -8,6 +8,8 @@ public class LockedInteract : MonoBehaviour, IInteractable
 {
     private PlayerData playerData;
     [SerializeField] private string keyItem;
+
+    [SerializeField] private GameObject[] objects;
     public UnityEvent action;
     // Start is called before the first frame update
     void Start()
@@ -24,14 +26,21 @@ public class LockedInteract : MonoBehaviour, IInteractable
     public void Interact()
     {
         Dictionary<string, int> currentInventory = playerData.inventoryGet();
-        if (currentInventory.ContainsKey(keyItem))
+        if (currentInventory.ContainsKey(keyItem) || keyItem == "none")
         {
             action.Invoke();
         }
     }
 
+    public void ShowPuzzle()
+    {
+        foreach (var obj in objects) {
+            obj.SetActive(true);
+        }
+    }
+
     public void Highlight()
-    {}
+    { }
 
     public void Unhighlight()
     {}
