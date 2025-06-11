@@ -16,7 +16,49 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 223613eff5e740f4d9a0ae6d45415ec3
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 0392aad65c3848a45bb40c397d38dd6c
+    m_Address: LanguageMenu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4547d03c044b0e14ba79972c8a9772c2
+    m_Address: ColorblindMenu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bde776a96f60c74d8af0a783a36f7f2
+    m_Address: MainMenu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4c46da0c591a380409ea7e8da73a4ef8
+    m_Address: OptionsMenu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68179a20011665b488f0640c3280f4ba
+    m_Address: Inventory_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: abe6857da60519c4cbdfeabd95534b74
+    m_Address: FPSMenu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f82da68dba8fc8a488cb7acbb33daede
+    m_Address: PauseMenu_zh-Hans
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-zh-Hans
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: a8c4d4e6759623e489c9c8b9a425a34c, type: 2}
   m_SchemaSet:

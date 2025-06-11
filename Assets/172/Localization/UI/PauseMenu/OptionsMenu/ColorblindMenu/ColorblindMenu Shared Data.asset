@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ColorblindMenu Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: ColorblindMenu
+  m_TableCollectionNameGuidString: 02e08b68375d08d498d558ebe3f3a001
+  m_Entries:
+  - m_Id: 177831010304
+    m_Key: return
+    m_Metadata:
+      m_Items: []
+  - m_Id: 200564137984
+    m_Key: option_normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 244570775552
+    m_Key: option_protanopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 284441829376
+    m_Key: option_deuteranopia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 320722558976
+    m_Key: option_tritanopia
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7455760012906594336
+  references:
+    version: 2
+    RefIds:
+    - rid: 7455760012906594336
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1749622686744
