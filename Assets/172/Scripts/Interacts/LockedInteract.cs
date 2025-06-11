@@ -8,6 +8,8 @@ public class LockedInteract : MonoBehaviour, IInteractable
 {
     private PlayerData playerData;
     [SerializeField] private string keyItem;
+
+    [SerializeField] private GameObject[] puzzles;
     public UnityEvent action;
     // Start is called before the first frame update
     void Start()
@@ -30,8 +32,15 @@ public class LockedInteract : MonoBehaviour, IInteractable
         }
     }
 
+    public void ShowPuzzle()
+    {
+        foreach (var puzzle in puzzles) {
+            puzzle.SetActive(true);
+        }
+    }
+
     public void Highlight()
-    {}
+    { }
 
     public void Unhighlight()
     {}
